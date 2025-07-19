@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import dts from 'vite-plugin-dts'
 import path from 'path'
 
 // https://vite.dev/config/
@@ -8,7 +9,14 @@ export default defineConfig(({ mode }) => {
   const isLibrary = mode === 'library';
   
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: isLibrary ? [
+      react(), 
+      tailwindcss(),
+      dts({
+        insertTypesEntry: true,
+        exclude: ['src/main.tsx', 'src/App.tsx', 'src/vite-env.d.ts']
+      })
+    ] : [react(), tailwindcss()],
     build: isLibrary ? {
       lib: {
         entry: path.resolve(process.cwd(), 'src/index.ts'),

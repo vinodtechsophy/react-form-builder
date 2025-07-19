@@ -1,6 +1,6 @@
 {
   "name": "@flowcsolutions/react-form-builder",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A powerful, responsive form builder built with React, TypeScript, HeroUI, and TailwindCSS",
   "keywords": [
     "react",
@@ -32,7 +32,7 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./styles": "./dist/style.css"
+    "./styles": "./dist/react-form-builder.css"
   },
   "files": [
     "dist",
@@ -42,7 +42,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build:lib": "tsc && vite build --mode library",
+    "build:lib": "tsc --project tsconfig.lib.json && vite build --mode library",
     "lint": "eslint .",
     "preview": "vite preview",
     "prepublishOnly": "npm run build:lib"
@@ -74,6 +74,7 @@
     "globals": "^16.3.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.1",
-    "vite": "^7.0.4"
+    "vite": "^7.0.4",
+    "vite-plugin-dts": "^4.5.4"
   }
 }
