@@ -52,26 +52,36 @@ npm run dev
 ### Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/react-form-builder.git
-cd react-form-builder
+# Install the package
+npm install @flowcsolutions/react-form-builder
 
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
+# Install peer dependencies (if not already installed)
+npm install react react-dom @heroui/react @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities framer-motion lucide-react uuid
 ```
 
 ### Basic Usage
 
-#### Form Builder
+#### Complete Form Builder Suite (Recommended)
 
 ```tsx
-import { FormBuilderProvider } from './context/FormBuilderContext';
-import { FormCanvas } from './components/FormCanvas';
-import { FieldSidebar } from './components/FieldSidebar';
-import { PropertiesPanel } from './components/PropertiesPanel';
+import { FormBuilderSuite } from '@flowcsolutions/react-form-builder';
+import '@flowcsolutions/react-form-builder/styles';
+
+function App() {
+  return <FormBuilderSuite />;
+}
+```
+
+#### Custom Form Builder Layout
+
+```tsx
+import { 
+  FormBuilderProvider, 
+  FormCanvas, 
+  FieldSidebar, 
+  PropertiesPanel 
+} from '@flowcsolutions/react-form-builder';
+import '@flowcsolutions/react-form-builder/styles';
 
 function App() {
   return (
@@ -89,8 +99,8 @@ function App() {
 #### Form Renderer (Standalone)
 
 ```tsx
-import { FormRenderer } from './components/FormRenderer';
-import type { FormConfig } from './types/form';
+import { FormRenderer, type FormConfig } from '@flowcsolutions/react-form-builder';
+import '@flowcsolutions/react-form-builder/styles';
 
 const formConfig: FormConfig = {
   // Your exported form JSON
@@ -108,6 +118,20 @@ function MyForm() {
     />
   );
 }
+```
+
+### Local Development (For Contributors)
+
+```bash
+# Clone the repository
+git clone https://github.com/flowcsolutions/react-form-builder.git
+cd react-form-builder
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
 ## 📦 Dependencies
@@ -146,7 +170,9 @@ function MyForm() {
 ### Adding Custom Field Types
 
 ```tsx
-// Add to src/data/formFields.ts
+import { createFormField, FIELD_TEMPLATES } from '@flowcsolutions/react-form-builder';
+
+// Add custom field configuration
 export const CUSTOM_FIELDS = {
   signature: {
     type: 'signature',
@@ -160,6 +186,8 @@ export const CUSTOM_FIELDS = {
 ### Custom Styling
 
 ```tsx
+import { FormRenderer, type FormConfig } from '@flowcsolutions/react-form-builder';
+
 // Forms support custom CSS classes
 const fieldWithCustomStyle = {
   type: 'text',
@@ -193,10 +221,11 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 ## 🔗 Links
 
-- [Live Demo](https://your-demo-url.com)
-- [Documentation](https://your-docs-url.com)
-- [GitHub Issues](https://github.com/yourusername/react-form-builder/issues)
-- [Discussions](https://github.com/yourusername/react-form-builder/discussions)
+- [Live Demo](https://flowcsolutions.github.io/react-form-builder)
+- [NPM Package](https://www.npmjs.com/package/@flowcsolutions/react-form-builder)
+- [GitHub Repository](https://github.com/flowcsolutions/react-form-builder)
+- [GitHub Issues](https://github.com/flowcsolutions/react-form-builder/issues)
+- [Discussions](https://github.com/flowcsolutions/react-form-builder/discussions)
     ],
     languageOptions: {
       parserOptions: {
