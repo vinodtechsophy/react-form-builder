@@ -7,7 +7,7 @@ A powerful, responsive form builder built with React, TypeScript, HeroUI, and Ta
 ### As a Package (Recommended)
 
 ```bash
-npm install @your-org/react-form-builder
+npm install @flowcsolutions/react-form-builder
 ```
 
 #### Peer Dependencies
@@ -17,8 +17,8 @@ npm install react react-dom @heroui/react @dnd-kit/core @dnd-kit/sortable @dnd-k
 
 #### Basic Usage
 ```tsx
-import { FormBuilderSuite } from '@your-org/react-form-builder';
-import '@your-org/react-form-builder/styles';
+import { FormBuilderSuite } from '@flowcsolutions/react-form-builder';
+import '@flowcsolutions/react-form-builder/styles';
 
 function App() {
   return <FormBuilderSuite />;
