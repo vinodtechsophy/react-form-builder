@@ -1,0 +1,52 @@
+# Development files
+src/
+examples/
+docs/
+public/
+.vscode/
+node_modules/
+
+# Config files
+vite.config.ts
+tsconfig.json
+tsconfig.app.json
+tsconfig.node.json
+tailwind.config.js
+eslint.config.js
+
+# Git and development
+.git/
+.gitignore
+.env*
+
+# Build files (keep only dist)
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+.nyc_output/
+
+# Optional npm cache directory
+.npm
+
+# Optional ESLint cache
+.eslintcache
+
+# Development docs
+PACKAGE_USAGE.md
+CONTRIBUTING.md
+hero.ts
+index.html
