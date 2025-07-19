@@ -42,4 +42,4 @@ export { groupFieldsIntoRows, getFieldSpan, getGridClassName } from './utils/lay
 export { buildHeroUIClasses, buildFieldClasses, buildFieldWrapperClasses } from './utils/fieldStyles';
 
 // Pre-built Form Builder Suite (for easy integration)
-export { default as FormBuilderSuite } from './App';
+export { FormBuilderSuite } from './components/FormBuilderSuite';

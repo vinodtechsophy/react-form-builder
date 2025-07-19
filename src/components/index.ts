@@ -7,3 +7,4 @@ export { PropertiesPanel } from './PropertiesPanel';
 export { FormBuilderToolbar } from './FormBuilderToolbar';
 export { FormRowRenderer } from './FormRowRenderer';
 export { FormRenderer } from './FormRenderer';
+export { FormBuilderSuite } from './FormBuilderSuite';

@@ -103,7 +103,26 @@ import { FormRenderer, type FormConfig } from '@flowcsolutions/react-form-builde
 import '@flowcsolutions/react-form-builder/styles';
 
 const formConfig: FormConfig = {
-  // Your exported form JSON
+  settings: {
+    title: "Sample Form",
+    description: "A sample form created with the form builder"
+  },
+  rows: [
+    {
+      id: "row-1",
+      fields: [
+        {
+          id: "field-1",
+          type: "text",
+          label: "Full Name",
+          properties: {
+            required: true,
+            placeholder: "Enter your full name"
+          }
+        }
+      ]
+    }
+  ]
 };
 
 function MyForm() {

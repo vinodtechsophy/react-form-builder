@@ -14,7 +14,9 @@ export default defineConfig(({ mode }) => {
       tailwindcss(),
       dts({
         insertTypesEntry: true,
-        exclude: ['src/main.tsx', 'src/App.tsx', 'src/vite-env.d.ts']
+        rollupTypes: true,
+        tsconfigPath: './tsconfig.lib.json',
+        exclude: ['src/main.tsx', 'src/vite-env.d.ts', '**/*.test.*', '**/*.spec.*']
       })
     ] : [react(), tailwindcss()],
     build: isLibrary ? {
