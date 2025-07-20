@@ -90,7 +90,7 @@ const AnnouncementPage = () => {
           </Chip>
         </div>
         
-        <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent mb-4">
+        <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent mb-5">
           🎉 Major Updates Available!
         </h1>
         

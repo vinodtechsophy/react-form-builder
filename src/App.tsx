@@ -21,7 +21,7 @@ import { FieldSidebar } from "./components/FieldSidebar";
 import { FormCanvas } from "./components/FormCanvas";
 import { PropertiesPanel } from "./components/PropertiesPanel";
 import { JsonFormRenderer } from "./examples/JsonFormRenderer";
-import AnnouncementPage from "./pages/AnnouncementPage";
+import WhatsNewPage from "./pages/WhatsNewPage";
 import { createFormField } from "./data/formFields";
 import type { FormFieldType } from "./types/form";
 import { Package, Settings, Sparkles } from "lucide-react";
@@ -334,7 +334,7 @@ function App() {
           </FormBuilderProvider>
         )}
         {mode === "renderer" && <JsonFormRenderer />}
-        {mode === "announcement" && <AnnouncementPage />}
+        {mode === "announcement" && <WhatsNewPage />}
       </div>
     </HeroUIProvider>
   );
