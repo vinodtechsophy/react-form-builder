@@ -15,6 +15,7 @@ import { createFormField } from "./data/formFields";
 import type { FormFieldType } from "./types/form";
 import { Package, Settings } from "lucide-react";
 import "./App.css";
+import "./styles.css";
 
 type AppMode = 'builder' | 'renderer';
 
@@ -22,8 +23,7 @@ function AppModeSelector({ mode, setMode }: { mode: AppMode; setMode: (mode: App
   return (
     <div className="p-4 border-b border-divider bg-background">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-2xl font-bold mb-2">Form Builder Suite</h1>
-        <p className="text-default-600 mb-4">Create, test, and render dynamic forms with ease</p>
+        <h1 className="text-2xl font-bold mb-2 text-blue-600">Form Builder Suite</h1>
         <ButtonGroup>
           <Button
             variant={mode === 'builder' ? 'solid' : 'flat'}

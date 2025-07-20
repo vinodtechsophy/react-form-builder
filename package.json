@@ -1,6 +1,6 @@
 {
   "name": "@flowcsolutions/react-form-builder",
-  "version": "1.0.4",
+  "version": "1.0.13",
   "description": "A powerful, responsive form builder built with React, TypeScript, HeroUI, and TailwindCSS",
   "keywords": [
     "react",
@@ -32,7 +32,8 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./styles": "./dist/react-form-builder.css"
+    "./style.css": "./dist/react-form-builder.css",
+    "./dist/react-form-builder.css": "./dist/react-form-builder.css"
   },
   "files": [
     "dist",

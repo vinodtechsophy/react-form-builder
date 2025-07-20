@@ -141,7 +141,7 @@ npm install @flowcsolutions/react-form-builder
 
 # In their React app:
 import { FormBuilderSuite } from '@flowcsolutions/react-form-builder';
-import '@flowcsolutions/react-form-builder/styles';
+import '@flowcsolutions/react-form-builder/style.css';
 ```
 
 ## Organization Management
