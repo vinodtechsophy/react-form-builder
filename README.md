@@ -348,8 +348,8 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 - [**🎉 What's New in v1.1.0**](./src/pages/AnnouncementPage.tsx) - See all the latest features and improvements
 - [Live Demo](https://flowcsolutions.github.io/react-form-builder)
 - [NPM Package](https://www.npmjs.com/package/@flowcsolutions/react-form-builder)
-- [GitHub Repository](https://github.com/flowcsolutions/react-form-builder)
-- [GitHub Issues](https://github.com/flowcsolutions/react-form-builder/issues)
+- [GitHub Repository](https://github.com/zenpou21/react-form-builder)
+- [GitHub Issues](https://github.com/zenpou21/react-form-builder/issues)
 
 ---
 

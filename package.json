@@ -1,6 +1,6 @@
 {
   "name": "@flowcsolutions/react-form-builder",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A powerful, responsive form builder built with React, TypeScript, HeroUI, and TailwindCSS",
   "keywords": [
     "react",
@@ -17,12 +17,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/flowcsolutions/react-form-builder.git"
+    "url": "https://github.com/zenpou21/react-form-builder.git"
   },
   "bugs": {
-    "url": "https://github.com/flowcsolutions/react-form-builder/issues"
+    "url": "https://github.com/zenpou21/react-form-builder/issues"
   },
-  "homepage": "https://github.com/flowcsolutions/react-form-builder#readme",
+  "homepage": "https://github.com/zenpou21/react-form-builder#readme",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
