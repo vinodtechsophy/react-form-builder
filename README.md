@@ -2,7 +2,7 @@
 
 A powerful, responsive form builder built with React, TypeScript, HeroUI, and TailwindCSS. Create dynamic forms with drag-and-drop functionality, export to JSON, and render forms anywhere.
 
-## 🎉 What's New in v1.1.0
+## 🎉 What's New in v1.1
 
 We've just released major improvements to React Form Builder! Here's what's new:
 
@@ -345,7 +345,7 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 ## 🔗 Links
 
-- [**🎉 What's New in v1.1.0**](./src/pages/AnnouncementPage.tsx) - See all the latest features and improvements
+- [**🎉 What's New in v1.1**](./src/pages/AnnouncementPage.tsx) - See all the latest features and improvements
 - [Live Demo](https://flowcsolutions.github.io/react-form-builder)
 - [NPM Package](https://www.npmjs.com/package/@flowcsolutions/react-form-builder)
 - [GitHub Repository](https://github.com/zenpou21/react-form-builder)

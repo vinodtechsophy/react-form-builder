@@ -86,7 +86,7 @@ const AnnouncementPage = () => {
             startContent={<Gift className="w-4 h-4" />}
             size="lg"
           >
-            Version 1.1.0 - New Features
+            Version 1.1 - New Features
           </Chip>
         </div>
         
@@ -109,7 +109,7 @@ const AnnouncementPage = () => {
             <span className="text-sm text-default-600">4/4 Features Completed</span>
           </div>
           <Progress value={100} color="success" className="mb-2" />
-          <p className="text-xs text-default-600">All planned features for v1.1.0 have been successfully implemented!</p>
+          <p className="text-xs text-default-600">All planned features for v1.1 have been successfully implemented!</p>
         </CardBody>
       </Card>
 
@@ -199,7 +199,7 @@ const AnnouncementPage = () => {
       <Card className="mb-12">
         <CardHeader>
           <h2 className="text-2xl font-bold flex items-center gap-2">
-            📋 Version 1.1.0 Changelog
+            📋 Version 1.1 Changelog
           </h2>
         </CardHeader>
         <CardBody>
@@ -272,7 +272,7 @@ const AnnouncementPage = () => {
 
       {/* Footer */}
       <div className="text-center text-sm text-default-500">
-        <p>React Form Builder v1.1.0 • Built with ❤️ by FlowC Solutions</p>
+        <p>React Form Builder v1.1 • Built with ❤️ by FlowC Solutions</p>
       </div>
     </div>
   );
