@@ -530,8 +530,6 @@ function validateForm(formData, formConfig) {
 // Extend the form renderer for custom field types
 function renderCustomField(field) {
   switch (field.type) {
-    case 'signature':
-      return createSignaturePad(field);
     case 'location':
       return createLocationPicker(field);
     case 'color':

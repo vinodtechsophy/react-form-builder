@@ -153,7 +153,7 @@ type FormFieldType =
   | 'text' | 'email' | 'password' | 'number' | 'phone'
   | 'textarea' | 'select' | 'multiselect' | 'radio' | 'checkbox'
   | 'file' | 'date' | 'time' | 'datetime'
-  | 'rating' | 'range' | 'switch'
+  | 'rating' | 'switch' | 'autocomplete'
   | 'section' | 'paragraph';
 ```
 

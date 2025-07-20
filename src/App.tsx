@@ -40,8 +40,10 @@ function AppModeSelector({
   return (
     <div className="p-4 border-b border-divider bg-background">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-xl sm:text-2xl font-bold mb-2">Form Builder Suite</h1>
-        
+        <h1 className="text-xl sm:text-2xl font-bold mb-2">
+          Form Builder Suite
+        </h1>
+
         {/* Desktop Navigation */}
         <div className="hidden sm:block">
           <ButtonGroup className="" radius="sm">
@@ -67,14 +69,14 @@ function AppModeSelector({
                 <Sparkles className="w-4 h-4 sparkle-animation text-warning-500" />
               }
             >
-              What's New
-              <Chip 
-                size="sm" 
-                color="success" 
-                variant="solid" 
+              What's New{" "}
+              <Chip
+                size="sm"
+                color="success"
+                variant="solid"
                 className="ml-2 text-white"
               >
-                v1.1.0
+                v1.1
               </Chip>
             </Button>
           </ButtonGroup>
@@ -104,7 +106,7 @@ function AppModeSelector({
                 Renderer
               </Button>
             </div>
-            
+
             {/* Row 2: What's New button (full width) */}
             <Button
               variant={mode === "announcement" ? "solid" : "flat"}
@@ -116,14 +118,14 @@ function AppModeSelector({
               className="w-full"
               size="sm"
             >
-              What's New
-              <Chip 
-                size="sm" 
-                color="success" 
-                variant="solid" 
+              What's New{" "}
+              <Chip
+                size="sm"
+                color="success"
+                variant="solid"
                 className="ml-1 text-white text-xs"
               >
-                v1.1.0
+                v1.1
               </Chip>
             </Button>
           </div>

@@ -10,13 +10,14 @@ We've just released major improvements to React Form Builder! Here's what's new:
 - **🎯 Unified Field Alignment**: Radio, checkbox, switch, and rating fields now have consistent label and component alignment controls
 - **⚡ Auto-Generated Field Names**: Fields without custom names automatically get unique identifiers (e.g., `text_input`, `text_input2`)
 - **🔍 Autocomplete Field**: Full HeroUI Autocomplete support with searchable dropdown options and validation
-- **⏳ Coming Soon Indicators**: Static content and structure elements show "Coming Soon" chips in the sidebar
+- **📥 Form Import/Export System**: Complete JSON import/export functionality with validation and format conversion for seamless form portability
 
 ### 🛠️ Improvements
 - Cleaner Properties Panel with context-aware controls
 - Hidden text alignment for field types that don't need it (select, radio, checkbox, switch, date, time, file, rating, autocomplete)
 - Better drag-and-drop experience with disabled state handling
 - Enhanced form export with auto-naming logic
+- Form import functionality with format validation and conversion
 - Improved accessibility and user experience
 
 ### 🔮 Coming Soon
@@ -32,8 +33,20 @@ We've just released major improvements to React Form Builder! Here's what's new:
 ### As a Package (Recommended)
 
 ```bash
+# Install the main package
 npm install @flowcsolutions/react-form-builder
+
+# Install required peer dependencies
+npm install react react-dom @heroui/react framer-motion lucide-react uuid
 ```
+
+**Required Dependencies:**
+- `react` (^18.0.0 || ^19.0.0)
+- `react-dom` (^18.0.0 || ^19.0.0)
+- `@heroui/react` (^2.8.0)
+- `framer-motion` (^12.0.0)
+- `lucide-react` (^0.400.0)
+- `uuid` (^11.0.0)
 
 **Important**: Since this package uses TailwindCSS for styling, you need to set up TailwindCSS in your project for the styles to work properly.
 
@@ -115,20 +128,23 @@ npm run dev
 - ⚡ **Auto-Generated Names**: Automatic unique naming for fields without custom names
 - 🎯 **Grid Layout**: Multi-column layouts with customizable spans
 - 🎨 **Custom Styling**: Support for custom CSS classes and Tailwind utilities
-- 📤 **JSON Export/Import**: Portable form configurations with intelligent field naming
+- � **Advanced Import/Export**: Complete JSON import/export system with validation and format conversion
 - 🔄 **Form Renderer**: Standalone form rendering component
 - ⚡ **Live Preview**: Real-time form preview with multiple device views
 - 🔧 **Validation**: Built-in validation rules and custom validation support
 - 🎪 **Modern UI**: Clean, accessible interface built with HeroUI
-- ⏳ **Future-Ready**: Coming soon indicators for upcoming features
+- 🚀 **Production Ready**: Battle-tested components for real-world applications
 
 ## 🚀 Quick Start
 
 ### Installation
 
 ```bash
-# Install the package (includes all dependencies)
-npm install @flowcsolutions/react-form-builder
+# Install the package and required dependencies
+npm install @flowcsolutions/react-form-builder react react-dom @heroui/react framer-motion lucide-react uuid
+
+# Install TailwindCSS (required for styling)
+npm install -D tailwindcss @tailwindcss/vite
 ```
 
 ### Basic Usage
@@ -266,10 +282,10 @@ import { createFormField, FIELD_TEMPLATES } from '@flowcsolutions/react-form-bui
 
 // Add custom field configuration
 export const CUSTOM_FIELDS = {
-  signature: {
-    type: 'signature',
-    label: 'Signature',
-    icon: 'PenTool',
+  customText: {
+    type: 'customText',
+    label: 'Custom Text Field',
+    icon: 'Type',
     category: 'advanced'
   }
 };

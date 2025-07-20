@@ -20,7 +20,8 @@ import {
   Palette,
   Shield,
   Users,
-  Rocket
+  Rocket,
+  Upload
 } from 'lucide-react';
 
 const DocumentationPage = () => {
@@ -46,21 +47,21 @@ const DocumentationPage = () => {
       description: "Mobile-first design that works on all devices"
     },
     {
-      icon: <CodeIcon className="w-5 h-5" />,
-      title: "JSON Export/Import",
-      description: "Export forms as JSON and import them back seamlessly"
+      icon: <Upload className="w-5 h-5" />,
+      title: "Advanced Import/Export",
+      description: "Complete JSON import/export system with validation and format conversion"
     },
     {
-      icon: <Rocket className="w-5 h-5" />,
+      icon: <CodeIcon className="w-5 h-5" />,
       title: "Extensive Field Types",
-      description: "20+ field types including advanced components"
+      description: "17+ field types including advanced components"
     }
   ];
 
   const fieldTypes = [
     "Text Input", "Email", "Password", "Number", "Date", "Time", "Textarea",
     "Select", "Autocomplete", "Multi-select", "Radio", "Checkbox", "Switch",
-    "File Upload", "Rating", "Signature", "Phone", "URL", "Range", "Button"
+    "File Upload", "Rating", "Phone", "URL"
   ];
 
   const copyToClipboard = (text: string) => {
@@ -100,19 +101,62 @@ const DocumentationPage = () => {
           </h2>
         </CardHeader>
         <CardBody>
-          <div className="space-y-4">
+          <div className="space-y-6">
             <div>
               <h3 className="text-lg font-semibold mb-2">Installation</h3>
-              <div className="bg-default-100 p-4 rounded-lg relative">
-                <Code className="block">npm install @flowcsolutions/react-form-builder</Code>
-                <Button
-                  size="sm"
-                  variant="flat"
-                  className="absolute top-2 right-2"
-                  onPress={() => copyToClipboard('npm install @flowcsolutions/react-form-builder')}
-                >
-                  Copy
-                </Button>
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm text-default-600 mb-2">Install the package and required dependencies:</p>
+                  <div className="bg-default-100 p-4 rounded-lg relative">
+                    <Code className="block text-sm">npm install @flowcsolutions/react-form-builder react react-dom @heroui/react framer-motion lucide-react uuid</Code>
+                    <Button
+                      size="sm"
+                      variant="flat"
+                      className="absolute top-2 right-2"
+                      onPress={() => copyToClipboard('npm install @flowcsolutions/react-form-builder react react-dom @heroui/react framer-motion lucide-react uuid')}
+                    >
+                      Copy
+                    </Button>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-sm text-default-600 mb-2">Install TailwindCSS (required for styling):</p>
+                  <div className="bg-default-100 p-4 rounded-lg relative">
+                    <Code className="block text-sm">npm install -D tailwindcss @tailwindcss/vite</Code>
+                    <Button
+                      size="sm"
+                      variant="flat"
+                      className="absolute top-2 right-2"
+                      onPress={() => copyToClipboard('npm install -D tailwindcss @tailwindcss/vite')}
+                    >
+                      Copy
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold mb-2">Required Dependencies</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <h4 className="font-medium text-sm">Core Dependencies:</h4>
+                  <ul className="text-sm text-default-600 space-y-1">
+                    <li>• <Code>react</Code> (^18.0.0 || ^19.0.0)</li>
+                    <li>• <Code>react-dom</Code> (^18.0.0 || ^19.0.0)</li>
+                    <li>• <Code>@heroui/react</Code> (^2.8.0)</li>
+                    <li>• <Code>framer-motion</Code> (^12.0.0)</li>
+                  </ul>
+                </div>
+                <div className="space-y-2">
+                  <h4 className="font-medium text-sm">Additional Dependencies:</h4>
+                  <ul className="text-sm text-default-600 space-y-1">
+                    <li>• <Code>lucide-react</Code> (^0.400.0)</li>
+                    <li>• <Code>uuid</Code> (^11.0.0)</li>
+                    <li>• <Code>tailwindcss</Code> (^4.0.0)</li>
+                    <li>• <Code>@tailwindcss/vite</Code> (^4.0.0)</li>
+                  </ul>
+                </div>
               </div>
             </div>
 
@@ -493,7 +537,7 @@ const MyFormBuilder = () => {
 
       {/* Footer */}
       <div className="text-center text-sm text-default-500">
-        <p>React Form Builder v1.1.3 • Built with ❤️ by FlowC Solutions</p>
+        <p>React Form Builder v1.1.4 • Built with ❤️ by FlowC Solutions</p>
       </div>
     </div>
   );

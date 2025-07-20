@@ -288,7 +288,7 @@ File upload input.
 - `maxSize?: number` - Maximum file size in bytes
 - `allowedTypes?: string[]` - MIME types allowed
 
-## ⭐ Rating & Range
+## ⭐ Rating
 
 ### Rating
 Star rating input.
@@ -309,29 +309,6 @@ Star rating input.
 - `max?: number` - Maximum rating value (default: 5)
 - `allowHalf?: boolean` - Allow half-star ratings
 - `icon?: string` - Rating icon type
-
-### Range
-Slider input for numeric ranges.
-
-```tsx
-{
-  type: 'range',
-  label: 'Price Range',
-  properties: {
-    min: 0,
-    max: 1000,
-    step: 50,
-    showValue: true,
-    formatValue: (value) => `$${value}`
-  }
-}
-```
-
-**Properties:**
-- `min?: number` - Minimum value
-- `max?: number` - Maximum value
-- `step?: number` - Step increment
-- `showValue?: boolean` - Display current value
 
 ## 🔘 Switch & Toggle
 

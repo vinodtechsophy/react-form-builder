@@ -14,6 +14,7 @@ import {
   CheckCircle,
   Gift,
   Rocket,
+  Upload,
 } from 'lucide-react';
 
 const AnnouncementPage = () => {
@@ -37,9 +38,9 @@ const AnnouncementPage = () => {
       status: "released"
     },
     {
-      icon: <Clock className="w-5 h-5" />,
-      title: "Coming Soon Indicators",
-      description: "Static content and structure elements now show 'Coming Soon' chips in the sidebar.",
+      icon: <Upload className="w-5 h-5" />,
+      title: "Form Import/Export System",
+      description: "Complete JSON import/export functionality with validation and format conversion for seamless form portability.",
       status: "released"
     }
   ];
@@ -49,6 +50,7 @@ const AnnouncementPage = () => {
     "Hidden text alignment for field types that don't need it",
     "Better drag-and-drop experience with disabled state handling",
     "Enhanced form export with auto-naming logic",
+    "Form import functionality with format validation",
     "Improved accessibility and user experience"
   ];
 
@@ -210,7 +212,7 @@ const AnnouncementPage = () => {
                 <li>• Added Autocomplete field type with HeroUI integration</li>
                 <li>• Implemented auto-generated field naming system</li>
                 <li>• Added unified alignment controls for radio, checkbox, switch, and rating fields</li>
-                <li>• Introduced "Coming Soon" indicators for upcoming features</li>
+                <li>• Built comprehensive form import/export system with validation</li>
               </ul>
             </div>
             
@@ -221,6 +223,7 @@ const AnnouncementPage = () => {
                 <li>• Hidden text alignment for irrelevant field types</li>
                 <li>• Improved drag-and-drop experience with disabled states</li>
                 <li>• Better form export logic with intelligent naming</li>
+                <li>• Added form import functionality with validation and format conversion</li>
                 <li>• Enhanced accessibility and user experience</li>
               </ul>
             </div>

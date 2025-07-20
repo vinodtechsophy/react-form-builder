@@ -216,7 +216,7 @@ function validateForm(formData: Record<string, any>, config: FormExportData) {
 - **switch**: Toggle switch
 - **file**: File upload
 - **rating**: Star rating
-- **signature**: Signature pad
+- **autocomplete**: Searchable dropdown
 - **section**: Section header
 - **paragraph**: Text content
 - **pagebreak**: Page break divider
