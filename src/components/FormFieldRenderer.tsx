@@ -3,6 +3,8 @@ import {
   Textarea,
   Select,
   SelectItem,
+  Autocomplete,
+  AutocompleteItem,
   Checkbox,
   RadioGroup,
   Radio,
@@ -12,9 +14,11 @@ import {
   Divider,
   DateInput,
   TimeInput,
+  Button,
 } from "@heroui/react";
+import React from "react";
 import type { FormField } from "../types/form";
-import { Star, Upload } from "lucide-react";
+import { Star, Upload, Smartphone, Tablet, Monitor } from "lucide-react";
 import { buildHeroUIClasses } from "../utils/fieldStyles";
 import { SignaturePad } from "./SignaturePad";
 
@@ -37,34 +41,128 @@ export function FormFieldRenderer({
   };
 
   // Hide field if conditional logic applies (simplified)
-  if (field.properties?.hidden) {
+  if (field.advanced?.hidden || field.properties?.hidden) {
     return null;
   }
 
-  // Build HeroUI-specific classes
-  const heroUIClasses = buildHeroUIClasses(field);
+  // Build HeroUI-specific classes (pass isEditor: true to prevent responsive hiding in editor)
+  const heroUIClasses = buildHeroUIClasses(field, true);
 
   // For complex components that need wrapper divs
   const wrapperClasses = heroUIClasses.base;
+
+  // Generate responsive hide indicators for editor
+  const getResponsiveIndicators = () => {
+    const indicators = [];
+    if (field.properties?.hideOnMobile) {
+      indicators.push('Hidden on Mobile');
+    }
+    if (field.properties?.hideOnTablet) {
+      indicators.push('Hidden on Tablet');
+    }
+    if (field.properties?.hideOnDesktop) {
+      indicators.push('Hidden on Desktop');
+    }
+    return indicators;
+  };
+
+  const responsiveIndicators = getResponsiveIndicators();
+
+  // Wrapper component that shows responsive indicators in editor
+  const FieldWithIndicators = ({ children }: { children: React.ReactNode }) => {
+    if (responsiveIndicators.length === 0) {
+      return <>{children}</>;
+    }
+
+    return (
+      <div className="relative">
+        {children}
+        <div className="absolute top-0 right-0 flex items-center gap-1 -mt-2 -mr-2 z-10">
+          {responsiveIndicators.map((indicator) => (
+            <span
+              key={indicator}
+              className="text-danger-700 text-xs px-1.5 py-0.5 rounded-full "
+              title={indicator}
+            >
+              {indicator.includes('Mobile') ? <Smartphone size={15} /> : indicator.includes('Tablet') ? <Tablet size={15} /> : <Monitor size={15} />}
+            </span>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+  // Helper function to wrap any field component with indicators
+  const wrapWithIndicators = (component: React.ReactNode) => (
+    <FieldWithIndicators>{component}</FieldWithIndicators>
+  );
 
   // Common props for the form components
   const commonProps = {
     label: field.label,
     placeholder: field.placeholder,
     isRequired: field.required,
-    description: field.properties?.helpText,
-    isDisabled: field.properties?.disabled,
-    isReadOnly: field.properties?.readonly,
+    description: field.properties?.description,
+    isDisabled: field.advanced?.disabled || field.properties?.disabled,
+    isReadOnly: field.advanced?.readOnly || field.properties?.readonly,
     size: field.properties?.size as any,
     color: field.properties?.colorVariant as any,
+    variant: field.properties?.variant as any,
+    radius: field.properties?.borderRadius as any,
     classNames: {
       base: heroUIClasses.base,
-      inputWrapper: heroUIClasses.inputWrapper,
-      input: heroUIClasses.input,
       label: heroUIClasses.label,
+      inputWrapper: heroUIClasses.inputWrapper,
+      innerWrapper: heroUIClasses.innerWrapper,
+      mainWrapper: heroUIClasses.mainWrapper,
+      input: heroUIClasses.input,
+      clearButton: heroUIClasses.clearButton,
+      helperWrapper: heroUIClasses.helperWrapper,
       description: heroUIClasses.description,
+      errorMessage: heroUIClasses.errorMessage,
     },
   };
+
+  // Build HTML attributes for data attributes and accessibility
+  const buildHtmlAttributes = () => {
+    const attrs: Record<string, any> = {};
+    
+    // Add data attributes from custom properties
+    const dataAttributes = field.custom?.dataAttributes || {};
+    Object.entries(dataAttributes).forEach(([key, value]) => {
+      attrs[`data-${key}`] = value;
+    });
+    
+    // Add accessibility attributes
+    if (field.custom?.role) {
+      attrs['role'] = field.custom.role;
+    }
+    
+    if (field.custom?.tabIndex !== undefined) {
+      attrs['tabIndex'] = field.custom.tabIndex;
+    }
+    
+    if (field.properties?.ariaLabel) {
+      attrs['aria-label'] = field.properties.ariaLabel;
+    }
+    
+    // Add number input specific attributes
+    if (field.type === 'number') {
+      if (field.properties?.min !== undefined) {
+        attrs['min'] = field.properties.min;
+      }
+      if (field.properties?.max !== undefined) {
+        attrs['max'] = field.properties.max;
+      }
+      if (field.properties?.step !== undefined) {
+        attrs['step'] = field.properties.step;
+      }
+    }
+    
+    return attrs;
+  };
+
+  const htmlAttributes = buildHtmlAttributes();
 
   // Add character count for text fields
   const getCharacterCount = () => {
@@ -84,12 +182,14 @@ export function FormFieldRenderer({
   switch (field.type) {
     case "text":
       return (
-        <>
+        <FieldWithIndicators>
           <Input
+            key={`text-${field.id}`}
             {...commonProps}
+            {...htmlAttributes}
             type="text"
             value={value || ""}
-            onChange={(e) => handleChange(e.target.value)}
+            onValueChange={(val) => handleChange(val)}
             maxLength={field.properties?.maxLength}
           />
           {characterCount && (
@@ -97,45 +197,65 @@ export function FormFieldRenderer({
               {characterCount}
             </div>
           )}
-        </>
+        </FieldWithIndicators>
       );
 
     case "email":
       return (
-        <Input
-          {...commonProps}
-          type="email"
-          value={value || ""}
-          onChange={(e) => handleChange(e.target.value)}
-        />
+        <FieldWithIndicators>
+          <Input
+            key={`email-${field.id}`}
+            {...commonProps}
+            {...htmlAttributes}
+            type="email"
+            value={value || ""}
+            onValueChange={(val) => handleChange(val)}
+          />
+        </FieldWithIndicators>
       );
 
     case "password":
       return (
-        <Input
-          {...commonProps}
-          type="password"
-          value={value || ""}
-          onChange={(e) => handleChange(e.target.value)}
-        />
+        <FieldWithIndicators>
+          <Input
+            key={`password-${field.id}`}
+            {...commonProps}
+            {...htmlAttributes}
+            type="password"
+            value={value || ""}
+            onValueChange={(val) => handleChange(val)}
+          />
+        </FieldWithIndicators>
       );
 
     case "number":
-      return (
+      return wrapWithIndicators(
         <Input
+          key={`number-${field.id}`}
           {...commonProps}
+          {...htmlAttributes}
           type="number"
           value={value || ""}
-          onChange={(e) => handleChange(e.target.value)}
-          min={field.properties?.min}
-          max={field.properties?.max}
-          step={field.properties?.step}
+          onValueChange={(val) => {
+            // Add client-side min/max validation
+            const numVal = parseFloat(val);
+            if (!isNaN(numVal)) {
+              if (field.properties?.min !== undefined && numVal < field.properties.min) {
+                return; // Don't update if below minimum
+              }
+              if (field.properties?.max !== undefined && numVal > field.properties.max) {
+                return; // Don't update if above maximum
+              }
+            }
+            handleChange(val);
+          }}
         />
       );
 
     case "date":
-      return (
+      return wrapWithIndicators(
         <DateInput
+          key={`date-${field.id}`}
           {...commonProps}
           value={value || null}
           onChange={(date) => {
@@ -152,6 +272,7 @@ export function FormFieldRenderer({
     case "datetime":
       return (
         <DateInput
+          key={`datetime-${field.id}`}
           {...commonProps}
           granularity="second"
           value={value || null}
@@ -169,6 +290,7 @@ export function FormFieldRenderer({
     case "time":
       return (
         <TimeInput
+          key={`time-${field.id}`}
           {...commonProps}
           value={value || null}
           onChange={(time) => {
@@ -183,12 +305,14 @@ export function FormFieldRenderer({
       );
 
     case "textarea":
-      return (
+      return wrapWithIndicators(
         <>
           <Textarea
+            key={`textarea-${field.id}`}
             {...commonProps}
+            {...htmlAttributes}
             value={value || ""}
-            onChange={(e) => handleChange(e.target.value)}
+            onValueChange={(val) => handleChange(val)}
             rows={field.properties?.rows || 4}
             maxLength={field.properties?.maxLength}
           />
@@ -201,9 +325,10 @@ export function FormFieldRenderer({
       );
 
     case "select":
-      return (
+      return wrapWithIndicators(
         <Select
           {...commonProps}
+          {...htmlAttributes}
           selectedKeys={value ? [value] : []}
           onSelectionChange={(keys) => {
             const selectedValue = Array.from(keys)[0];
@@ -214,6 +339,23 @@ export function FormFieldRenderer({
             <SelectItem key={option.value}>{option.label}</SelectItem>
           )) || []}
         </Select>
+      );
+
+    case "autocomplete":
+      return wrapWithIndicators(
+        <Autocomplete
+          {...commonProps}
+          {...htmlAttributes}
+          selectedKey={value || ""}
+          onSelectionChange={(key) => {
+            handleChange(key);
+          }}
+          allowsCustomValue
+        >
+          {field.options?.map((option) => (
+            <AutocompleteItem key={option.value}>{option.label}</AutocompleteItem>
+          )) || []}
+        </Autocomplete>
       );
 
     case "multiselect":
@@ -233,18 +375,42 @@ export function FormFieldRenderer({
       );
 
     case "radio":
+      const radioOrientation = field.properties?.orientation || 'vertical';
+      const radioComponentAlignment = field.properties?.componentAlignment || 'left';
+      
+      // Alignment classes based on orientation and alignment preference
+      const radioAlignmentClass = radioOrientation === 'horizontal'
+        ? (radioComponentAlignment === 'center' ? 'justify-center' : 
+           radioComponentAlignment === 'right' ? 'justify-end' : 'justify-start')
+        : (radioComponentAlignment === 'center' ? 'items-center' : 
+           radioComponentAlignment === 'right' ? 'items-end' : 'items-start');
+      
+      const radioLabelAlignmentClass = radioComponentAlignment === 'center' ? 'text-center' : 
+                                       radioComponentAlignment === 'right' ? 'text-right' : 'text-left';
+      
+      // Wrapper alignment for the entire component
+      const radioWrapperAlignmentClass = radioComponentAlignment === 'center' ? 'flex flex-col items-center' :
+                                        radioComponentAlignment === 'right' ? 'flex flex-col items-end' : 
+                                        'flex flex-col items-start';
+      
       return (
-        <RadioGroup
-          label={field.label}
-          description={field.properties?.helpText}
-          isRequired={field.required}
-          value={value || ""}
-          onValueChange={handleChange}
-          size="sm"
-          classNames={{
-            base: heroUIClasses.base,
-            label: heroUIClasses.label,
-            wrapper: heroUIClasses.inputWrapper,
+        <div className={radioWrapperAlignmentClass}>
+          <RadioGroup
+            label={field.label}
+            description={field.properties?.description}
+            isRequired={field.required}
+            value={value || ""}
+            onValueChange={handleChange}
+            size={field.properties?.size as any}
+            color={field.properties?.colorVariant as any}
+            isDisabled={field.advanced?.disabled || field.properties?.disabled}
+            isReadOnly={field.advanced?.readOnly || field.properties?.readonly}
+            orientation={radioOrientation as any}
+            classNames={{
+              base: heroUIClasses.base,
+              label: `${heroUIClasses.label} ${radioLabelAlignmentClass}`,
+              wrapper: `${heroUIClasses.inputWrapper} ${radioAlignmentClass}`,
+            description: `${heroUIClasses.description} ${radioLabelAlignmentClass}`,
           }}
         >
           {field.options?.map((option) => (
@@ -253,23 +419,47 @@ export function FormFieldRenderer({
             </Radio>
           )) || []}
         </RadioGroup>
+        </div>
       );
 
     case "checkbox":
       if (field.options && field.options.length > 1) {
         // Multiple checkboxes
+        const orientation = field.properties?.orientation || 'vertical';
+        const componentAlignment = field.properties?.componentAlignment || 'left';
+        
+        // Container classes based on orientation
+        const containerClass = orientation === 'horizontal' 
+          ? 'flex flex-wrap gap-4' 
+          : 'flex flex-col space-y-2';
+          
+        // Alignment classes based on orientation and alignment preference
+        const alignmentClass = orientation === 'horizontal'
+          ? (componentAlignment === 'center' ? 'justify-center' : 
+             componentAlignment === 'right' ? 'justify-end' : 'justify-start')
+          : (componentAlignment === 'center' ? 'items-center' : 
+             componentAlignment === 'right' ? 'items-end' : 'items-start');
+        
+        const labelAlignmentClass = componentAlignment === 'center' ? 'text-center' : 
+                                   componentAlignment === 'right' ? 'text-right' : 'text-left';
+        
+        // Wrapper alignment for the entire component
+        const wrapperAlignmentClass = componentAlignment === 'center' ? 'flex flex-col items-center' :
+                                     componentAlignment === 'right' ? 'flex flex-col items-end' : 
+                                     'flex flex-col items-start';
+        
         return (
-          <div className={`space-y-2 ${wrapperClasses}`}>
-            <label className="text-sm font-medium">
+          <div className={`space-y-2 ${wrapperClasses} ${wrapperAlignmentClass}`}>
+            <label className={`text-sm font-medium ${labelAlignmentClass}`}>
               {field.label}
               {field.required && <span className="text-danger">*</span>}
             </label>
-            {field.properties?.helpText && (
-              <p className="text-xs text-default-500">
-                {field.properties.helpText}
+            {field.properties?.description && (
+              <p className={`text-xs text-default-500 ${labelAlignmentClass}`}>
+                {field.properties?.description}
               </p>
             )}
-            <div className="flex flex-col space-y-2">
+            <div className={`${containerClass} ${alignmentClass}`}>
               {field.options.map((option) => (
                 <Checkbox
                   key={option.value}
@@ -285,7 +475,11 @@ export function FormFieldRenderer({
                       );
                     }
                   }}
-                  size="sm"
+                  size={field.properties?.size as any}
+                  color={field.properties?.colorVariant as any}
+                  radius={field.properties?.borderRadius as any}
+                  isDisabled={field.advanced?.disabled || field.properties?.disabled}
+                  isReadOnly={field.advanced?.readOnly || field.properties?.readonly}
                 >
                   {option.label}
                 </Checkbox>
@@ -295,40 +489,63 @@ export function FormFieldRenderer({
         );
       } else {
         // Single checkbox
+        const checkboxComponentAlignment = field.properties?.componentAlignment || 'left';
+        const checkboxAlignmentClass = checkboxComponentAlignment === 'center' ? 'flex justify-center' : 
+                                       checkboxComponentAlignment === 'right' ? 'flex justify-end' : 'flex justify-start';
+        const checkboxLabelAlignmentClass = checkboxComponentAlignment === 'center' ? 'text-center' : 
+                                           checkboxComponentAlignment === 'right' ? 'text-right' : 'text-left';
+        
         return (
-          <div className={wrapperClasses}>
-            <Checkbox
-              isSelected={value || false}
-              onValueChange={handleChange}
-              size="sm"
-            >
+          <div className={`${wrapperClasses} ${checkboxAlignmentClass} flex-col items-start`}>
+            <label className={`text-sm font-medium ${checkboxLabelAlignmentClass} block mb-2`}>
               {field.label}
-              {field.required && <span className="text-danger ml-1">*</span>}
-            </Checkbox>
-            {field.properties?.helpText && (
-              <p className="text-xs text-default-500 mt-1">
-                {field.properties.helpText}
+              {field.required && <span className="text-danger">*</span>}
+            </label>
+            {field.properties?.description && (
+              <p className={`text-xs text-default-500 mb-2 ${checkboxLabelAlignmentClass}`}>
+                {field.properties?.description}
               </p>
             )}
+            <Checkbox
+              isSelected={value || false}
+              onValueChange={handleChange}              size={field.properties?.size as any}
+              color={field.properties?.colorVariant as any}
+              radius={field.properties?.borderRadius as any}
+              isDisabled={field.advanced?.disabled || field.properties?.disabled}
+              isReadOnly={field.advanced?.readOnly || field.properties?.readonly}
+            >
+              Check to confirm
+            </Checkbox>
           </div>
         );
       }
 
     case "switch":
+      const switchComponentAlignment = field.properties?.componentAlignment || 'left';
+      const switchAlignmentClass = switchComponentAlignment === 'center' ? 'flex justify-center' : 
+                                   switchComponentAlignment === 'right' ? 'flex justify-end' : 'flex justify-start';
+      
       return (
-        <div className={wrapperClasses}>
-          <Switch
-            isSelected={value || false}
-            onValueChange={handleChange}
-            size="sm"
-          >
-            {field.label}
-            {field.required && <span className="text-danger ml-1">*</span>}
-          </Switch>
-          {field.properties?.helpText && (
-            <p className="text-xs text-default-500 mt-1">
-              {field.properties.helpText}
-            </p>
+        <div className={`space-y-2 ${wrapperClasses}`}>
+          <div className={switchAlignmentClass}>
+            <Switch
+              isSelected={value || false}
+              onValueChange={handleChange}
+              size={field.properties?.size as any}
+              color={field.properties?.colorVariant as any}
+              isDisabled={field.advanced?.disabled || field.properties?.disabled}
+              isReadOnly={field.advanced?.readOnly || field.properties?.readonly}
+            >
+              {field.label}
+              {field.required && <span className="text-danger ml-1">*</span>}
+            </Switch>
+          </div>
+          {field.properties?.description && (
+            <div className={switchAlignmentClass}>
+              <p className="text-xs text-default-500">
+                {field.properties?.description}
+              </p>
+            </div>
           )}
         </div>
       );
@@ -340,9 +557,9 @@ export function FormFieldRenderer({
             {field.label}
             {field.required && <span className="text-danger">*</span>}
           </label>
-          {field.properties?.helpText && (
+          {field.properties?.description && (
             <p className="text-xs text-default-500">
-              {field.properties.helpText}
+              {field.properties?.description}
             </p>
           )}
           <div className="border-2 border-dashed border-default-300 rounded-lg p-6 text-center hover:border-default-400 transition-colors relative">
@@ -369,20 +586,29 @@ export function FormFieldRenderer({
 
     case "rating":
       const maxRating = field.properties?.max || 5;
+      const ratingComponentAlignment = field.properties?.componentAlignment || 'left';
+      const ratingAlignmentClass = ratingComponentAlignment === 'center' ? 'flex justify-center' : 
+                                   ratingComponentAlignment === 'right' ? 'flex justify-end' : 'flex justify-start';
+      
       return (
         <div className={`space-y-2 ${wrapperClasses}`}>
-          <label className="text-sm font-medium">
-            {field.label}
-            {field.required && <span className="text-danger">*</span>}
-          </label>
-          {field.properties?.helpText && (
-            <p className="text-xs text-default-500">
-              {field.properties.helpText}
-            </p>
+          <div className={ratingAlignmentClass}>
+            <label className="text-sm font-medium">
+              {field.label}
+              {field.required && <span className="text-danger">*</span>}
+            </label>
+          </div>
+          {field.properties?.description && (
+            <div className={ratingAlignmentClass}>
+              <p className="text-xs text-default-500">
+                {field.properties?.description}
+              </p>
+            </div>
           )}
-          <div className="flex gap-1">
-            {Array.from({ length: maxRating }, (_, i) => i + 1).map(
-              (rating) => (
+          <div className={ratingAlignmentClass}>
+            <div className="flex gap-1">
+              {Array.from({ length: maxRating }, (_, i) => i + 1).map(
+                (rating) => (
                 <button
                   key={rating}
                   type="button"
@@ -399,6 +625,7 @@ export function FormFieldRenderer({
                 </button>
               )
             )}
+            </div>
           </div>
         </div>
       );
@@ -410,9 +637,9 @@ export function FormFieldRenderer({
             {field.label}
             {field.required && <span className="text-danger">*</span>}
           </label>
-          {field.properties?.helpText && (
+          {field.properties?.description && (
             <p className="text-xs text-default-500">
-              {field.properties.helpText}
+              {field.properties?.description}
             </p>
           )}
           <SignaturePad
@@ -431,8 +658,8 @@ export function FormFieldRenderer({
           <Card>
             <CardBody className="py-4">
               <h3 className="text-lg font-semibold mb-2">{field.label}</h3>
-              {field.properties?.helpText && (
-                <p className="text-default-600">{field.properties.helpText}</p>
+              {field.properties?.description && (
+                <p className="text-default-600">{field.properties?.description}</p>
               )}
             </CardBody>
           </Card>
@@ -443,8 +670,8 @@ export function FormFieldRenderer({
       return (
         <div className={`py-2 ${wrapperClasses}`}>
           <h4 className="text-md font-medium mb-1">{field.label}</h4>
-          {field.properties?.helpText && (
-            <p className="text-default-600">{field.properties.helpText}</p>
+          {field.properties?.description && (
+            <p className="text-default-600">{field.properties?.description}</p>
           )}
         </div>
       );
@@ -463,7 +690,7 @@ export function FormFieldRenderer({
         <div
           className={`prose prose-sm max-w-none ${wrapperClasses}`}
           dangerouslySetInnerHTML={{
-            __html: field.properties?.helpText || field.label,
+            __html: field.properties?.description || field.label,
           }}
         />
       );
@@ -475,9 +702,9 @@ export function FormFieldRenderer({
             {field.label}
             {field.required && <span className="text-danger">*</span>}
           </label>
-          {field.properties?.helpText && (
+          {field.properties?.description && (
             <p className="text-xs text-default-500">
-              {field.properties.helpText}
+              {field.properties?.description}
             </p>
           )}
           <div className="flex items-center gap-4">
@@ -503,7 +730,7 @@ export function FormFieldRenderer({
           {...commonProps}
           type="tel"
           value={value || ""}
-          onChange={(e) => handleChange(e.target.value)}
+          onValueChange={(val) => handleChange(val)}
         />
       );
 
@@ -513,8 +740,27 @@ export function FormFieldRenderer({
           {...commonProps}
           type="url"
           value={value || ""}
-          onChange={(e) => handleChange(e.target.value)}
+          onValueChange={(val) => handleChange(val)}
         />
+      );
+
+    case "button":
+      return wrapWithIndicators(
+        <Button
+          key={`button-${field.id}`}
+          color={field.properties?.colorVariant as any}
+          size={field.properties?.size as any}
+          variant={field.properties?.variant as any}
+          radius={field.properties?.borderRadius as any}
+          isDisabled={field.advanced?.disabled || field.properties?.disabled}
+          className={heroUIClasses.base}
+          onPress={() => {
+            handleChange('clicked');
+          }}
+          {...htmlAttributes}
+        >
+          {field.label}
+        </Button>
       );
 
     default:
@@ -529,3 +775,7 @@ export function FormFieldRenderer({
       );
   }
 }
+
+// Export both named and default for compatibility
+export const MemoizedFormFieldRenderer = React.memo(FormFieldRenderer);
+export default MemoizedFormFieldRenderer;

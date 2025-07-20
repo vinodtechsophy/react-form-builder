@@ -1,6 +1,6 @@
 {
   "name": "@flowcsolutions/react-form-builder",
-  "version": "1.0.13",
+  "version": "1.1.0",
   "description": "A powerful, responsive form builder built with React, TypeScript, HeroUI, and TailwindCSS",
   "keywords": [
     "react",

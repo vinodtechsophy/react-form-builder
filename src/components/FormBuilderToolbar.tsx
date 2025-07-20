@@ -9,7 +9,6 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-  Input,
   Modal,
   ModalContent,
   ModalHeader,
@@ -23,19 +22,13 @@ import {
   Tab,
 } from "@heroui/react";
 import {
-  Eye,
-  Edit,
-  Settings,
-  Save,
   Download,
   Upload,
-  Monitor,
-  Tablet,
-  Smartphone,
   MoreVertical,
   FileJson,
   Copy,
   Check,
+  Rows4,
 } from "lucide-react";
 import { useState } from "react";
 import { useFormBuilder } from "../context/FormBuilderContext";
@@ -47,41 +40,20 @@ import type { FormConfig } from "../types/form";
 
 export function FormBuilderToolbar() {
   const { state, actions } = useFormBuilder();
-  const { previewMode, deviceView, currentForm } = state;
-  const {
-    isOpen: isSettingsOpen,
-    onOpen: onSettingsOpen,
-    onOpenChange: onSettingsOpenChange,
-  } = useDisclosure();
+  const { previewMode, currentForm } = state;
   const {
     isOpen: isJsonOpen,
     onOpen: onJsonOpen,
     onOpenChange: onJsonOpenChange,
   } = useDisclosure();
 
-  const deviceIcons = {
-    desktop: Monitor,
-    tablet: Tablet,
-    mobile: Smartphone,
-  };
-
-  const DeviceIcon = deviceIcons[deviceView];
-
-  const handleSave = () => {
-    // Save form logic
-    console.log("Saving form:", currentForm);
+  const handlePreview = () => {
+    // Toggle preview mode
+    actions.setPreviewMode(!previewMode);
   };
 
   const handleExport = () => {
     downloadFormAsJson(currentForm);
-  };
-
-  const handleExportForRender = () => {
-    // Generate JSON specifically for form rendering
-    downloadFormAsJson(
-      currentForm,
-      `${currentForm.title.replace(/\s+/g, "_")}_render_config.json`
-    );
   };
 
   const handlePreviewJson = () => {
@@ -122,127 +94,27 @@ export function FormBuilderToolbar() {
         </NavbarBrand>
 
         <NavbarContent className="flex gap-2 sm:gap-4" justify="center">
-          <NavbarItem>
-            <ButtonGroup size="sm" className="flex md:hidden">
-              <Button
-                size="sm"
-                color={!previewMode ? "primary" : "default"}
-                variant={!previewMode ? "solid" : "flat"}
-                isIconOnly
-                onPress={() => actions.setPreviewMode(false)}
-                className=""
-              >
-                <Edit size={14} />
-              </Button>
-              <Button
-                size="sm"
-                color={previewMode ? "primary" : "default"}
-                variant={previewMode ? "solid" : "flat"}
-                isIconOnly
-                onPress={() => actions.setPreviewMode(true)}
-                className=""
-              >
-                <Eye size={14} />
-              </Button>
-            </ButtonGroup>
-            
-            <ButtonGroup size="sm" className="hidden md:flex">
-              <Button
-                size="sm"
-                color={!previewMode ? "primary" : "default"}
-                variant={!previewMode ? "solid" : "flat"}
-                startContent={<Edit size={14} className="sm:w-4 sm:h-4" />}
-                onPress={() => actions.setPreviewMode(false)}
-                className=""
-              >
-                Edit
-              </Button>
-              <Button
-                size="sm"
-                color={previewMode ? "primary" : "default"}
-                variant={previewMode ? "solid" : "flat"}
-                startContent={<Eye size={14} className="sm:w-4 sm:h-4" />}
-                onPress={() => actions.setPreviewMode(true)}
-                className=""
-              >
-                Preview
-              </Button>
-            </ButtonGroup>
-          </NavbarItem>
-
-          {previewMode && (
-            <NavbarItem className="hidden sm:block">
-              <Dropdown>
-                <DropdownTrigger>
-                  <Button
-                    size="sm"
-                    variant="flat"
-                    startContent={<DeviceIcon />}
-                  >
-                    <span className="hidden md:inline">
-                      {deviceView.charAt(0).toUpperCase() + deviceView.slice(1)}
-                    </span>
-                  </Button>
-                </DropdownTrigger>
-                <DropdownMenu
-                  selectedKeys={[deviceView]}
-                  selectionMode="single"
-                  onSelectionChange={(keys) => {
-                    const view = Array.from(keys)[0] as
-                      | "desktop"
-                      | "tablet"
-                      | "mobile";
-                    actions.setDeviceView(view);
-                  }}
-                >
-                  <DropdownItem key="desktop" startContent={<Monitor />}>
-                    Desktop
-                  </DropdownItem>
-                  <DropdownItem key="tablet" startContent={<Tablet />}>
-                    Tablet
-                  </DropdownItem>
-                  <DropdownItem key="mobile" startContent={<Smartphone />}>
-                    Mobile
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </NavbarItem>
-          )}
-
-          {previewMode && (
-            <NavbarItem className="hidden md:block">
-              <Button
-                variant="flat"
-                startContent={<FileJson />}
-                onPress={handlePreviewJson}
-                size="sm"
-              >
-                <span className="hidden lg:inline">View JSON</span>
-              </Button>
-            </NavbarItem>
-          )}
         </NavbarContent>
 
         <NavbarContent justify="end">
           <NavbarItem>
-            <ButtonGroup size="sm">
+            <ButtonGroup radius="sm" size="sm">
               <Button
                 variant="flat"
-                startContent={<Save />}
-                onPress={handleSave}
+                onPress={handlePreview}
                 size="sm"
                 className="hidden sm:flex"
               >
-                Save
+                {previewMode ? "Edit Form" : "Preview Form"}
               </Button>
               <Button
                 variant="flat"
                 isIconOnly
-                onPress={handleSave}
+                onPress={handlePreview}
                 size="sm"
                 className="sm:hidden"
               >
-                <Save />
+                <Rows4 size={16} />
               </Button>
               <Dropdown>
                 <DropdownTrigger>
@@ -252,36 +124,22 @@ export function FormBuilderToolbar() {
                 </DropdownTrigger>
                 <DropdownMenu>
                   <DropdownItem
-                    key="settings"
-                    startContent={<Settings />}
-                    onPress={onSettingsOpen}
-                  >
-                    Form Settings
-                  </DropdownItem>
-                  <DropdownItem
                     key="export"
-                    startContent={<Download />}
+                    startContent={<Download size={16} />}
                     onPress={handleExport}
                   >
                     Export Form JSON
                   </DropdownItem>
                   <DropdownItem
-                    key="export-render"
-                    startContent={<FileJson />}
-                    onPress={handleExportForRender}
-                  >
-                    Export for Render
-                  </DropdownItem>
-                  <DropdownItem
                     key="preview-json"
-                    startContent={<Eye />}
+                    startContent={<FileJson size={16} />}
                     onPress={handlePreviewJson}
                   >
                     Preview JSON
                   </DropdownItem>
                   <DropdownItem
                     key="import"
-                    startContent={<Upload />}
+                    startContent={<Upload size={16} />}
                     onPress={handleImport}
                   >
                     Import Form
@@ -293,176 +151,12 @@ export function FormBuilderToolbar() {
         </NavbarContent>
       </Navbar>
 
-      <FormSettingsModal
-        isOpen={isSettingsOpen}
-        onOpenChange={onSettingsOpenChange}
-      />
-
       <JsonPreviewModal
         isOpen={isJsonOpen}
         onOpenChange={onJsonOpenChange}
         form={currentForm}
       />
     </>
-  );
-}
-
-function FormSettingsModal({
-  isOpen,
-  onOpenChange,
-}: {
-  isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
-}) {
-  const { state, actions } = useFormBuilder();
-  const { currentForm } = state;
-
-  return (
-    <Modal
-      isOpen={isOpen}
-      onOpenChange={onOpenChange}
-      size="2xl"
-      scrollBehavior="inside"
-    >
-      <ModalContent>
-        {(onClose) => (
-          <>
-            <ModalHeader className="flex flex-col gap-1">
-              Form Settings
-            </ModalHeader>
-            <ModalBody>
-              <div className="space-y-4">
-                <Input
-                  label="Form Title"
-                  value={currentForm.title}
-                  onChange={(e) =>
-                    actions.updateFormMeta({ title: e.target.value })
-                  }
-                />
-
-                <Input
-                  label="Form Description"
-                  value={currentForm.description || ""}
-                  onChange={(e) =>
-                    actions.updateFormMeta({ description: e.target.value })
-                  }
-                />
-
-                <Input
-                  label="Submit Button Text"
-                  value={currentForm.settings.submitButtonText}
-                  onChange={(e) =>
-                    actions.updateFormSettings({
-                      submitButtonText: e.target.value,
-                    })
-                  }
-                />
-
-                <Input
-                  label="Redirect URL (after submission)"
-                  value={currentForm.settings.redirectUrl || ""}
-                  onChange={(e) =>
-                    actions.updateFormSettings({ redirectUrl: e.target.value })
-                  }
-                />
-
-                <Input
-                  label="Email Notifications"
-                  placeholder="admin@example.com, user@example.com"
-                  value={
-                    currentForm.settings.emailNotifications?.join(", ") || ""
-                  }
-                  onChange={(e) => {
-                    const emails = e.target.value
-                      .split(",")
-                      .map((email) => email.trim())
-                      .filter(Boolean);
-                    actions.updateFormSettings({ emailNotifications: emails });
-                  }}
-                />
-
-                <div className="flex flex-col gap-3">
-                  <label className="text-sm font-medium">Options</label>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Allow Multiple Submissions</span>
-                    <Button
-                      size="sm"
-                      color={
-                        currentForm.settings.allowMultipleSubmissions
-                          ? "success"
-                          : "default"
-                      }
-                      variant="flat"
-                      onPress={() =>
-                        actions.updateFormSettings({
-                          allowMultipleSubmissions:
-                            !currentForm.settings.allowMultipleSubmissions,
-                        })
-                      }
-                    >
-                      {currentForm.settings.allowMultipleSubmissions
-                        ? "Enabled"
-                        : "Disabled"}
-                    </Button>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Require Authentication</span>
-                    <Button
-                      size="sm"
-                      color={
-                        currentForm.settings.requireAuth ? "success" : "default"
-                      }
-                      variant="flat"
-                      onPress={() =>
-                        actions.updateFormSettings({
-                          requireAuth: !currentForm.settings.requireAuth,
-                        })
-                      }
-                    >
-                      {currentForm.settings.requireAuth
-                        ? "Required"
-                        : "Not Required"}
-                    </Button>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm">Enable Captcha</span>
-                    <Button
-                      size="sm"
-                      color={
-                        currentForm.settings.captchaEnabled
-                          ? "success"
-                          : "default"
-                      }
-                      variant="flat"
-                      onPress={() =>
-                        actions.updateFormSettings({
-                          captchaEnabled: !currentForm.settings.captchaEnabled,
-                        })
-                      }
-                    >
-                      {currentForm.settings.captchaEnabled
-                        ? "Enabled"
-                        : "Disabled"}
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </ModalBody>
-            <ModalFooter>
-              <Button color="danger" variant="light" onPress={onClose}>
-                Cancel
-              </Button>
-              <Button color="primary" onPress={onClose}>
-                Save Settings
-              </Button>
-            </ModalFooter>
-          </>
-        )}
-      </ModalContent>
-    </Modal>
   );
 }
 

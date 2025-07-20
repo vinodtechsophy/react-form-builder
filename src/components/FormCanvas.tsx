@@ -3,18 +3,40 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { Card, CardBody, Button, Input, Textarea } from "@heroui/react";
-import { Plus } from "lucide-react";
+import { 
+  Card, 
+  CardBody, 
+  Button, 
+  Input, 
+  Textarea,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  useDisclosure,
+  Divider
+} from "@heroui/react";
+import { Plus, Check } from "lucide-react";
 import { useFormBuilder } from "../context/FormBuilderContext";
 import { createFormField } from "../data/formFields";
 import { FormRowRenderer } from "./FormRowRenderer";
 import { FormRenderer } from "./FormRenderer";
 import { groupFieldsIntoRows } from "../utils/layoutUtils";
 import { generateFormExportData } from "../utils/formExport";
+import { useState } from "react";
 
 export function FormCanvas() {
   const { state, actions } = useFormBuilder();
   const { currentForm, previewMode } = state;
+  
+  // Modal state for preview form submissions
+  const [submissionData, setSubmissionData] = useState<Record<string, any> | null>(null);
+  const {
+    isOpen: isSubmissionModalOpen,
+    onOpen: onSubmissionModalOpen,
+    onOpenChange: onSubmissionModalOpenChange,
+  } = useDisclosure();
 
   const { setNodeRef, isOver } = useDroppable({
     id: "form-canvas",
@@ -23,6 +45,11 @@ export function FormCanvas() {
   const handleAddField = () => {
     const newField = createFormField("text");
     actions.addField(newField);
+  };
+
+  const handlePreviewSubmit = (data: Record<string, any>) => {
+    setSubmissionData(data);
+    onSubmissionModalOpen();
   };
 
   if (currentForm.fields.length === 0) {
@@ -47,7 +74,7 @@ export function FormCanvas() {
               your first field
             </p>
             <Button
-              color="primary"
+              color="secondary"
               size="sm"
               radius="sm"
               startContent={<Plus />}
@@ -72,12 +99,7 @@ export function FormCanvas() {
         {/* Form Header */}
         <div className="mb-2 sm:mb-4 px-1 sm:px-2">
           {previewMode ? (
-            <div className="text-center mb-4 sm:mb-6">
-              <h1 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">{currentForm.title}</h1>
-              {currentForm.description && (
-                <p className="text-xs sm:text-sm md:text-base text-default-600">{currentForm.description}</p>
-              )}
-            </div>
+          <></>
           ) : (
             <div className="space-y-2 sm:space-y-3 mb-2 sm:mb-4 p-2 sm:p-4 bg-default-50 rounded-lg border border-default-200">
               <h3 className="text-xs sm:text-sm font-semibold text-default-700 mb-1 sm:mb-2">Form Information</h3>
@@ -107,10 +129,7 @@ export function FormCanvas() {
           // In preview mode, use the same FormRenderer that will be used with exported JSON
           <FormRenderer 
             formConfig={generateFormExportData(currentForm)}
-            onSubmit={(data: Record<string, any>) => {
-              console.log('Preview form submission:', data);
-              alert('Form submitted! Check console for data.');
-            }}
+            onSubmit={handlePreviewSubmit}
           />
         ) : (
           <>
@@ -126,11 +145,10 @@ export function FormCanvas() {
             </SortableContext>
 
             {/* Submit Button (edit mode) */}
-            <div className="mt-2 sm:mt-4 pt-2 sm:pt-4 border-t border-divider px-1 sm:px-2">
+            <div className="mt-2 flex justify-end sm:mt-4 pt-2 sm:pt-4 border-t border-divider px-1 sm:px-2">
               <Button
                 radius="sm"
                 color="primary"
-                size="sm"
                 type="submit"
                 disabled={true}
                 className="sm:size-lg"
@@ -156,6 +174,62 @@ export function FormCanvas() {
           </>
         )}
       </div>
+
+      {/* Preview Submission Result Modal */}
+      <Modal
+        isOpen={isSubmissionModalOpen}
+        onOpenChange={onSubmissionModalOpenChange}
+        size="2xl"
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader>Form Preview Submission</ModalHeader>
+              <ModalBody>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-2 text-success">
+                    <Check className="w-5 h-5" />
+                    <span className="font-medium">
+                      Form submitted successfully in preview mode!
+                    </span>
+                  </div>
+                  <Divider />
+                  <div>
+                    <h4 className="font-semibold mb-2">Submitted Data:</h4>
+                    <div className="bg-success-50 p-4 rounded-lg">
+                      <pre className="text-sm overflow-auto whitespace-pre-wrap">
+                        {JSON.stringify(submissionData, null, 2)}
+                      </pre>
+                    </div>
+                  </div>
+                  <div className="text-sm text-default-600">
+                    <strong>Preview Mode:</strong> This shows how your form will behave when submitted. 
+                    In a real application, this data would be sent to your server or API endpoint.
+                  </div>
+                </div>
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  color="default"
+                  variant="flat"
+                  onPress={async () => {
+                    if (submissionData) {
+                      await navigator.clipboard.writeText(
+                        JSON.stringify(submissionData, null, 2)
+                      );
+                    }
+                  }}
+                >
+                  Copy Data
+                </Button>
+                <Button color="primary" onPress={onClose}>
+                  Close
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </div>
   );
 }

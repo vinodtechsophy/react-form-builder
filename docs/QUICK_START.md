@@ -119,7 +119,6 @@ The JSON from your form builder contains everything needed:
 - ✅ Validation rules
 - ✅ Layout information
 - ✅ Styling classes
-- ✅ Form settings
 
 ## 🎯 Key Benefits
 

@@ -3,6 +3,35 @@ import type { ReactNode } from 'react';
 import type { FormConfig, FormField, FormSettings } from '../types/form';
 import { v4 as uuidv4 } from 'uuid';
 
+// Helper function to generate unique field names with auto-numbering
+function generateUniqueFieldName(field: FormField, existingFields: FormField[]): string {
+  // If field already has a name, use it
+  if (field.name && field.name.trim()) {
+    return field.name;
+  }
+
+  // Generate base name from field type
+  const baseName = field.type.replace(/[-_]/g, '_').toLowerCase();
+  
+  // Check if base name already exists
+  const existingNames = existingFields.map(f => f.name).filter(Boolean);
+  
+  if (!existingNames.includes(baseName)) {
+    return baseName;
+  }
+  
+  // Find the next available number
+  let counter = 2;
+  let uniqueName = `${baseName}${counter}`;
+  
+  while (existingNames.includes(uniqueName)) {
+    counter++;
+    uniqueName = `${baseName}${counter}`;
+  }
+  
+  return uniqueName;
+}
+
 interface FormBuilderState {
   currentForm: FormConfig;
   selectedFieldId: string | null;
@@ -14,6 +43,12 @@ type FormBuilderAction =
   | { type: 'SET_FORM'; payload: FormConfig }
   | { type: 'ADD_FIELD'; payload: FormField }
   | { type: 'UPDATE_FIELD'; payload: { id: string; updates: Partial<FormField> } }
+  | { type: 'UPDATE_FIELD_PROPERTIES'; payload: { id: string; properties: any } }
+  | { type: 'UPDATE_FIELD_ADVANCED'; payload: { id: string; advanced: any } }
+  | { type: 'UPDATE_FIELD_CUSTOM'; payload: { id: string; custom: any } }
+  | { type: 'UPDATE_FIELD_EVENTS'; payload: { id: string; events: any } }
+  | { type: 'UPDATE_FIELD_SCHEMA'; payload: { id: string; schema: any } }
+  | { type: 'UPDATE_FIELD_LAYOUT'; payload: { id: string; layout: any } }
   | { type: 'DELETE_FIELD'; payload: string }
   | { type: 'REORDER_FIELDS'; payload: { oldIndex: number; newIndex: number } }
   | { type: 'SELECT_FIELD'; payload: string | null }
@@ -51,11 +86,15 @@ function formBuilderReducer(state: FormBuilderState, action: FormBuilderAction):
       };
 
     case 'ADD_FIELD':
+      const fieldWithUniqueName = {
+        ...action.payload,
+        name: generateUniqueFieldName(action.payload, state.currentForm.fields)
+      };
       return {
         ...state,
         currentForm: {
           ...state.currentForm,
-          fields: [...state.currentForm.fields, action.payload]
+          fields: [...state.currentForm.fields, fieldWithUniqueName]
         },
         selectedFieldId: action.payload.id
       };
@@ -67,7 +106,107 @@ function formBuilderReducer(state: FormBuilderState, action: FormBuilderAction):
           ...state.currentForm,
           fields: state.currentForm.fields.map(field =>
             field.id === action.payload.id
-              ? { ...field, ...action.payload.updates }
+              ? {
+                  ...field,
+                  ...action.payload.updates,
+                  // Deep merge nested objects to prevent component remounting
+                  properties: action.payload.updates.properties
+                    ? { ...field.properties, ...action.payload.updates.properties }
+                    : field.properties,
+                  advanced: action.payload.updates.advanced
+                    ? { ...field.advanced, ...action.payload.updates.advanced }
+                    : field.advanced,
+                  custom: action.payload.updates.custom
+                    ? { ...field.custom, ...action.payload.updates.custom }
+                    : field.custom,
+                  events: action.payload.updates.events
+                    ? { ...field.events, ...action.payload.updates.events }
+                    : field.events,
+                  schema: action.payload.updates.schema
+                    ? { ...field.schema, ...action.payload.updates.schema }
+                    : field.schema,
+                  layout: action.payload.updates.layout
+                    ? { ...field.layout, ...action.payload.updates.layout }
+                    : field.layout
+                }
+              : field
+          )
+        }
+      };
+
+    case 'UPDATE_FIELD_PROPERTIES':
+      return {
+        ...state,
+        currentForm: {
+          ...state.currentForm,
+          fields: state.currentForm.fields.map(field =>
+            field.id === action.payload.id
+              ? { ...field, properties: { ...field.properties, ...action.payload.properties } }
+              : field
+          )
+        }
+      };
+
+    case 'UPDATE_FIELD_ADVANCED':
+      return {
+        ...state,
+        currentForm: {
+          ...state.currentForm,
+          fields: state.currentForm.fields.map(field =>
+            field.id === action.payload.id
+              ? { ...field, advanced: { ...field.advanced, ...action.payload.advanced } }
+              : field
+          )
+        }
+      };
+
+    case 'UPDATE_FIELD_CUSTOM':
+      return {
+        ...state,
+        currentForm: {
+          ...state.currentForm,
+          fields: state.currentForm.fields.map(field =>
+            field.id === action.payload.id
+              ? { ...field, custom: { ...field.custom, ...action.payload.custom } }
+              : field
+          )
+        }
+      };
+
+    case 'UPDATE_FIELD_EVENTS':
+      return {
+        ...state,
+        currentForm: {
+          ...state.currentForm,
+          fields: state.currentForm.fields.map(field =>
+            field.id === action.payload.id
+              ? { ...field, events: { ...field.events, ...action.payload.events } }
+              : field
+          )
+        }
+      };
+
+    case 'UPDATE_FIELD_SCHEMA':
+      return {
+        ...state,
+        currentForm: {
+          ...state.currentForm,
+          fields: state.currentForm.fields.map(field =>
+            field.id === action.payload.id
+              ? { ...field, schema: { ...field.schema, ...action.payload.schema } }
+              : field
+          )
+        }
+      };
+
+    case 'UPDATE_FIELD_LAYOUT':
+      return {
+        ...state,
+        currentForm: {
+          ...state.currentForm,
+          fields: state.currentForm.fields.map(field =>
+            field.id === action.payload.id
+              ? { ...field, layout: { ...field.layout, ...action.payload.layout } }
               : field
           )
         }
@@ -147,6 +286,12 @@ interface FormBuilderContextType {
   actions: {
     addField: (field: FormField) => void;
     updateField: (id: string, updates: Partial<FormField>) => void;
+    updateFieldProperties: (id: string, properties: any) => void;
+    updateFieldAdvanced: (id: string, advanced: any) => void;
+    updateFieldCustom: (id: string, custom: any) => void;
+    updateFieldEvents: (id: string, events: any) => void;
+    updateFieldSchema: (id: string, schema: any) => void;
+    updateFieldLayout: (id: string, layout: any) => void;
     deleteField: (id: string) => void;
     reorderFields: (oldIndex: number, newIndex: number) => void;
     selectField: (id: string | null) => void;
@@ -166,6 +311,18 @@ export function FormBuilderProvider({ children }: { children: ReactNode }) {
     addField: (field: FormField) => dispatch({ type: 'ADD_FIELD', payload: field }),
     updateField: (id: string, updates: Partial<FormField>) => 
       dispatch({ type: 'UPDATE_FIELD', payload: { id, updates } }),
+    updateFieldProperties: (id: string, properties: any) => 
+      dispatch({ type: 'UPDATE_FIELD_PROPERTIES', payload: { id, properties } }),
+    updateFieldAdvanced: (id: string, advanced: any) => 
+      dispatch({ type: 'UPDATE_FIELD_ADVANCED', payload: { id, advanced } }),
+    updateFieldCustom: (id: string, custom: any) => 
+      dispatch({ type: 'UPDATE_FIELD_CUSTOM', payload: { id, custom } }),
+    updateFieldEvents: (id: string, events: any) => 
+      dispatch({ type: 'UPDATE_FIELD_EVENTS', payload: { id, events } }),
+    updateFieldSchema: (id: string, schema: any) => 
+      dispatch({ type: 'UPDATE_FIELD_SCHEMA', payload: { id, schema } }),
+    updateFieldLayout: (id: string, layout: any) => 
+      dispatch({ type: 'UPDATE_FIELD_LAYOUT', payload: { id, layout } }),
     deleteField: (id: string) => dispatch({ type: 'DELETE_FIELD', payload: id }),
     reorderFields: (oldIndex: number, newIndex: number) => 
       dispatch({ type: 'REORDER_FIELDS', payload: { oldIndex, newIndex } }),

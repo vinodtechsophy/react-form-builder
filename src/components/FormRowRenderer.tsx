@@ -13,7 +13,7 @@ export function FormRowRenderer({ row, isPreview }: FormRowRendererProps) {
   
   // If there's only one field with full width, don't use grid
   if (fields.length === 1 && getFieldSpan(fields[0]) === 12) {
-    const wrapperClasses = buildFieldWrapperClasses(fields[0]);
+    const wrapperClasses = buildFieldWrapperClasses(fields[0], !isPreview); // isEditor = !isPreview
     return (
       <div className={wrapperClasses}>
         <SortableFormField
@@ -31,7 +31,7 @@ export function FormRowRenderer({ row, isPreview }: FormRowRendererProps) {
       {fields.map((field) => {
         const span = getFieldSpan(field);
         const gridClass = getGridClassName(span);
-        const wrapperClasses = buildFieldWrapperClasses(field);
+        const wrapperClasses = buildFieldWrapperClasses(field, !isPreview); // isEditor = !isPreview
         const combinedClasses = [gridClass, wrapperClasses].filter(Boolean).join(' ');
         
         return (

@@ -58,7 +58,7 @@ export function SortableFormField({
     actions.selectField(field.id);
   };
 
-  const wrapperClasses = buildFieldWrapperClasses(field);
+  const wrapperClasses = buildFieldWrapperClasses(field, !isPreview); // isEditor = !isPreview
 
   if (isPreview) {
     return (

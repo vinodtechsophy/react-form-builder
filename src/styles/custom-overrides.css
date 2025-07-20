@@ -1,32 +1,3 @@
-@import "tailwindcss";
-@plugin '../hero.ts';
-@source '../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
-@custom-variant dark (&:is(.dark *));
-
-/* Apply Poppins font globally */
-html,
-body,
-#root {
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Ensure all text elements inherit the font */
-h1, h2, h3, h4, h5, h6, p, span, div, button, input, textarea, select {
-  font-family: inherit;
-}
-
-/* Hide scrollbar but allow scrolling */
-.scrollbar-hide {
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;  /* Safari and Chrome */
-}
-
 /* Custom CSS overrides to ensure Tailwind classes work with HeroUI */
 
 /* Force Tailwind text color classes to have higher specificity */
@@ -153,4 +124,21 @@ h1, h2, h3, h4, h5, h6, p, span, div, button, input, textarea, select {
 
 [data-slot="description"].text-primary-400 {
   color: hsl(var(--heroui-primary-400)) !important;
+}
+
+/* Force padding and margin classes to work */
+.p-4 {
+  padding: 1rem !important;
+}
+
+.p-2 {
+  padding: 0.5rem !important;
+}
+
+.mt-1 {
+  margin-top: 0.25rem !important;
+}
+
+.mt-2 {
+  margin-top: 0.5rem !important;
 }

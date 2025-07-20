@@ -57,7 +57,20 @@ export interface FormFieldExport {
   }>;
   properties: {
     helpText?: string;
+    description?: string;
     customClasses?: string;
+    classNames?: {
+      base?: string;
+      label?: string;
+      inputWrapper?: string;
+      innerWrapper?: string;
+      mainWrapper?: string;
+      input?: string;
+      clearButton?: string;
+      helperWrapper?: string;
+      description?: string;
+      errorMessage?: string;
+    };
     width?: string;
     rows?: number;
     multiple?: boolean;
@@ -66,6 +79,31 @@ export interface FormFieldExport {
     max?: number;
     step?: number;
     startNewRow?: boolean;
+    size?: 'small' | 'medium' | 'large' | 'sm' | 'md' | 'lg';
+    disabled?: boolean;
+    readonly?: boolean;
+    hidden?: boolean;
+    colorVariant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+    borderRadius?: 'none' | 'small' | 'default' | 'large' | 'full' | 'sm' | 'md' | 'lg';
+    variant?: 'solid' | 'bordered' | 'light' | 'flat' | 'faded' | 'shadow' | 'ghost';
+    showCharacterCount?: boolean;
+    minLength?: number;
+    maxLength?: number;
+    // Layout properties
+    marginTop?: string; // Tailwind classes like 'mt-0', 'mt-1', 'mt-2', 'mt-4', 'mt-6', 'mt-8'
+    marginBottom?: string; // Tailwind classes like 'mb-0', 'mb-1', 'mb-2', 'mb-4', 'mb-6', 'mb-8'
+    padding?: string; // Tailwind classes like 'p-0', 'p-1', 'p-2', 'p-4', 'p-6', 'p-8'
+    alignment?: string; // Tailwind classes like 'text-left', 'text-center', 'text-right', 'text-justify'
+    orientation?: 'vertical' | 'horizontal'; // Layout orientation for radio and checkbox groups
+    componentAlignment?: 'left' | 'center' | 'right'; // Unified alignment for labels and components in radio, checkbox, switch, and rating
+    // Responsive properties
+    hideOnMobile?: boolean;
+    hideOnTablet?: boolean;
+    hideOnDesktop?: boolean;
+    // Custom attributes
+    dataAttributes?: string;
+    ariaLabel?: string;
+    tabIndex?: number;
   };
   layout: {
     columnSpan: number;
@@ -84,7 +122,36 @@ export function generateFormExportData(form: FormConfig): FormExportData {
   const rows = groupFieldsIntoRows(form.fields);
   const now = new Date().toISOString();
   
-  // Process rows for export
+  // Generate unique names for fields that don't have them
+  const fieldsWithNames = form.fields.map((field, index) => {
+    if (field.name && field.name.trim()) {
+      return field;
+    }
+    
+    // Generate unique name based on type and existing names
+    const baseName = field.type.replace(/[-_]/g, '_').toLowerCase();
+    const existingNames = form.fields
+      .slice(0, index)
+      .map(f => f.name)
+      .filter(Boolean);
+    
+    let uniqueName = baseName;
+    if (existingNames.includes(baseName)) {
+      let counter = 2;
+      uniqueName = `${baseName}${counter}`;
+      while (existingNames.includes(uniqueName)) {
+        counter++;
+        uniqueName = `${baseName}${counter}`;
+      }
+    }
+    
+    return {
+      ...field,
+      name: uniqueName
+    };
+  });
+  
+  // Process rows for export (use original fields for row mapping)
   const exportRows: FormRowExport[] = rows.map(row => ({
     id: row.id,
     fields: row.fields.map(field => field.id),
@@ -92,7 +159,7 @@ export function generateFormExportData(form: FormConfig): FormExportData {
   }));
 
   // Process fields for export
-  const exportFields: FormFieldExport[] = form.fields.map(field => {
+  const exportFields: FormFieldExport[] = fieldsWithNames.map(field => {
     const span = getFieldSpan(field);
     const rowId = rows.find(row => row.fields.some(f => f.id === field.id))?.id || 'row-0';
     
@@ -108,7 +175,9 @@ export function generateFormExportData(form: FormConfig): FormExportData {
       options: field.options,
       properties: {
         helpText: field.properties?.helpText,
-        customClasses: field.properties?.customClasses,
+        description: field.properties?.description,
+        customClasses: field.properties?.customClasses || field.custom?.cssClasses?.join(' ') || '',
+        classNames: field.properties?.classNames,
         width: field.properties?.width || 'full',
         rows: field.properties?.rows,
         multiple: field.properties?.multiple,
@@ -117,6 +186,31 @@ export function generateFormExportData(form: FormConfig): FormExportData {
         max: field.properties?.max,
         step: field.properties?.step,
         startNewRow: field.properties?.startNewRow,
+        size: field.properties?.size,
+        disabled: field.advanced?.disabled || field.properties?.disabled,
+        readonly: field.advanced?.readOnly || field.properties?.readonly,
+        hidden: field.advanced?.hidden || field.properties?.hidden,
+        colorVariant: field.properties?.colorVariant,
+        borderRadius: field.properties?.borderRadius,
+        variant: field.properties?.variant,
+        showCharacterCount: field.properties?.showCharacterCount,
+        minLength: field.properties?.minLength,
+        maxLength: field.properties?.maxLength,
+        // Layout properties
+        marginTop: field.properties?.marginTop,
+        marginBottom: field.properties?.marginBottom,
+        padding: field.properties?.padding,
+        alignment: field.properties?.alignment,
+        orientation: field.properties?.orientation,
+        componentAlignment: field.properties?.componentAlignment,
+        // Responsive properties
+        hideOnMobile: field.properties?.hideOnMobile,
+        hideOnTablet: field.properties?.hideOnTablet,
+        hideOnDesktop: field.properties?.hideOnDesktop,
+        // Custom attributes
+        dataAttributes: field.properties?.dataAttributes,
+        ariaLabel: field.properties?.ariaLabel,
+        tabIndex: field.properties?.tabIndex,
       },
       layout: {
         columnSpan: field.columnSpan || span,

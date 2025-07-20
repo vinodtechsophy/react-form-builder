@@ -2,6 +2,31 @@
 
 A powerful, responsive form builder built with React, TypeScript, HeroUI, and TailwindCSS. Create dynamic forms with drag-and-drop functionality, export to JSON, and render forms anywhere.
 
+## 🎉 What's New in v1.1.0
+
+We've just released major improvements to React Form Builder! Here's what's new:
+
+### ✨ New Features
+- **🎯 Unified Field Alignment**: Radio, checkbox, switch, and rating fields now have consistent label and component alignment controls
+- **⚡ Auto-Generated Field Names**: Fields without custom names automatically get unique identifiers (e.g., `text_input`, `text_input2`)
+- **🔍 Autocomplete Field**: Full HeroUI Autocomplete support with searchable dropdown options and validation
+- **⏳ Coming Soon Indicators**: Static content and structure elements show "Coming Soon" chips in the sidebar
+
+### 🛠️ Improvements
+- Cleaner Properties Panel with context-aware controls
+- Hidden text alignment for field types that don't need it (select, radio, checkbox, switch, date, time, file, rating, autocomplete)
+- Better drag-and-drop experience with disabled state handling
+- Enhanced form export with auto-naming logic
+- Improved accessibility and user experience
+
+### 🔮 Coming Soon
+- **Static Content Elements**: Rich text, images, dividers, and spacers
+- **Advanced Layout Controls**: Sections, tabs, and multi-step wizards
+- **Conditional Logic**: Show/hide fields based on other field values
+- **Custom Validation Rules**: Advanced validation with custom error messages
+
+> 📖 **[View Full Announcement](./src/pages/AnnouncementPage.tsx)** for detailed information about all new features and improvements.
+
 ## 📦 Installation
 
 ### As a Package (Recommended)
@@ -85,14 +110,17 @@ npm run dev
 
 - 🎨 **Visual Form Builder**: Drag and drop interface for building forms
 - 📱 **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
-- 🔧 **Rich Field Types**: Text, email, select, radio, checkbox, file upload, and more
+- 🔧 **Rich Field Types**: Text, email, select, radio, checkbox, file upload, autocomplete, rating, and more
+- 🎯 **Smart Field Alignment**: Unified alignment controls for radio, checkbox, switch, and rating fields
+- ⚡ **Auto-Generated Names**: Automatic unique naming for fields without custom names
 - 🎯 **Grid Layout**: Multi-column layouts with customizable spans
 - 🎨 **Custom Styling**: Support for custom CSS classes and Tailwind utilities
-- 📤 **JSON Export/Import**: Portable form configurations
+- 📤 **JSON Export/Import**: Portable form configurations with intelligent field naming
 - 🔄 **Form Renderer**: Standalone form rendering component
 - ⚡ **Live Preview**: Real-time form preview with multiple device views
 - 🔧 **Validation**: Built-in validation rules and custom validation support
 - 🎪 **Modern UI**: Clean, accessible interface built with HeroUI
+- ⏳ **Future-Ready**: Coming soon indicators for upcoming features
 
 ## 🚀 Quick Start
 
@@ -191,18 +219,45 @@ npm run dev
 
 ## 📖 Documentation
 
+- [**🎉 What's New**](./src/pages/AnnouncementPage.tsx) - Latest features and improvements in v1.1.0
 - [Field Types](./docs/FIELD_TYPES.md) - Available form field types and properties
 - [JSON Export Format](./docs/JSON_EXPORT.md) - Structure of exported form configurations
 - [Custom Styling](./docs/STYLING.md) - How to customize form appearance
 - [API Reference](./docs/API.md) - Component props and methods
 
+### 🆕 New Field Types & Features
+
+#### Autocomplete Field
+```tsx
+// Autocomplete field with searchable options
+{
+  "type": "autocomplete",
+  "label": "Select Country",
+  "options": [
+    {"label": "United States", "value": "us"},
+    {"label": "Canada", "value": "ca"},
+    {"label": "United Kingdom", "value": "uk"}
+  ],
+  "placeholder": "Search countries...",
+  "allowsCustomValue": false
+}
+```
+
+#### Unified Field Alignment
+All form fields now support consistent alignment controls:
+- `componentAlignment`: "horizontal" | "vertical" (for radio, checkbox, switch, rating)
+- Context-aware properties panel that shows only relevant alignment options
+- Automatic field naming for improved form export consistency
+
 ## 🎯 Use Cases
 
-- **Customer Feedback Forms**: Surveys, reviews, contact forms
-- **Application Forms**: Job applications, registrations, onboarding
-- **Data Collection**: Research forms, lead generation, event registration
-- **Dynamic Forms**: Multi-step wizards, conditional logic forms
-- **Embedded Forms**: Integrate forms into existing applications
+- **Customer Feedback Forms**: Surveys with rating fields, reviews, contact forms
+- **Application Forms**: Job applications with autocomplete fields, registrations, onboarding
+- **Data Collection**: Research forms with smart field alignment, lead generation, event registration
+- **Dynamic Forms**: Multi-step wizards, conditional logic forms (coming soon)
+- **Embedded Forms**: Integrate forms into existing applications with consistent styling
+- **E-commerce**: Product reviews with rating fields, checkout forms with autocomplete
+- **Professional Services**: Client intake forms, service requests, appointment booking
 
 ## 🔧 Customization
 
@@ -224,17 +279,47 @@ export const CUSTOM_FIELDS = {
 
 ### Custom Styling
 
+The form builder now includes smarter styling controls based on field types:
+
 ```tsx
 import { FormRenderer, type FormExportData } from '@flowcsolutions/react-form-builder';
 
-// Forms support custom CSS classes through field properties
-const fieldWithCustomStyle = {
-  id: "styled-field",
-  type: "text",
-  label: "Styled Input",
-  customClasses: "border-blue-500 bg-blue-50 text-blue-900",
-  validation: []
+// Enhanced field configuration with unified alignment
+const enhancedFieldConfig = {
+  id: "rating-field",
+  type: "rating",
+  label: "Rate this product",
+  componentAlignment: "horizontal", // New unified alignment
+  maxRating: 5,
+  customClasses: "border-blue-500 bg-blue-50",
+  validation: [{ type: "required", message: "Please provide a rating" }]
 };
+
+// Autocomplete field with search functionality
+const autocompleteField = {
+  id: "country-select",
+  type: "autocomplete",
+  label: "Select Country",
+  options: [
+    { label: "United States", value: "us" },
+    { label: "Canada", value: "ca" }
+  ],
+  placeholder: "Search countries...",
+  allowsCustomValue: false
+};
+```
+
+#### Automatic Field Naming
+Fields without custom names now get automatic unique identifiers:
+- `text_input`, `text_input2`, `text_input3`
+- `email_field`, `email_field2`
+- `select_dropdown`, `select_dropdown2`
+
+#### Smart Properties Panel
+The properties panel now intelligently shows only relevant controls:
+- Text alignment hidden for: select, radio, checkbox, switch, date, time, file, rating, autocomplete
+- Unified alignment controls for radio, checkbox, switch, and rating fields
+- Context-aware validation options based on field type
 ```
 
 ## 🤝 Contributing
@@ -260,8 +345,13 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 ## 🔗 Links
 
+- [**🎉 What's New in v1.1.0**](./src/pages/AnnouncementPage.tsx) - See all the latest features and improvements
 - [Live Demo](https://flowcsolutions.github.io/react-form-builder)
 - [NPM Package](https://www.npmjs.com/package/@flowcsolutions/react-form-builder)
 - [GitHub Repository](https://github.com/flowcsolutions/react-form-builder)
 - [GitHub Issues](https://github.com/flowcsolutions/react-form-builder/issues)
+
+---
+
+**🚀 Enjoying React Form Builder?** Star us on GitHub and share your feedback!
 ```

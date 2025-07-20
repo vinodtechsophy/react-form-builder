@@ -12,7 +12,7 @@ import { FormBuilderToolbar } from './FormBuilderToolbar';
 import { FieldSidebar } from './FieldSidebar';
 import { FormCanvas } from './FormCanvas';
 import { PropertiesPanel } from './PropertiesPanel';
-import { createFormField } from '../data/formFields';
+import { createFormField, DRAG_ITEMS } from '../data/formFields';
 import type { FormFieldType } from '../types/form';
 
 function FormBuilderContent() {
@@ -35,6 +35,13 @@ function FormBuilderContent() {
     // Handle dropping field from sidebar to canvas
     if (over.id === 'form-canvas' && !currentForm.fields.find(f => f.id === active.id)) {
       const fieldType = active.id as FormFieldType;
+      
+      // Prevent dropping coming soon items (static and structure elements)
+      const dragItem = DRAG_ITEMS.find(item => item.id === active.id);
+      if (dragItem && (dragItem.category === 'static' || dragItem.category === 'structure')) {
+        return; // Don't allow dropping coming soon items
+      }
+      
       const newField = createFormField(fieldType);
       actions.addField(newField);
       return;

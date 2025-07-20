@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Accordion, AccordionItem, Button, Input } from "@heroui/react";
+import { Accordion, AccordionItem, Button, Input, Chip } from "@heroui/react";
 import { useDraggable } from "@dnd-kit/core";
 import {
   DRAG_ITEMS,
@@ -15,12 +15,24 @@ interface DraggableFieldProps {
   type: FormFieldType;
   label: string;
   icon: string;
+  category: string;
 }
 
-function DraggableField({ id, type, label, icon }: DraggableFieldProps) {
+function DraggableField({
+  id,
+  type,
+  label,
+  icon,
+  category,
+}: DraggableFieldProps) {
   const { addField } = useFormBuilder().actions;
+  const isComingSoon = category === "static" || category === "structure";
+
   const { attributes, listeners, setNodeRef, transform, isDragging } =
-    useDraggable({ id });
+    useDraggable({
+      id,
+      disabled: isComingSoon, // Disable dragging for coming soon items
+    });
 
   const style = transform
     ? {
@@ -31,6 +43,9 @@ function DraggableField({ id, type, label, icon }: DraggableFieldProps) {
   const IconComponent = (LucideIcons as any)[icon] || LucideIcons.Plus;
 
   const handleClick = () => {
+    if (isComingSoon) {
+      return; // Prevent adding coming soon items
+    }
     const newField = createFormField(type);
     addField(newField);
   };
@@ -39,23 +54,42 @@ function DraggableField({ id, type, label, icon }: DraggableFieldProps) {
     <div
       ref={setNodeRef}
       style={style}
-      {...listeners}
-      {...attributes}
-      className={`cursor-grab active:cursor-grabbing ${
-        isDragging ? "opacity-50" : ""
-      }`}
+      {...(!isComingSoon ? listeners : {})}
+      {...(!isComingSoon ? attributes : {})}
+      className={`${
+        !isComingSoon
+          ? "cursor-grab active:cursor-grabbing"
+          : "cursor-not-allowed"
+      } ${isDragging ? "opacity-50" : ""}`}
     >
       <Button
         size="sm"
         radius="sm"
         variant="flat"
-        className="mb-1 w-full bg-white hover:bg-default-100 transition-colors cursor-pointer"
+        className={`mb-1 w-full transition-colors relative ${
+          isComingSoon
+            ? "bg-white"
+            : "bg-white hover:bg-default-100 cursor-pointer"
+        }`}
         onPress={handleClick}
+        isDisabled={isComingSoon}
       >
         <div className="flex absolute left-1 sm:left-3 items-center justify-start text-start gap-1 sm:gap-1.5">
           <IconComponent size={14} className="sm:w-4 sm:h-4" />
           <span className="text-xs font-body inline">{label}</span>
         </div>
+        {isComingSoon && (
+          <div className="absolute bg-white right-1 top-1/2 transform -translate-y-1/2">
+            <Chip
+              size="sm"
+              color="secondary"
+              variant="flat"
+              className="text-xs px-1 py-0 min-h-unit-5 h-5"
+            >
+              Soon
+            </Chip>
+          </div>
+        )}
       </Button>
     </div>
   );
@@ -76,7 +110,9 @@ export function FieldSidebar() {
   return (
     <div className="w-full bg-background border-r border-divider h-full overflow-y-auto scrollbar-hide">
       <div className="p-1 sm:p-2 border-b border-divider">
-        <h2 className="text-xs sm:text-sm font-semibold mb-2 hidden sm:block">Form Elements</h2>
+        <h2 className="text-xs sm:text-sm font-semibold mb-2 hidden sm:block">
+          Form Elements
+        </h2>
         <h2 className="text-xs font-semibold mb-2 sm:hidden">Elements</h2>
         <Input
           radius="sm"
@@ -97,17 +133,18 @@ export function FieldSidebar() {
           defaultExpandedKeys={["basic", "choices"]}
         >
           {groupedItems.map((category) => {
-            const CategoryIcon =
-              (LucideIcons as any)[category.icon] || LucideIcons.Square;
             return (
               <AccordionItem
                 key={category.id}
                 aria-label={category.label}
                 title={
                   <div className="flex items-center gap-1 sm:gap-2">
-                    <CategoryIcon size={14} className="sm:w-4 sm:h-4" />
-                    <span className="text-xs sm:text-sm inline">{category.label}</span>
-                    <span className="text-xs sm:hidden">{category.label.charAt(0)}</span>
+                    <span className="text-xs sm:text-sm inline">
+                      {category.label}
+                    </span>
+                    <span className="text-xs sm:hidden">
+                      {category.label.charAt(0)}
+                    </span>
                     <span className="text-xs text-default-500 inline">
                       ({category.items.length})
                     </span>
@@ -122,6 +159,7 @@ export function FieldSidebar() {
                       type={item.type}
                       label={item.label}
                       icon={item.icon}
+                      category={item.category}
                     />
                   ))}
                 </div>

@@ -1,35 +1,40 @@
-import { useState } from 'react';
-import { 
-  Card, 
-  CardBody, 
-  Input, 
-  Switch, 
-  Select, 
-  SelectItem, 
+import React, { useState } from "react";
+import {
+  Card,
+  CardBody,
+  Input,
+  Switch,
+  Select,
+  SelectItem,
   Button,
   Tabs,
   Tab,
   Chip,
-  Textarea
-} from '@heroui/react';
-import { Plus, Trash2, Settings, Code, Layout, Palette } from 'lucide-react';
-import { useFormBuilder } from '../context/FormBuilderContext';
-import type { FormField, Option, ValidationRule } from '../types/form';
+} from "@heroui/react";
+import { Plus, Trash2, Settings, Layout } from "lucide-react";
+import { useFormBuilder } from "../context/FormBuilderContext";
+import type { FormField, Option } from "../types/form";
 
 export function PropertiesPanel() {
   const { state } = useFormBuilder();
   const { selectedFieldId, currentForm } = state;
-  
-  const selectedField = currentForm.fields.find(field => field.id === selectedFieldId);
+
+  const selectedField = currentForm.fields.find(
+    (field) => field.id === selectedFieldId
+  );
 
   if (!selectedField) {
     return (
       <div className="w-full bg-background border-l border-divider h-full mt-1 sm:mt-2 p-1 sm:p-2">
-        <Card radius='sm' className="py-4 sm:py-10">
+        <Card radius="sm" className="py-4 sm:py-10">
           <CardBody className="text-center py-2 sm:py-4">
             <Settings className="text-lg sm:text-2xl text-default-400 mx-auto mb-1 sm:mb-2" />
-            <h3 className="text-xs font-semibold mb-1 hidden sm:block">No Field Selected</h3>
-            <h3 className="text-xs font-semibold mb-1 sm:hidden">Select Field</h3>
+            <h3 className="text-xs font-semibold mb-1 hidden sm:block">
+              No Field Selected
+            </h3>
+            <h3 className="text-xs font-semibold mb-1 sm:hidden">
+              Select Field
+            </h3>
             <p className="text-default-600 text-xs hidden sm:block">
               Select a field to edit properties
             </p>
@@ -43,19 +48,16 @@ export function PropertiesPanel() {
     <div className="w-full bg-background border-l border-divider h-full overflow-y-auto">
       <div className="p-2">
         <h2 className="text-sm font-semibold mb-2">Properties</h2>
-        
+
         <Tabs aria-label="Properties" variant="underlined" size="sm">
           <Tab key="basic" title="Basic">
-            <BasicProperties field={selectedField} />
-          </Tab>
-          <Tab key="advanced" title="Advanced">
-            <AdvancedProperties field={selectedField} />
+            <MemoizedBasicProperties field={selectedField} />
           </Tab>
           <Tab key="layout" title="Layout">
-            <LayoutProperties field={selectedField} />
+            <MemoizedLayoutProperties field={selectedField} />
           </Tab>
           <Tab key="custom" title="Custom">
-            <CustomProperties field={selectedField} />
+            <MemoizedCustomProperties field={selectedField} />
           </Tab>
         </Tabs>
       </div>
@@ -71,95 +73,291 @@ function BasicProperties({ field }: { field: FormField }) {
   };
 
   const updateProperties = (updates: any) => {
-    actions.updateField(field.id, {
-      properties: { ...field.properties, ...updates }
-    });
+    actions.updateFieldProperties(field.id, updates);
+  };
+
+  const updateAdvanced = (updates: Partial<FormField["advanced"]>) => {
+    actions.updateFieldAdvanced(field.id, updates);
   };
 
   return (
     <div className="space-y-2 pt-2">
       <Input
+        key={`label-${field.id}`}
         label="Label"
         value={field.label}
-        onChange={(e) => updateField({ label: e.target.value })}
+        onValueChange={(value) => updateField({ label: value })}
         size="sm"
       />
 
       <Input
+        key={`name-${field.id}`}
         label="Field Name"
         placeholder="e.g., first_name, email, age"
-        value={field.name || ''}
-        onChange={(e) => updateField({ name: e.target.value })}
+        value={field.name || ""}
+        onValueChange={(value) => updateField({ name: value })}
         size="sm"
         description="Used as the key in form submissions"
       />
 
-      {field.type !== 'section' && field.type !== 'paragraph' && (
+      {field.type !== "section" && field.type !== "paragraph" && (
         <Input
+          key={`placeholder-${field.id}`}
           label="Placeholder"
-          value={field.placeholder || ''}
-          onChange={(e) => updateField({ placeholder: e.target.value })}
+          value={field.placeholder || ""}
+          onValueChange={(value) => updateField({ placeholder: value })}
           size="sm"
         />
       )}
 
-      <Switch
-        isSelected={field.required}
-        onValueChange={(checked) => updateField({ required: checked })}
-        size="sm"
-      >
-        Required
-      </Switch>
-
-      <Select
-        label="Width"
-        selectedKeys={[field.properties?.width || 'full']}
-        onSelectionChange={(keys) => {
-          const width = Array.from(keys)[0] as string;
-          updateProperties({ width });
-        }}
-        size="sm"
-      >
-        <SelectItem key="full">Full</SelectItem>
-        <SelectItem key="half">Half</SelectItem>
-        <SelectItem key="third">Third</SelectItem>
-        <SelectItem key="quarter">Quarter</SelectItem>
-      </Select>
-
-      {(field.type === 'radio' || field.type === 'checkbox' || field.type === 'select' || field.type === 'multiselect') && (
-        <OptionsEditor field={field} />
+      {/* Description field for HeroUI description prop */}
+      {field.type !== "section" && field.type !== "paragraph" && (
+        <Input
+          key={`description-${field.id}`}
+          label="Description"
+          placeholder="e.g. We'll never share your email with anyone else."
+          value={field.properties?.description || ""}
+          onValueChange={(value) => updateProperties({ description: value })}
+          size="sm"
+          description="Helper text shown below the input field"
+        />
       )}
 
-      {field.type === 'textarea' && (
+      {/* Add Read Only and Disabled for input fields */}
+      {(field.type === "text" ||
+        field.type === "email" ||
+        field.type === "password" ||
+        field.type === "number" ||
+        field.type === "phone" ||
+        field.type === "url" ||
+        field.type === "date" ||
+        field.type === "time" ||
+        field.type === "datetime" ||
+        field.type === "calendar" ||
+        field.type === "textarea" ||
+        field.type === "select" ||
+        field.type === "multiselect" ||
+        field.type === "autocomplete" ||
+        field.type === "search" ||
+        field.type === "file" ||
+        field.type === "rating" ||
+        field.type === "range" ||
+        field.type === "rich-text" ||
+        field.type === "number-format" ||
+        field.type === "pattern-format") && (
+        <div className="space-y-2 border-t border-divider pt-2">
+          <h5 className="text-xs font-medium text-default-600">Field State</h5>
+
+          <div className="flex flex-col gap-1">
+            <Switch
+              key={`required-${field.id}`}
+              isSelected={field.required}
+              onValueChange={(checked) => updateField({ required: checked })}
+              size="sm"
+            >
+              Required
+            </Switch>
+            <Switch
+              key={`readonly-${field.id}`}
+              isSelected={field.advanced?.readOnly || false}
+              onValueChange={(checked) => updateAdvanced({ readOnly: checked })}
+              size="sm"
+            >
+              Read Only
+            </Switch>
+
+            <Switch
+              key={`disabled-${field.id}`}
+              isSelected={field.advanced?.disabled || false}
+              onValueChange={(checked) => updateAdvanced({ disabled: checked })}
+              size="sm"
+            >
+              Disabled
+            </Switch>
+          </div>
+        </div>
+      )}
+
+      {/* Color and Size Settings for input fields */}
+      {(field.type === "text" ||
+        field.type === "email" ||
+        field.type === "password" ||
+        field.type === "number" ||
+        field.type === "phone" ||
+        field.type === "url" ||
+        field.type === "date" ||
+        field.type === "time" ||
+        field.type === "datetime" ||
+        field.type === "calendar" ||
+        field.type === "textarea" ||
+        field.type === "select" ||
+        field.type === "multiselect" ||
+        field.type === "autocomplete" ||
+        field.type === "search" ||
+        field.type === "file" ||
+        field.type === "range") && (
+        <div className="space-y-2 border-t border-divider pt-2">
+          <h5 className="text-xs font-medium text-default-600">Appearance</h5>
+
+          <div className="grid grid-cols-2 gap-2">
+            <Select
+              label="Color"
+              selectedKeys={[field.properties?.colorVariant || "default"]}
+              onSelectionChange={(keys) => {
+                const color = Array.from(keys)[0] as string;
+                updateProperties({ colorVariant: color });
+              }}
+              size="sm"
+            >
+              <SelectItem key="default">Default</SelectItem>
+              <SelectItem key="primary">Primary</SelectItem>
+              <SelectItem key="secondary">Secondary</SelectItem>
+              <SelectItem key="success">Success</SelectItem>
+              <SelectItem key="warning">Warning</SelectItem>
+              <SelectItem key="danger">Danger</SelectItem>
+            </Select>
+
+            <Select
+              label="Size"
+              selectedKeys={[field.properties?.size || "md"]}
+              onSelectionChange={(keys) => {
+                const size = Array.from(keys)[0] as string;
+                updateProperties({ size: size });
+              }}
+              size="sm"
+            >
+              <SelectItem key="sm">Small</SelectItem>
+              <SelectItem key="md">Medium</SelectItem>
+              <SelectItem key="lg">Large</SelectItem>
+            </Select>
+          </div>
+
+          <Select
+            label="Border Radius"
+            selectedKeys={[field.properties?.borderRadius || "md"]}
+            onSelectionChange={(keys) => {
+              const radius = Array.from(keys)[0] as string;
+              updateProperties({ borderRadius: radius });
+            }}
+            size="sm"
+          >
+            <SelectItem key="none">None</SelectItem>
+            <SelectItem key="sm">Small</SelectItem>
+            <SelectItem key="md">Medium</SelectItem>
+            <SelectItem key="lg">Large</SelectItem>
+            <SelectItem key="full">Full</SelectItem>
+          </Select>
+        </div>
+      )}
+
+      {/* Color and Appearance for buttons and interactive elements */}
+      {(field.type === "button" ||
+        field.type === "switch" ||
+        field.type === "checkbox" ||
+        field.type === "radio") && (
+        <div className="space-y-2 border-t border-divider pt-2">
+          <h5 className="text-xs font-medium text-default-600">Appearance</h5>
+
+          <div className="grid grid-cols-2 gap-2">
+            <Select
+              label="Color"
+              selectedKeys={[field.properties?.colorVariant || "default"]}
+              onSelectionChange={(keys) => {
+                const color = Array.from(keys)[0] as string;
+                updateProperties({ colorVariant: color });
+              }}
+              size="sm"
+            >
+              <SelectItem key="default">Default</SelectItem>
+              <SelectItem key="primary">Primary</SelectItem>
+              <SelectItem key="secondary">Secondary</SelectItem>
+              <SelectItem key="success">Success</SelectItem>
+              <SelectItem key="warning">Warning</SelectItem>
+              <SelectItem key="danger">Danger</SelectItem>
+            </Select>
+
+            <Select
+              label="Size"
+              selectedKeys={[field.properties?.size || "md"]}
+              onSelectionChange={(keys) => {
+                const size = Array.from(keys)[0] as string;
+                updateProperties({ size: size });
+              }}
+              size="sm"
+            >
+              <SelectItem key="sm">Small</SelectItem>
+              <SelectItem key="md">Medium</SelectItem>
+              <SelectItem key="lg">Large</SelectItem>
+            </Select>
+          </div>
+
+          {field.type === "button" && (
+            <Select
+              label="Variant"
+              selectedKeys={[field.properties?.variant || "solid"]}
+              onSelectionChange={(keys) => {
+                const variant = Array.from(keys)[0] as string;
+                updateProperties({ variant: variant });
+              }}
+              size="sm"
+            >
+              <SelectItem key="solid">Solid</SelectItem>
+              <SelectItem key="bordered">Bordered</SelectItem>
+              <SelectItem key="light">Light</SelectItem>
+              <SelectItem key="flat">Flat</SelectItem>
+              <SelectItem key="faded">Faded</SelectItem>
+              <SelectItem key="shadow">Shadow</SelectItem>
+              <SelectItem key="ghost">Ghost</SelectItem>
+            </Select>
+          )}
+        </div>
+      )}
+
+      {(field.type === "radio" ||
+        field.type === "checkbox" ||
+        field.type === "select" ||
+        field.type === "multiselect") && (
+        <MemoizedOptionsEditor field={field} />
+      )}
+
+      {field.type === "textarea" && (
         <Input
+          key={`rows-${field.id}`}
           type="number"
           label="Rows"
-          value={field.properties?.rows?.toString() || '4'}
-          onChange={(e) => updateProperties({ rows: parseInt(e.target.value) || 4 })}
+          value={field.properties?.rows?.toString() || "4"}
+          onValueChange={(value) =>
+            updateProperties({ rows: parseInt(value) || 4 })
+          }
           size="sm"
         />
       )}
 
-      {field.type === 'rating' && (
+      {field.type === "rating" && (
         <Input
+          key={`max-rating-${field.id}`}
           type="number"
           label="Max Rating"
-          value={field.properties?.max?.toString() || '5'}
-          onChange={(e) => updateProperties({ max: parseInt(e.target.value) || 5 })}
+          value={field.properties?.max?.toString() || "5"}
+          onValueChange={(value) =>
+            updateProperties({ max: parseInt(value) || 5 })
+          }
           size="sm"
         />
       )}
 
-      {field.type === 'file' && (
+      {field.type === "file" && (
         <>
           <Input
+            key={`accept-${field.id}`}
             label="File Types"
             placeholder="e.g., .jpg,.png,.pdf"
-            value={field.properties?.accept || ''}
-            onChange={(e) => updateProperties({ accept: e.target.value })}
+            value={field.properties?.accept || ""}
+            onValueChange={(value) => updateProperties({ accept: value })}
             size="sm"
           />
           <Switch
+            key={`multiple-${field.id}`}
             isSelected={field.properties?.multiple || false}
             onValueChange={(checked) => updateProperties({ multiple: checked })}
             size="sm"
@@ -169,20 +367,26 @@ function BasicProperties({ field }: { field: FormField }) {
         </>
       )}
 
-      {field.type === 'number' && (
+      {field.type === "number" && (
         <>
           <Input
+            key={`min-${field.id}`}
             type="number"
             label="Min Value"
-            value={field.properties?.min?.toString() || ''}
-            onChange={(e) => updateProperties({ min: e.target.value ? parseFloat(e.target.value) : undefined })}
+            value={field.properties?.min?.toString() || ""}
+            onValueChange={(value) =>
+              updateProperties({ min: value ? parseFloat(value) : undefined })
+            }
             size="sm"
           />
           <Input
+            key={`max-${field.id}`}
             type="number"
             label="Max Value"
-            value={field.properties?.max?.toString() || ''}
-            onChange={(e) => updateProperties({ max: e.target.value ? parseFloat(e.target.value) : undefined })}
+            value={field.properties?.max?.toString() || ""}
+            onValueChange={(value) =>
+              updateProperties({ max: value ? parseFloat(value) : undefined })
+            }
             size="sm"
           />
         </>
@@ -193,7 +397,7 @@ function BasicProperties({ field }: { field: FormField }) {
 
 function OptionsEditor({ field }: { field: FormField }) {
   const { actions } = useFormBuilder();
-  const [newOption, setNewOption] = useState({ label: '', value: '' });
+  const [newOption, setNewOption] = useState({ label: "", value: "" });
 
   const updateOptions = (options: Option[]) => {
     actions.updateField(field.id, { options });
@@ -203,7 +407,7 @@ function OptionsEditor({ field }: { field: FormField }) {
     if (newOption.label && newOption.value) {
       const currentOptions = field.options || [];
       updateOptions([...currentOptions, newOption]);
-      setNewOption({ label: '', value: '' });
+      setNewOption({ label: "", value: "" });
     }
   };
 
@@ -216,32 +420,39 @@ function OptionsEditor({ field }: { field: FormField }) {
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <h4 className="text-xs font-medium">Options</h4>
-        <Chip size="sm" variant="flat">{field.options?.length || 0}</Chip>
+        <Chip size="sm" variant="flat">
+          {field.options?.length || 0}
+        </Chip>
       </div>
 
       {field.options?.map((option, index) => (
-        <div key={index} className="p-2 border border-default-200 rounded space-y-1">
+        <div
+          key={`option-${index}-${field.id}`}
+          className="p-2 border border-default-200 rounded space-y-1"
+        >
           <Input
+            key={`option-label-${index}-${field.id}`}
             size="sm"
             placeholder="Label"
             value={option.label}
-            onChange={(e) => {
+            onValueChange={(value) => {
               const currentOptions = field.options || [];
-              const updatedOptions = currentOptions.map((opt, i) => 
-                i === index ? { ...opt, label: e.target.value } : opt
+              const updatedOptions = currentOptions.map((opt, i) =>
+                i === index ? { ...opt, label: value } : opt
               );
               updateOptions(updatedOptions);
             }}
           />
           <div className="flex gap-1">
             <Input
+              key={`option-value-${index}-${field.id}`}
               size="sm"
               placeholder="Value"
               value={option.value}
-              onChange={(e) => {
+              onValueChange={(value) => {
                 const currentOptions = field.options || [];
-                const updatedOptions = currentOptions.map((opt, i) => 
-                  i === index ? { ...opt, value: e.target.value } : opt
+                const updatedOptions = currentOptions.map((opt, i) =>
+                  i === index ? { ...opt, value: value } : opt
                 );
                 updateOptions(updatedOptions);
               }}
@@ -262,17 +473,23 @@ function OptionsEditor({ field }: { field: FormField }) {
 
       <div className="p-2 border border-dashed border-default-300 rounded space-y-1">
         <Input
+          key={`new-option-label-${field.id}`}
           size="sm"
           placeholder="New option label"
           value={newOption.label}
-          onChange={(e) => setNewOption({ ...newOption, label: e.target.value })}
+          onValueChange={(value) =>
+            setNewOption({ ...newOption, label: value })
+          }
         />
         <div className="flex gap-1">
           <Input
+            key={`new-option-value-${field.id}`}
             size="sm"
             placeholder="Value"
             value={newOption.value}
-            onChange={(e) => setNewOption({ ...newOption, value: e.target.value })}
+            onValueChange={(value) =>
+              setNewOption({ ...newOption, value: value })
+            }
             className="flex-1"
           />
           <Button
@@ -291,250 +508,6 @@ function OptionsEditor({ field }: { field: FormField }) {
   );
 }
 
-function AdvancedProperties({ field }: { field: FormField }) {
-  const { actions } = useFormBuilder();
-
-  const updateField = (updates: Partial<FormField>) => {
-    actions.updateField(field.id, updates);
-  };
-
-  const updateProperties = (updates: any) => {
-    actions.updateField(field.id, {
-      properties: { ...field.properties, ...updates }
-    });
-  };
-
-  const addValidation = () => {
-    const currentValidation = field.validation || [];
-    const newValidation: ValidationRule = {
-      type: 'required',
-      message: 'This field is required'
-    };
-    updateField({ validation: [...currentValidation, newValidation] });
-  };
-
-  const removeValidation = (index: number) => {
-    const currentValidation = field.validation || [];
-    updateField({ validation: currentValidation.filter((_, i) => i !== index) });
-  };
-
-  const updateValidation = (index: number, updates: any) => {
-    const currentValidation = field.validation || [];
-    const updatedValidation = currentValidation.map((val, i) => 
-      i === index ? { ...val, ...updates } : val
-    );
-    updateField({ validation: updatedValidation });
-  };
-
-  return (
-    <div className="space-y-3 pt-2">
-      {/* Default Value */}
-      <Input
-        label="Default Value"
-        value={field.defaultValue || ''}
-        onChange={(e) => updateField({ defaultValue: e.target.value })}
-        size="sm"
-      />
-
-      {/* Help Text */}
-      <Textarea
-        label="Help Text"
-        value={field.properties?.helpText || ''}
-        onChange={(e) => updateProperties({ helpText: e.target.value })}
-        size="sm"
-        rows={2}
-      />
-
-      {/* Conditional Logic */}
-      <div className="space-y-2 border-t border-divider pt-2">
-        <h4 className="text-xs font-medium text-default-700 flex items-center gap-1">
-          <Settings size={12} />
-          Conditional Logic
-        </h4>
-        
-        <Switch
-          isSelected={field.properties?.conditional || false}
-          onValueChange={(checked) => updateProperties({ conditional: checked })}
-          size="sm"
-        >
-          Enable Conditional Display
-        </Switch>
-
-        {field.properties?.conditional && (
-          <div className="space-y-2 pl-4">
-            <Select
-              label="Show when field"
-              selectedKeys={field.properties?.conditionalField ? [field.properties.conditionalField] : []}
-              onSelectionChange={(keys) => {
-                const fieldId = Array.from(keys)[0] as string;
-                updateProperties({ conditionalField: fieldId });
-              }}
-              size="sm"
-            >
-              <SelectItem key="field1">Name</SelectItem>
-              <SelectItem key="field2">Email</SelectItem>
-              <SelectItem key="field3">Age</SelectItem>
-            </Select>
-
-            <Select
-              label="Condition"
-              selectedKeys={[field.properties?.conditionalOperator || 'equals']}
-              onSelectionChange={(keys) => {
-                const operator = Array.from(keys)[0] as string;
-                updateProperties({ conditionalOperator: operator });
-              }}
-              size="sm"
-            >
-              <SelectItem key="equals">Equals</SelectItem>
-              <SelectItem key="not_equals">Not equals</SelectItem>
-              <SelectItem key="contains">Contains</SelectItem>
-              <SelectItem key="empty">Is empty</SelectItem>
-              <SelectItem key="not_empty">Is not empty</SelectItem>
-            </Select>
-
-            <Input
-              label="Value"
-              value={field.properties?.conditionalValue || ''}
-              onChange={(e) => updateProperties({ conditionalValue: e.target.value })}
-              size="sm"
-            />
-          </div>
-        )}
-      </div>
-
-      {/* Validation Rules */}
-      <div className="space-y-2 border-t border-divider pt-2">
-        <div className="flex items-center justify-between">
-          <h4 className="text-xs font-medium text-default-700">Validation Rules</h4>
-          <Button
-            size="sm"
-            variant="flat"
-            startContent={<Plus size={12} />}
-            onPress={addValidation}
-          >
-            Add Rule
-          </Button>
-        </div>
-
-        {field.validation?.map((validation, index) => (
-          <div key={index} className="p-2 border border-default-200 rounded space-y-2">
-            <div className="flex gap-2">
-              <Select
-                label="Type"
-                selectedKeys={[validation.type]}
-                onSelectionChange={(keys) => {
-                  const type = Array.from(keys)[0] as string;
-                  updateValidation(index, { type });
-                }}
-                size="sm"
-                className="flex-1"
-              >
-                <SelectItem key="required">Required</SelectItem>
-                <SelectItem key="email">Email</SelectItem>
-                <SelectItem key="url">URL</SelectItem>
-                <SelectItem key="pattern">Pattern</SelectItem>
-                <SelectItem key="min_length">Min Length</SelectItem>
-                <SelectItem key="max_length">Max Length</SelectItem>
-                <SelectItem key="min_value">Min Value</SelectItem>
-                <SelectItem key="max_value">Max Value</SelectItem>
-              </Select>
-              
-              <Button
-                size="sm"
-                color="danger"
-                variant="flat"
-                isIconOnly
-                onPress={() => removeValidation(index)}
-              >
-                <Trash2 size={12} />
-              </Button>
-            </div>
-
-            {(validation.type === 'pattern' || validation.type === 'minLength' || 
-              validation.type === 'maxLength' || validation.type === 'min' || 
-              validation.type === 'max') && (
-              <Input
-                label="Value"
-                value={validation.value || ''}
-                onChange={(e) => updateValidation(index, { value: e.target.value })}
-                size="sm"
-              />
-            )}
-
-            <Input
-              label="Error Message"
-              value={validation.message || ''}
-              onChange={(e) => updateValidation(index, { message: e.target.value })}
-              size="sm"
-            />
-          </div>
-        ))}
-      </div>
-
-      {/* Field Specific Properties */}
-      {field.type === 'number' && (
-        <div className="space-y-2 border-t border-divider pt-2">
-          <h4 className="text-xs font-medium text-default-700">Number Properties</h4>
-          <div className="grid grid-cols-2 gap-2">
-            <Input
-              type="number"
-              label="Min Value"
-              value={field.properties?.min?.toString() || ''}
-              onChange={(e) => updateProperties({ min: e.target.value ? parseFloat(e.target.value) : undefined })}
-              size="sm"
-            />
-            <Input
-              type="number"
-              label="Max Value"
-              value={field.properties?.max?.toString() || ''}
-              onChange={(e) => updateProperties({ max: e.target.value ? parseFloat(e.target.value) : undefined })}
-              size="sm"
-            />
-          </div>
-          <Input
-            type="number"
-            label="Step"
-            value={field.properties?.step?.toString() || ''}
-            onChange={(e) => updateProperties({ step: e.target.value ? parseFloat(e.target.value) : undefined })}
-            size="sm"
-          />
-        </div>
-      )}
-
-      {/* Character Counter */}
-      {(field.type === 'text' || field.type === 'textarea') && (
-        <div className="space-y-2 border-t border-divider pt-2">
-          <h4 className="text-xs font-medium text-default-700">Text Properties</h4>
-          <Switch
-            isSelected={field.properties?.showCharacterCount || false}
-            onValueChange={(checked) => updateProperties({ showCharacterCount: checked })}
-            size="sm"
-          >
-            Show Character Count
-          </Switch>
-          
-          <div className="grid grid-cols-2 gap-2">
-            <Input
-              type="number"
-              label="Min Length"
-              value={field.properties?.minLength?.toString() || ''}
-              onChange={(e) => updateProperties({ minLength: e.target.value ? parseInt(e.target.value) : undefined })}
-              size="sm"
-            />
-            <Input
-              type="number"
-              label="Max Length"
-              value={field.properties?.maxLength?.toString() || ''}
-              onChange={(e) => updateProperties({ maxLength: e.target.value ? parseInt(e.target.value) : undefined })}
-              size="sm"
-            />
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
 function LayoutProperties({ field }: { field: FormField }) {
   const { actions } = useFormBuilder();
 
@@ -543,9 +516,7 @@ function LayoutProperties({ field }: { field: FormField }) {
   };
 
   const updateProperties = (updates: any) => {
-    actions.updateField(field.id, {
-      properties: { ...field.properties, ...updates }
-    });
+    actions.updateFieldProperties(field.id, updates);
   };
 
   return (
@@ -559,16 +530,20 @@ function LayoutProperties({ field }: { field: FormField }) {
       <div className="space-y-2">
         <Select
           label="Column Span"
-          selectedKeys={[field.layout?.columnSpan?.toString() || field.columnSpan?.toString() || '12']}
+          selectedKeys={[
+            field.layout?.columnSpan?.toString() ||
+              field.columnSpan?.toString() ||
+              "12",
+          ]}
           onSelectionChange={(keys) => {
             const span = parseInt(Array.from(keys)[0] as string);
-            updateField({ 
+            updateField({
               columnSpan: span, // For backward compatibility
-              layout: { 
-                ...field.layout, 
+              layout: {
+                ...field.layout,
                 columnSpan: span,
-                gridClass: `col-span-${span}`
-              }
+                gridClass: `col-span-${span}`,
+              },
             });
           }}
           size="sm"
@@ -587,73 +562,30 @@ function LayoutProperties({ field }: { field: FormField }) {
           <SelectItem key="12">12 columns (100%)</SelectItem>
         </Select>
 
-        <Switch
-          isSelected={field.properties?.startNewRow || false}
-          onValueChange={(checked) => updateProperties({ startNewRow: checked })}
-          size="sm"
-        >
-          Start New Row
-        </Switch>
-      </div>
-
-      {/* Spacing */}
-      <div className="space-y-2 border-t border-divider pt-2">
-        <h5 className="text-xs font-medium text-default-600">Spacing</h5>
-        
-        <div className="grid grid-cols-2 gap-2">
+        {/* Orientation for radio and checkbox groups */}
+        {(field.type === 'radio' || field.type === 'checkbox') && (
           <Select
-            label="Margin Top"
-            selectedKeys={[field.properties?.marginTop || 'default']}
+            label="Options Layout"
+            selectedKeys={[field.properties?.orientation || 'vertical']}
             onSelectionChange={(keys) => {
-              const margin = Array.from(keys)[0] as string;
-              updateProperties({ marginTop: margin });
+              const orientation = Array.from(keys)[0] as string;
+              updateProperties({ orientation });
             }}
             size="sm"
           >
-            <SelectItem key="none">None</SelectItem>
-            <SelectItem key="small">Small</SelectItem>
-            <SelectItem key="default">Default</SelectItem>
-            <SelectItem key="large">Large</SelectItem>
+            <SelectItem key="vertical">Vertical</SelectItem>
+            <SelectItem key="horizontal">Horizontal</SelectItem>
           </Select>
+        )}
 
-          <Select
-            label="Margin Bottom"
-            selectedKeys={[field.properties?.marginBottom || 'default']}
-            onSelectionChange={(keys) => {
-              const margin = Array.from(keys)[0] as string;
-              updateProperties({ marginBottom: margin });
-            }}
-            size="sm"
-          >
-            <SelectItem key="none">None</SelectItem>
-            <SelectItem key="small">Small</SelectItem>
-            <SelectItem key="default">Default</SelectItem>
-            <SelectItem key="large">Large</SelectItem>
-          </Select>
-        </div>
-
-        <div className="grid grid-cols-2 gap-2">
-          <Select
-            label="Padding"
-            selectedKeys={[field.properties?.padding || 'default']}
-            onSelectionChange={(keys) => {
-              const padding = Array.from(keys)[0] as string;
-              updateProperties({ padding });
-            }}
-            size="sm"
-          >
-            <SelectItem key="none">None</SelectItem>
-            <SelectItem key="small">Small</SelectItem>
-            <SelectItem key="default">Default</SelectItem>
-            <SelectItem key="large">Large</SelectItem>
-          </Select>
-
+        {/* Component alignment for radio, checkbox, switch, and rating */}
+        {(field.type === 'radio' || field.type === 'checkbox' || field.type === 'switch' || field.type === 'rating') && (
           <Select
             label="Alignment"
-            selectedKeys={[field.properties?.alignment || 'left']}
+            selectedKeys={[field.properties?.componentAlignment || 'left']}
             onSelectionChange={(keys) => {
-              const alignment = Array.from(keys)[0] as string;
-              updateProperties({ alignment });
+              const componentAlignment = Array.from(keys)[0] as string;
+              updateProperties({ componentAlignment });
             }}
             size="sm"
           >
@@ -661,185 +593,524 @@ function LayoutProperties({ field }: { field: FormField }) {
             <SelectItem key="center">Center</SelectItem>
             <SelectItem key="right">Right</SelectItem>
           </Select>
+        )}
+
+        <div className="flex justify-start">
+          <Switch
+            isSelected={field.properties?.startNewRow || false}
+            onValueChange={(checked) =>
+              updateProperties({ startNewRow: checked })
+            }
+            size="sm"
+          >
+            Start New Row
+          </Switch>
+        </div>
+      </div>
+
+      {/* Spacing */}
+      <div className="space-y-2 border-t border-divider pt-2">
+        <h5 className="text-xs font-medium text-default-600 text-start">Spacing</h5>
+
+        <div className="grid grid-cols-2 gap-2">
+          <Select
+            label="Margin Top"
+            selectedKeys={[field.properties?.marginTop || "mt-0"]}
+            onSelectionChange={(keys) => {
+              const margin = Array.from(keys)[0] as string;
+              updateProperties({ marginTop: margin });
+            }}
+            size="sm"
+          >
+            <SelectItem key="mt-0">None (mt-0)</SelectItem>
+            <SelectItem key="mt-1">Small (mt-1)</SelectItem>
+            <SelectItem key="mt-2">Medium (mt-2)</SelectItem>
+            <SelectItem key="mt-4">Default (mt-4)</SelectItem>
+            <SelectItem key="mt-6">Large (mt-6)</SelectItem>
+            <SelectItem key="mt-8">Extra Large (mt-8)</SelectItem>
+          </Select>
+
+          <Select
+            label="Margin Bottom"
+            selectedKeys={[field.properties?.marginBottom || "mb-0"]}
+            onSelectionChange={(keys) => {
+              const margin = Array.from(keys)[0] as string;
+              updateProperties({ marginBottom: margin });
+            }}
+            size="sm"
+          >
+            <SelectItem key="mb-0">None (mb-0)</SelectItem>
+            <SelectItem key="mb-1">Small (mb-1)</SelectItem>
+            <SelectItem key="mb-2">Medium (mb-2)</SelectItem>
+            <SelectItem key="mb-4">Default (mb-4)</SelectItem>
+            <SelectItem key="mb-6">Large (mb-6)</SelectItem>
+            <SelectItem key="mb-8">Extra Large (mb-8)</SelectItem>
+          </Select>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2">
+          <Select
+            label="Outer Spacing"
+            selectedKeys={[field.properties?.padding || "p-0"]}
+            onSelectionChange={(keys) => {
+              const padding = Array.from(keys)[0] as string;
+              updateProperties({ padding });
+            }}
+            size="sm"
+          >
+            <SelectItem key="p-0">None (p-0)</SelectItem>
+            <SelectItem key="p-1">Small (p-1)</SelectItem>
+            <SelectItem key="p-2">Medium (p-2)</SelectItem>
+            <SelectItem key="p-4">Default (p-4)</SelectItem>
+            <SelectItem key="p-6">Large (p-6)</SelectItem>
+            <SelectItem key="p-8">Extra Large (p-8)</SelectItem>
+          </Select>
+
+          {/* Hide text alignment for specific field types that have their own alignment logic */}
+          {!['select', 'autocomplete', 'radio', 'checkbox', 'switch', 'date', 'time', 'file', 'rating'].includes(field.type) && (
+            <Select
+              label="Text Alignment"
+              selectedKeys={[field.properties?.alignment || "text-left"]}
+              onSelectionChange={(keys) => {
+                const alignment = Array.from(keys)[0] as string;
+                updateProperties({ alignment });
+              }}
+              size="sm"
+            >
+              <SelectItem key="text-left">Left</SelectItem>
+              <SelectItem key="text-center">Center</SelectItem>
+              <SelectItem key="text-right">Right</SelectItem>
+            </Select>
+          )}
         </div>
       </div>
 
       {/* Responsive Settings */}
       <div className="space-y-2 border-t border-divider pt-2">
-        <h5 className="text-xs font-medium text-default-600">Responsive</h5>
-        
-        <Switch
-          isSelected={field.properties?.hideOnMobile || false}
-          onValueChange={(checked) => updateProperties({ hideOnMobile: checked })}
-          size="sm"
-        >
-          Hide on Mobile
-        </Switch>
+        <h5 className="text-xs font-medium text-default-600 text-start">Responsive</h5>
+        <div className="flex flex-col gap-1">
+          <Switch
+            isSelected={field.properties?.hideOnMobile || false}
+            onValueChange={(checked) =>
+              updateProperties({ hideOnMobile: checked })
+            }
+            size="sm"
+          >
+            Hide on Mobile
+          </Switch>
 
-        <Switch
-          isSelected={field.properties?.hideOnTablet || false}
-          onValueChange={(checked) => updateProperties({ hideOnTablet: checked })}
-          size="sm"
-        >
-          Hide on Tablet
-        </Switch>
+          <Switch
+            isSelected={field.properties?.hideOnTablet || false}
+            onValueChange={(checked) =>
+              updateProperties({ hideOnTablet: checked })
+            }
+            size="sm"
+          >
+            Hide on Tablet
+          </Switch>
 
-        <Switch
-          isSelected={field.properties?.hideOnDesktop || false}
-          onValueChange={(checked) => updateProperties({ hideOnDesktop: checked })}
-          size="sm"
-        >
-          Hide on Desktop
-        </Switch>
+          <Switch
+            isSelected={field.properties?.hideOnDesktop || false}
+            onValueChange={(checked) =>
+              updateProperties({ hideOnDesktop: checked })
+            }
+            size="sm"
+          >
+            Hide on Desktop
+          </Switch>
+        </div>
       </div>
     </div>
   );
 }
 
+// Custom Properties Component
 function CustomProperties({ field }: { field: FormField }) {
   const { actions } = useFormBuilder();
+  const [newDataKey, setNewDataKey] = useState("");
+  const [newDataValue, setNewDataValue] = useState("");
+
+  const updateCustom = (updates: Partial<FormField["custom"]>) => {
+    actions.updateFieldCustom(field.id, updates);
+  };
 
   const updateProperties = (updates: any) => {
-    actions.updateField(field.id, {
-      properties: { ...field.properties, ...updates }
-    });
+    actions.updateFieldProperties(field.id, updates);
+  };
+
+  const addDataAttribute = () => {
+    if (newDataKey && newDataValue) {
+      const currentDataAttributes = field.custom?.dataAttributes || {};
+      updateCustom({
+        dataAttributes: {
+          ...currentDataAttributes,
+          [newDataKey]: newDataValue,
+        },
+      });
+      setNewDataKey("");
+      setNewDataValue("");
+    }
+  };
+
+  const removeDataAttribute = (key: string) => {
+    const currentDataAttributes = field.custom?.dataAttributes || {};
+    const newAttributes = { ...currentDataAttributes };
+    delete newAttributes[key];
+    updateCustom({ dataAttributes: newAttributes });
   };
 
   return (
-    <div className="space-y-3 pt-2">
-      <h4 className="text-xs font-medium text-default-700 flex items-center gap-1">
-        <Code size={12} />
-        Custom Styling
-      </h4>
-
-      {/* CSS Classes */}
-      <Input
-        label="CSS Classes"
-        placeholder="btn-primary custom-field"
-        value={field.properties?.customClasses || ''}
-        onChange={(e) => updateProperties({ customClasses: e.target.value })}
-        size="sm"
-      />
-
-      {/* Custom Attributes */}
-      <div className="space-y-2 border-t border-divider pt-2">
-        <h5 className="text-xs font-medium text-default-600">HTML Attributes</h5>
+    <div className="space-y-4 py-4">
+      <div className="space-y-2">
+        <h5 className="text-xs font-medium text-default-600">HeroUI ClassNames</h5>
         
-        <Input
-          label="Data Attributes"
-          placeholder="data-test=value"
-          value={field.properties?.dataAttributes || ''}
-          onChange={(e) => updateProperties({ dataAttributes: e.target.value })}
-          size="sm"
-        />
+        <div className="space-y-2 border-t border-divider pt-2">
+          <div className="text-xs text-default-500 font-medium">Layout & Structure</div>
+          
+          <Input
+            key={`classnames-base-${field.id}`}
+            label="Base (Outer Container)"
+            placeholder="e.g. p-4 bg-gray-50 rounded-lg"
+            value={field.properties?.classNames?.base || ""}
+            onValueChange={(value) => {
+              const currentClassNames = field.properties?.classNames || {};
+              updateProperties({ 
+                classNames: { 
+                  ...currentClassNames, 
+                  base: value 
+                } 
+              });
+            }}
+            size="sm"
+            description="Outer wrapper container"
+          />
+
+          <Input
+            key={`classnames-mainwrapper-${field.id}`}
+            label="Main Wrapper"
+            placeholder="e.g. flex flex-col gap-2"
+            value={field.properties?.classNames?.mainWrapper || ""}
+            onValueChange={(value) => {
+              const currentClassNames = field.properties?.classNames || {};
+              updateProperties({ 
+                classNames: { 
+                  ...currentClassNames, 
+                  mainWrapper: value 
+                } 
+              });
+            }}
+            size="sm"
+            description="Main wrapper around input elements"
+          />
+
+          <Input
+            key={`classnames-innerwrapper-${field.id}`}
+            label="Inner Wrapper"
+            placeholder="e.g. relative flex items-center"
+            value={field.properties?.classNames?.innerWrapper || ""}
+            onValueChange={(value) => {
+              const currentClassNames = field.properties?.classNames || {};
+              updateProperties({ 
+                classNames: { 
+                  ...currentClassNames, 
+                  innerWrapper: value 
+                } 
+              });
+            }}
+            size="sm"
+            description="Inner wrapper around input field"
+          />
+        </div>
+
+        <div className="space-y-2 border-t border-divider pt-2">
+          <div className="text-xs text-default-500 font-medium">Input Elements</div>
+          
+          <Input
+            key={`classnames-inputwrapper-${field.id}`}
+            label="Input Wrapper"
+            placeholder="e.g. border border-red-500 shadow-lg"
+            value={field.properties?.classNames?.inputWrapper || ""}
+            onValueChange={(value) => {
+              const currentClassNames = field.properties?.classNames || {};
+              updateProperties({ 
+                classNames: { 
+                  ...currentClassNames, 
+                  inputWrapper: value 
+                } 
+              });
+            }}
+            size="sm"
+            description="Input border, background, and styling"
+          />
+
+          <Input
+            key={`classnames-input-${field.id}`}
+            label="Input Field"
+            placeholder="e.g. text-lg font-bold text-blue-600"
+            value={field.properties?.classNames?.input || ""}
+            onValueChange={(value) => {
+              const currentClassNames = field.properties?.classNames || {};
+              updateProperties({ 
+                classNames: { 
+                  ...currentClassNames, 
+                  input: value 
+                } 
+              });
+            }}
+            size="sm"
+            description="Text styling for input content"
+          />
+
+          <Input
+            key={`classnames-clearbutton-${field.id}`}
+            label="Clear Button"
+            placeholder="e.g. text-gray-400 hover:text-red-500"
+            value={field.properties?.classNames?.clearButton || ""}
+            onValueChange={(value) => {
+              const currentClassNames = field.properties?.classNames || {};
+              updateProperties({ 
+                classNames: { 
+                  ...currentClassNames, 
+                  clearButton: value 
+                } 
+              });
+            }}
+            size="sm"
+            description="Clear button styling"
+          />
+        </div>
+
+        <div className="space-y-2 border-t border-divider pt-2">
+          <div className="text-xs text-default-500 font-medium">Labels & Text</div>
+          
+          <Input
+            key={`classnames-label-${field.id}`}
+            label="Label"
+            placeholder="e.g. text-sm font-semibold text-purple-700"
+            value={field.properties?.classNames?.label || ""}
+            onValueChange={(value) => {
+              const currentClassNames = field.properties?.classNames || {};
+              updateProperties({ 
+                classNames: { 
+                  ...currentClassNames, 
+                  label: value 
+                } 
+              });
+            }}
+            size="sm"
+            description="Field label styling"
+          />
+
+          <Input
+            key={`classnames-description-${field.id}`}
+            label="Description/Helper"
+            placeholder="e.g. text-xs text-gray-500 italic"
+            value={field.properties?.classNames?.description || ""}
+            onValueChange={(value) => {
+              const currentClassNames = field.properties?.classNames || {};
+              updateProperties({ 
+                classNames: { 
+                  ...currentClassNames, 
+                  description: value 
+                } 
+              });
+            }}
+            size="sm"
+            description="Help text styling"
+          />
+
+          <Input
+            key={`classnames-helperwrapper-${field.id}`}
+            label="Helper Wrapper"
+            placeholder="e.g. mt-1 flex justify-between"
+            value={field.properties?.classNames?.helperWrapper || ""}
+            onValueChange={(value) => {
+              const currentClassNames = field.properties?.classNames || {};
+              updateProperties({ 
+                classNames: { 
+                  ...currentClassNames, 
+                  helperWrapper: value 
+                } 
+              });
+            }}
+            size="sm"
+            description="Wrapper for helper text and validation"
+          />
+
+          <Input
+            key={`classnames-errormessage-${field.id}`}
+            label="Error Message"
+            placeholder="e.g. text-red-500 text-xs font-medium"
+            value={field.properties?.classNames?.errorMessage || ""}
+            onValueChange={(value) => {
+              const currentClassNames = field.properties?.classNames || {};
+              updateProperties({ 
+                classNames: { 
+                  ...currentClassNames, 
+                  errorMessage: value 
+                } 
+              });
+            }}
+            size="sm"
+            description="Error message styling"
+          />
+        </div>
+
+        <div className="flex gap-2 pt-2 border-t border-divider">
+          <Button
+            size="sm"
+            variant="flat"
+            onPress={() => {
+              updateProperties({ classNames: undefined });
+            }}
+          >
+            Clear All
+          </Button>
+          
+          <Button
+            size="sm"
+            variant="flat"
+            color="primary"
+            onPress={() => {
+              updateProperties({ 
+                classNames: {
+                  base: "p-4",
+                  inputWrapper: "border-2 border-primary-300 hover:border-primary-500",
+                  input: "text-primary-700 font-medium",
+                  label: "text-primary-600 font-semibold",
+                  description: "text-primary-400"
+                }
+              });
+            }}
+          >
+            Example Style
+          </Button>
+        </div>
+      </div>
+
+      <div className="space-y-2 border-t border-divider pt-2">
+        <div className="flex items-center justify-between">
+          <h5 className="text-xs font-medium text-default-600">
+            Data Attributes
+          </h5>
+          <Button
+            size="sm"
+            variant="flat"
+            onPress={() => {
+              updateCustom({
+                dataAttributes: {
+                  ...field.custom?.dataAttributes,
+                  'field-type': field.type,
+                  'field-name': field.name || field.label.toLowerCase().replace(/\s+/g, '-')
+                }
+              });
+            }}
+          >
+            Add Defaults
+          </Button>
+        </div>
+
+        <div className="flex gap-2">
+          <Input
+            key={`new-data-key-${field.id}`}
+            placeholder="e.g. analytics-event"
+            value={newDataKey}
+            onValueChange={setNewDataKey}
+            size="sm"
+            className="flex-1"
+          />
+          <Input
+            key={`new-data-value-${field.id}`}
+            placeholder="e.g. form-submit"
+            value={newDataValue}
+            onValueChange={setNewDataValue}
+            size="sm"
+            className="flex-1"
+          />
+          <Button
+            size="sm"
+            variant="flat"
+            onPress={addDataAttribute}
+            isIconOnly
+          >
+            <Plus className="w-4 h-4" />
+          </Button>
+        </div>
+
+        <div className="space-y-1">
+          {Object.entries(field.custom?.dataAttributes || {}).map(
+            ([key, value]) => (
+              <div
+                key={key}
+                className="flex items-center justify-between bg-default-100 p-2 rounded text-xs"
+              >
+                <span>
+                  <strong>{key}:</strong> {value}
+                </span>
+                <Button
+                  size="sm"
+                  variant="light"
+                  color="danger"
+                  onPress={() => removeDataAttribute(key)}
+                  isIconOnly
+                >
+                  <Trash2 className="w-3 h-3" />
+                </Button>
+              </div>
+            )
+          )}
+        </div>
+      </div>
+
+      <div className="space-y-2 border-t border-divider pt-2">
+        <div className="flex items-center justify-between">
+          <h5 className="text-xs font-medium text-default-600">Accessibility</h5>
+          <Button
+            size="sm"
+            variant="flat"
+            onPress={() => {
+              updateCustom({
+                role: field.type === 'button' ? 'button' : 
+                      field.type === 'select' || field.type === 'multiselect' ? 'combobox' :
+                      field.type === 'radio' ? 'radiogroup' :
+                      field.type === 'checkbox' ? 'checkbox' : 'textbox',
+                tabIndex: 0
+              });
+            }}
+          >
+            Add Defaults
+          </Button>
+        </div>
 
         <Input
-          label="ARIA Label"
-          value={field.properties?.ariaLabel || ''}
-          onChange={(e) => updateProperties({ ariaLabel: e.target.value })}
-          size="sm"
-        />
-
-        <Input
+          key={`tab-index-${field.id}`}
           label="Tab Index"
           type="number"
-          value={field.properties?.tabIndex?.toString() || ''}
-          onChange={(e) => updateProperties({ tabIndex: e.target.value ? parseInt(e.target.value) : undefined })}
+          value={field.custom?.tabIndex?.toString() || ""}
+          onValueChange={(value) =>
+            updateCustom({ tabIndex: parseInt(value) || undefined })
+          }
           size="sm"
+          placeholder="0 for normal tab order, -1 to skip"
         />
-      </div>
 
-      {/* Styling */}
-      <div className="space-y-2 border-t border-divider pt-2">
-        <h5 className="text-xs font-medium text-default-600 flex items-center gap-1">
-          <Palette size={12} />
-          Appearance
-        </h5>
-        
-        <Select
-          label="Color Variant"
-          selectedKeys={[field.properties?.colorVariant || 'default']}
-          onSelectionChange={(keys) => {
-            const variant = Array.from(keys)[0] as string;
-            updateProperties({ colorVariant: variant });
-          }}
+        <Input
+          key={`role-${field.id}`}
+          label="ARIA Role"
+          placeholder="textbox, button, combobox, etc."
+          value={field.custom?.role || ""}
+          onValueChange={(value) => updateCustom({ role: value })}
           size="sm"
-        >
-          <SelectItem key="default">Default</SelectItem>
-          <SelectItem key="primary">Primary</SelectItem>
-          <SelectItem key="secondary">Secondary</SelectItem>
-          <SelectItem key="success">Success</SelectItem>
-          <SelectItem key="warning">Warning</SelectItem>
-          <SelectItem key="danger">Danger</SelectItem>
-        </Select>
-
-        <Select
-          label="Size"
-          selectedKeys={[field.properties?.size || 'sm']}
-          onSelectionChange={(keys) => {
-            const size = Array.from(keys)[0] as string;
-            updateProperties({ size });
-          }}
-          size="sm"
-        >
-          <SelectItem key="sm">Small</SelectItem>
-          <SelectItem key="md">Medium</SelectItem>
-          <SelectItem key="lg">Large</SelectItem>
-        </Select>
-
-        <Select
-          label="Border Radius"
-          selectedKeys={[field.properties?.borderRadius || 'default']}
-          onSelectionChange={(keys) => {
-            const radius = Array.from(keys)[0] as string;
-            updateProperties({ borderRadius: radius });
-          }}
-          size="sm"
-        >
-          <SelectItem key="none">None</SelectItem>
-          <SelectItem key="small">Small</SelectItem>
-          <SelectItem key="default">Default</SelectItem>
-          <SelectItem key="large">Large</SelectItem>
-          <SelectItem key="full">Full</SelectItem>
-        </Select>
-      </div>
-
-      {/* Field ID */}
-      <div className="border-t border-divider pt-2">
-        <h5 className="text-xs font-medium text-default-600 mb-1">Field ID</h5>
-        <p className="text-xs text-default-500 font-mono bg-default-100 p-2 rounded">
-          {field.id}
-        </p>
-      </div>
-
-      {/* Advanced Options */}
-      <div className="space-y-2 border-t border-divider pt-2">
-        <h5 className="text-xs font-medium text-default-600">Advanced</h5>
-        
-        <Switch
-          isSelected={field.properties?.disabled || false}
-          onValueChange={(checked) => updateProperties({ disabled: checked })}
-          size="sm"
-        >
-          Disabled
-        </Switch>
-
-        <Switch
-          isSelected={field.properties?.readonly || false}
-          onValueChange={(checked) => updateProperties({ readonly: checked })}
-          size="sm"
-        >
-          Read Only
-        </Switch>
-
-        <Switch
-          isSelected={field.properties?.hidden || false}
-          onValueChange={(checked) => updateProperties({ hidden: checked })}
-          size="sm"
-        >
-          Hidden Field
-        </Switch>
+          description="Override the default ARIA role for this element"
+        />
       </div>
     </div>
   );
 }
+
+// Schema Properties Component
+// Memoized versions to prevent unnecessary re-renders
+const MemoizedBasicProperties = React.memo(BasicProperties);
+const MemoizedLayoutProperties = React.memo(LayoutProperties);
+const MemoizedCustomProperties = React.memo(CustomProperties);
+const MemoizedOptionsEditor = React.memo(OptionsEditor);

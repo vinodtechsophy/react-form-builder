@@ -108,7 +108,6 @@ function YourComponent() {
 - `reorderFields(oldIndex: number, newIndex: number)` - Reorder fields
 - `setPreviewMode(preview: boolean)` - Toggle preview mode
 - `setDeviceView(view: 'desktop' | 'tablet' | 'mobile')` - Set device view
-- `updateFormSettings(settings: Partial<FormSettings>)` - Update form settings
 - `updateFormMeta(meta: { title?: string; description?: string })` - Update form metadata
 
 ## Types
