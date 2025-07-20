@@ -29,6 +29,8 @@ import {
   Copy,
   Check,
   Rows4,
+  AlertCircle,
+  CheckCircle,
 } from "lucide-react";
 import { useState } from "react";
 import { useFormBuilder } from "../context/FormBuilderContext";
@@ -41,10 +43,21 @@ import type { FormConfig } from "../types/form";
 export function FormBuilderToolbar() {
   const { state, actions } = useFormBuilder();
   const { previewMode, currentForm } = state;
+  const [importStatus, setImportStatus] = useState<{
+    type: 'success' | 'error' | null;
+    message: string;
+  }>({ type: null, message: '' });
+  
   const {
     isOpen: isJsonOpen,
     onOpen: onJsonOpen,
     onOpenChange: onJsonOpenChange,
+  } = useDisclosure();
+
+  const {
+    isOpen: isImportOpen,
+    onOpen: onImportOpen,
+    onOpenChange: onImportOpenChange,
   } = useDisclosure();
 
   const handlePreview = () => {
@@ -61,28 +74,105 @@ export function FormBuilderToolbar() {
     onJsonOpen();
   };
 
+  const validateFormData = (data: any): boolean => {
+    // Basic validation for form structure
+    if (!data || typeof data !== 'object') return false;
+    
+    // Check if it's an exported form format (with metadata)
+    if (data.metadata && data.fields) {
+      // Validate exported form structure
+      if (!data.metadata.title || typeof data.metadata.title !== 'string') return false;
+      if (!Array.isArray(data.fields)) return false;
+      
+      // Validate each field has required properties
+      for (const field of data.fields) {
+        if (!field.id || !field.type || !field.label) return false;
+      }
+      return true;
+    }
+    
+    // Check if it's a simple form format (FormConfig)
+    if (data.title && data.fields) {
+      if (typeof data.title !== 'string') return false;
+      if (!Array.isArray(data.fields)) return false;
+      
+      // Validate each field has required properties
+      for (const field of data.fields) {
+        if (!field.id || !field.type || !field.label) return false;
+      }
+      return true;
+    }
+    
+    return false;
+  };
+
   const handleImport = () => {
-    const input = document.createElement("input");
-    input.type = "file";
-    input.accept = ".json";
-    input.onchange = (e) => {
-      const file = (e.target as HTMLInputElement).files?.[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          try {
-            const formData = JSON.parse(e.target?.result as string);
-            // Import form logic
-            console.log("Importing form:", formData);
-          } catch (error) {
-            console.error("Error importing form:", error);
-          }
-        };
-        reader.readAsText(file);
+    setImportStatus({ type: null, message: '' });
+    onImportOpen();
+  };
+
+  const convertToFormConfig = (data: any): FormConfig => {
+    // If it's already in FormConfig format, return as is
+    if (data.title && data.fields && !data.metadata) {
+      return data;
+    }
+    
+    // Convert from exported format to FormConfig
+    return {
+      id: data.metadata?.id || data.id,
+      title: data.metadata?.title || data.title,
+      description: data.metadata?.description || data.description || '',
+      fields: data.fields,
+      settings: data.settings || {
+        submitButtonText: 'Submit',
+        allowMultipleSubmissions: true,
+        requireAuth: false,
+        captchaEnabled: false,
+        theme: 'auto'
       }
     };
-    input.click();
   };
+
+  const handleFileImport = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const importedData = JSON.parse(e.target?.result as string);
+        
+        if (!validateFormData(importedData)) {
+          setImportStatus({
+            type: 'error',
+            message: 'Invalid form structure. Please ensure the JSON file contains a valid form configuration.'
+          });
+          return;
+        }
+
+        // Convert to FormConfig format
+        const formData = convertToFormConfig(importedData);
+        
+        // Import the form
+        actions.setForm(formData);
+        setImportStatus({
+          type: 'success',
+          message: `Successfully imported "${formData.title}" with ${formData.fields.length} field(s).`
+        });
+        
+        // Close modal after successful import
+        setTimeout(() => {
+          onImportOpenChange();
+          setImportStatus({ type: null, message: '' });
+        }, 2000);
+        
+      } catch (error) {
+        setImportStatus({
+          type: 'error',
+          message: 'Invalid JSON file. Please check the file format and try again.'
+        });
+      }
+    };
+    reader.readAsText(file);
+  };
+
 
   return (
     <>
@@ -156,6 +246,68 @@ export function FormBuilderToolbar() {
         onOpenChange={onJsonOpenChange}
         form={currentForm}
       />
+
+      {/* Import Form Modal */}
+      <Modal isOpen={isImportOpen} onOpenChange={onImportOpenChange} size="2xl">
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader className="flex flex-col gap-1">
+                <h3 className="text-lg font-semibold">Import Form</h3>
+                <p className="text-sm text-default-500">
+                  Import a form configuration from JSON file or paste JSON directly
+                </p>
+              </ModalHeader>
+              <ModalBody>
+                 <div className="space-y-4">
+                      <div className="border-2 border-dashed border-default-300 rounded-lg p-6 text-center hover:border-default-400 transition-colors">
+                        <Upload className="mx-auto text-default-400 mb-2" size={32} />
+                        <p className="text-sm text-default-600 mb-2">
+                          Click to upload or drag and drop
+                        </p>
+                        <p className="text-xs text-default-500">
+                          JSON files only (.json)
+                        </p>
+                        <input
+                          type="file"
+                          accept=".json"
+                          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              handleFileImport(file);
+                            }
+                          }}
+                        />
+                      </div>
+                    </div>
+                {/* Status Messages */}
+                {importStatus.type && (
+                  <div className="mt-4">
+                    <div className={`flex items-center gap-2 p-3 rounded-lg ${
+                      importStatus.type === 'success' 
+                        ? 'bg-success-50 border border-success-200 text-success-700'
+                        : 'bg-danger-50 border border-danger-200 text-danger-700'
+                    }`}>
+                      {importStatus.type === 'success' ? (
+                        <CheckCircle className="w-4 h-4" />
+                      ) : (
+                        <AlertCircle className="w-4 h-4" />
+                      )}
+                      <span className="text-sm">{importStatus.message}</span>
+                    </div>
+                  </div>
+                )}
+              </ModalBody>
+              <ModalFooter>
+                <Button variant="flat" onPress={onClose}>
+                  Close
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </>
   );
 }

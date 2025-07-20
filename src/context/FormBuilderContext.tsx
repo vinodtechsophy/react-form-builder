@@ -284,6 +284,7 @@ interface FormBuilderContextType {
   state: FormBuilderState;
   dispatch: React.Dispatch<FormBuilderAction>;
   actions: {
+    setForm: (form: FormConfig) => void;
     addField: (field: FormField) => void;
     updateField: (id: string, updates: Partial<FormField>) => void;
     updateFieldProperties: (id: string, properties: any) => void;
@@ -308,6 +309,7 @@ export function FormBuilderProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(formBuilderReducer, initialState);
 
   const actions = {
+    setForm: (form: FormConfig) => dispatch({ type: 'SET_FORM', payload: form }),
     addField: (field: FormField) => dispatch({ type: 'ADD_FIELD', payload: field }),
     updateField: (id: string, updates: Partial<FormField>) => 
       dispatch({ type: 'UPDATE_FIELD', payload: { id, updates } }),

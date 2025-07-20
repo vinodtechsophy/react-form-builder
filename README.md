@@ -144,8 +144,6 @@ function App() {
 }
 ```
 
-#### Custom Form Builder Layout
-
 #### Form Renderer (Standalone)
 
 ```tsx
