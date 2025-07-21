@@ -100,6 +100,27 @@ const AnnouncementPage = () => {
           We've been working hard to bring you exciting new features, improvements, and a better overall experience. 
           Here's everything new in React Form Builder!
         </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Card className="bg-gradient-to-r from-primary-50 to-secondary-50 border-primary-200">
+            <CardBody className="text-center py-4">
+              <div className="flex items-center justify-center gap-3">
+                <Rocket className="w-6 h-6 text-primary-600" />
+                <div>
+                  <p className="font-semibold text-primary-700">Try Live Demo</p>
+                  <a 
+                    href="https://react-form-builder.flowcsolutions.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-primary-600 hover:text-primary-800 underline text-sm"
+                  >
+                    react-form-builder.flowcsolutions.com
+                  </a>
+                </div>
+              </div>
+            </CardBody>
+          </Card>
+        </div>
 
       </div>
 

@@ -2,9 +2,13 @@
 
 A powerful, responsive form builder built with React, TypeScript, HeroUI, and TailwindCSS. Create dynamic forms with drag-and-drop functionality, export to JSON, and render forms anywhere.
 
+🚀 **[Try Live Demo](https://react-form-builder.flowcsolutions.com/)** | 📖 **[View Documentation](./docs/)** | 💾 **[NPM Package](https://www.npmjs.com/package/@flowcsolutions/react-form-builder)**
+
 ## 🎉 What's New in v1.1
 
 We've just released major improvements to React Form Builder! Here's what's new:
+
+> 🚀 **[See it in action](https://react-form-builder.flowcsolutions.com/)** - Try the live demo with all new features!
 
 ### ✨ New Features
 - **🎯 Unified Field Alignment**: Radio, checkbox, switch, and rating fields now have consistent label and component alignment controls
@@ -136,6 +140,8 @@ npm run dev
 - 🚀 **Production Ready**: Battle-tested components for real-world applications
 
 ## 🚀 Quick Start
+
+> 🌟 **New to React Form Builder?** [Try our interactive demo](https://react-form-builder.flowcsolutions.com/) to see all features in action!
 
 ### Installation
 
@@ -359,8 +365,8 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 
 ## 🔗 Links
 
+- [**🚀 Live Demo**](https://react-form-builder.flowcsolutions.com/) - Interactive demo with all features
 - [**🎉 What's New in v1.1**](./src/pages/AnnouncementPage.tsx) - See all the latest features and improvements
-- [Live Demo](https://flowcsolutions.github.io/react-form-builder)
 - [NPM Package](https://www.npmjs.com/package/@flowcsolutions/react-form-builder)
 - [GitHub Repository](https://github.com/zenpou21/react-form-builder)
 - [GitHub Issues](https://github.com/zenpou21/react-form-builder/issues)
