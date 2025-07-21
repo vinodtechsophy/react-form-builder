@@ -6,7 +6,8 @@ import {
   Spacer,
   Code,
   Button,
-  Link
+  Link,
+  Snippet
 } from '@heroui/react';
 import { 
   BookOpen, 
@@ -61,12 +62,8 @@ const DocumentationPage = () => {
   const fieldTypes = [
     "Text Input", "Email", "Password", "Number", "Date", "Time", "Textarea",
     "Select", "Autocomplete", "Multi-select", "Radio", "Checkbox", "Switch",
-    "File Upload", "Rating", "Phone", "URL"
+    "File Upload", "Rating", "Phone"
   ];
-
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
-  };
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
@@ -107,84 +104,88 @@ const DocumentationPage = () => {
               <div className="space-y-4">
                 <div>
                   <p className="text-sm text-default-600 mb-2">Install the package and required dependencies:</p>
-                  <div className="bg-default-100 p-4 rounded-lg relative">
-                    <Code className="block text-sm">npm install @flowcsolutions/react-form-builder react react-dom @heroui/react framer-motion lucide-react uuid</Code>
-                    <Button
-                      size="sm"
-                      variant="flat"
-                      className="absolute top-2 right-2"
-                      onPress={() => copyToClipboard('npm install @flowcsolutions/react-form-builder react react-dom @heroui/react framer-motion lucide-react uuid')}
-                    >
-                      Copy
-                    </Button>
-                  </div>
+                  <Snippet 
+                    symbol=""
+                    variant="bordered"
+                    color="default"
+                    className="w-full"
+                    classNames={{
+                      base: "w-full",
+                      pre: "whitespace-pre-wrap break-all"
+                    }}
+                  >
+                    npm install @flowcsolutions/react-form-builder react react-dom @heroui/react framer-motion lucide-react uuid
+                  </Snippet>
                 </div>
                 <div>
                   <p className="text-sm text-default-600 mb-2">Install TailwindCSS (required for styling):</p>
-                  <div className="bg-default-100 p-4 rounded-lg relative">
-                    <Code className="block text-sm">npm install -D tailwindcss @tailwindcss/vite</Code>
-                    <Button
-                      size="sm"
-                      variant="flat"
-                      className="absolute top-2 right-2"
-                      onPress={() => copyToClipboard('npm install -D tailwindcss @tailwindcss/vite')}
-                    >
-                      Copy
-                    </Button>
-                  </div>
+                  <Snippet 
+                    symbol=""
+                    variant="bordered"
+                    color="default"
+                    className="w-full"
+                    classNames={{
+                      base: "w-full",
+                      pre: "whitespace-pre-wrap break-all"
+                    }}
+                  >
+                    npm install -D tailwindcss @tailwindcss/vite
+                  </Snippet>
                 </div>
               </div>
             </div>
 
             <div>
               <h3 className="text-lg font-semibold mb-2">Required Dependencies</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <h4 className="font-medium text-sm">Core Dependencies:</h4>
-                  <ul className="text-sm text-default-600 space-y-1">
-                    <li>• <Code>react</Code> (^18.0.0 || ^19.0.0)</li>
-                    <li>• <Code>react-dom</Code> (^18.0.0 || ^19.0.0)</li>
-                    <li>• <Code>@heroui/react</Code> (^2.8.0)</li>
-                    <li>• <Code>framer-motion</Code> (^12.0.0)</li>
-                  </ul>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-medium text-sm">Additional Dependencies:</h4>
-                  <ul className="text-sm text-default-600 space-y-1">
-                    <li>• <Code>lucide-react</Code> (^0.400.0)</li>
-                    <li>• <Code>uuid</Code> (^11.0.0)</li>
-                    <li>• <Code>tailwindcss</Code> (^4.0.0)</li>
-                    <li>• <Code>@tailwindcss/vite</Code> (^4.0.0)</li>
-                  </ul>
-                </div>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <Card className="bg-primary-50 border-primary-200">
+                  <CardHeader className="pb-2">
+                    <h4 className="font-medium text-sm text-primary-700">Core Dependencies</h4>
+                  </CardHeader>
+                  <CardBody className="pt-0">
+                    <ul className="text-sm text-default-600 space-y-1">
+                      <li>• <Code size="sm">react</Code> (^18.0.0 || ^19.0.0)</li>
+                      <li>• <Code size="sm">react-dom</Code> (^18.0.0 || ^19.0.0)</li>
+                      <li>• <Code size="sm">@heroui/react</Code> (^2.8.0)</li>
+                      <li>• <Code size="sm">framer-motion</Code> (^12.0.0)</li>
+                    </ul>
+                  </CardBody>
+                </Card>
+                <Card className="bg-secondary-50 border-secondary-200">
+                  <CardHeader className="pb-2">
+                    <h4 className="font-medium text-sm text-secondary-700">Additional Dependencies</h4>
+                  </CardHeader>
+                  <CardBody className="pt-0">
+                    <ul className="text-sm text-default-600 space-y-1">
+                      <li>• <Code size="sm">lucide-react</Code> (^0.400.0)</li>
+                      <li>• <Code size="sm">uuid</Code> (^11.0.0)</li>
+                      <li>• <Code size="sm">tailwindcss</Code> (^4.0.0)</li>
+                      <li>• <Code size="sm">@tailwindcss/vite</Code> (^4.0.0)</li>
+                    </ul>
+                  </CardBody>
+                </Card>
               </div>
             </div>
 
             <div>
               <h3 className="text-lg font-semibold mb-2">Basic Usage</h3>
-              <div className="bg-default-100 p-4 rounded-lg relative">
-                <Code className="block text-sm">
+              <Snippet 
+                symbol=""
+                variant="bordered"
+                color="default"
+                className="w-full"
+                classNames={{
+                  base: "w-full",
+                  pre: "whitespace-pre-wrap"
+                }}
+              >
 {`import { ReactFormBuilderSuite } from '@flowcsolutions/react-form-builder';
 import '@flowcsolutions/react-form-builder/style.css';
 
 function App() {
   return <ReactFormBuilderSuite />;
 }`}
-                </Code>
-                <Button
-                  size="sm"
-                  variant="flat"
-                  className="absolute top-2 right-2"
-                  onPress={() => copyToClipboard(`import { ReactFormBuilderSuite } from '@flowcsolutions/react-form-builder';
-import '@flowcsolutions/react-form-builder/style.css';
-
-function App() {
-  return <ReactFormBuilderSuite />;
-}`)}
-                >
-                  Copy
-                </Button>
-              </div>
+              </Snippet>
             </div>
           </div>
         </CardBody>
@@ -252,8 +253,16 @@ function App() {
           <div className="space-y-6">
             <div>
               <h3 className="text-lg font-semibold mb-2">Custom Form Renderer</h3>
-              <div className="bg-default-100 p-4 rounded-lg relative">
-                <Code className="block text-sm">
+              <Snippet 
+                symbol=""
+                variant="bordered"
+                color="default"
+                className="w-full"
+                classNames={{
+                  base: "w-full",
+                  pre: "whitespace-pre-wrap text-xs sm:text-sm"
+                }}
+              >
 {`import { FormRenderer } from '@flowcsolutions/react-form-builder';
 
 const MyForm = () => {
@@ -280,47 +289,21 @@ const MyForm = () => {
     />
   );
 };`}
-                </Code>
-                <Button
-                  size="sm"
-                  variant="flat"
-                  className="absolute top-2 right-2"
-                  onPress={() => copyToClipboard(`import { FormRenderer } from '@flowcsolutions/react-form-builder';
-
-const MyForm = () => {
-  const formConfig = {
-    title: "Contact Form",
-    fields: [
-      {
-        id: "1",
-        type: "text",
-        label: "Name",
-        required: true
-      }
-    ]
-  };
-
-  const handleSubmit = (data) => {
-    console.log('Form submitted:', data);
-  };
-
-  return (
-    <FormRenderer 
-      form={formConfig} 
-      onSubmit={handleSubmit}
-    />
-  );
-};`)}
-                >
-                  Copy
-                </Button>
-              </div>
+              </Snippet>
             </div>
 
             <div>
               <h3 className="text-lg font-semibold mb-2">Custom Form Builder</h3>
-              <div className="bg-default-100 p-4 rounded-lg relative">
-                <Code className="block text-sm">
+              <Snippet 
+                symbol=""
+                variant="bordered"
+                color="default"
+                className="w-full"
+                classNames={{
+                  base: "w-full",
+                  pre: "whitespace-pre-wrap text-xs sm:text-sm"
+                }}
+              >
 {`import { 
   FormBuilderProvider, 
   FormBuilder 
@@ -337,31 +320,7 @@ const MyFormBuilder = () => {
     </FormBuilderProvider>
   );
 };`}
-                </Code>
-                <Button
-                  size="sm"
-                  variant="flat"
-                  className="absolute top-2 right-2"
-                  onPress={() => copyToClipboard(`import { 
-  FormBuilderProvider, 
-  FormBuilder 
-} from '@flowcsolutions/react-form-builder';
-
-const MyFormBuilder = () => {
-  return (
-    <FormBuilderProvider>
-      <FormBuilder 
-        onFormChange={(form) => {
-          console.log('Form updated:', form);
-        }}
-      />
-    </FormBuilderProvider>
-  );
-};`)}
-                >
-                  Copy
-                </Button>
-              </div>
+              </Snippet>
             </div>
           </div>
         </CardBody>
@@ -379,8 +338,16 @@ const MyFormBuilder = () => {
           <div className="space-y-4">
             <div>
               <h3 className="text-lg font-semibold mb-2">Form Settings</h3>
-              <div className="bg-default-100 p-4 rounded-lg">
-                <Code className="block text-sm">
+              <Snippet 
+                symbol=""
+                variant="flat"
+                color="default"
+                className="w-full"
+                classNames={{
+                  base: "w-full",
+                  pre: "whitespace-pre-wrap text-xs sm:text-sm"
+                }}
+              >
 {`{
   "submitButtonText": "Submit Form",
   "allowMultipleSubmissions": true,
@@ -388,14 +355,21 @@ const MyFormBuilder = () => {
   "captchaEnabled": false,
   "theme": "auto"
 }`}
-                </Code>
-              </div>
+              </Snippet>
             </div>
 
             <div>
               <h3 className="text-lg font-semibold mb-2">Field Properties</h3>
-              <div className="bg-default-100 p-4 rounded-lg">
-                <Code className="block text-sm">
+              <Snippet 
+                symbol=""
+                variant="flat"
+                color="default"
+                className="w-full"
+                classNames={{
+                  base: "w-full",
+                  pre: "whitespace-pre-wrap text-xs sm:text-sm"
+                }}
+              >
 {`{
   "label": "Field Label",
   "placeholder": "Enter value...",
@@ -407,8 +381,7 @@ const MyFormBuilder = () => {
     "width": "full"
   }
 }`}
-                </Code>
-              </div>
+              </Snippet>
             </div>
           </div>
         </CardBody>
