@@ -3,14 +3,14 @@ import oe, { createContext as rt, useContext as at, useReducer as st, useRef as 
 import { v4 as Ve } from "uuid";
 import { useDroppable as ot, useDraggable as ct, DndContext as dt } from "@dnd-kit/core";
 import { useSortable as pt, SortableContext as mt, verticalListSortingStrategy as ut } from "@dnd-kit/sortable";
-import { Button as F, Input as A, Divider as ne, Card as z, CardBody as T, Switch as U, Checkbox as pe, RadioGroup as Me, Radio as je, Select as V, SelectItem as b, Autocomplete as Be, AutocompleteItem as _e, Textarea as he, TimeInput as ht, DateInput as Oe, ButtonGroup as ve, CardHeader as R, Chip as _, Slider as bt, useDisclosure as X, Modal as Z, ModalContent as ee, ModalHeader as te, ModalBody as re, ModalFooter as be, Accordion as gt, AccordionItem as xt, Tabs as we, Tab as H, Navbar as yt, NavbarBrand as Nt, NavbarContent as De, NavbarItem as ft, Dropdown as vt, DropdownTrigger as wt, DropdownMenu as Ct, DropdownItem as ge, Progress as Ft, Spacer as We, Snippet as G, Code as k, Link as ze, HeroUIProvider as St } from "@heroui/react";
+import { Button as A, Input as S, Divider as ne, Card as D, CardBody as T, Switch as U, Checkbox as pe, RadioGroup as Me, Radio as je, Select as V, SelectItem as g, Autocomplete as Be, AutocompleteItem as _e, Textarea as he, TimeInput as ht, DateInput as Oe, ButtonGroup as ve, CardHeader as R, Chip as _, Slider as bt, useDisclosure as Z, Modal as X, ModalContent as ee, ModalHeader as te, ModalBody as re, ModalFooter as be, Accordion as gt, AccordionItem as xt, Tabs as we, Tab as H, Navbar as yt, NavbarBrand as Nt, NavbarContent as ze, NavbarItem as ft, Dropdown as vt, DropdownTrigger as wt, DropdownMenu as Ct, DropdownItem as ge, Progress as Ft, Spacer as We, Snippet as G, Code as k, Link as De, HeroUIProvider as St } from "@heroui/react";
 import * as Te from "lucide-react";
-import { RotateCcw as At, Check as le, Star as qe, Upload as Y, Smartphone as Et, Tablet as Ot, Monitor as Dt, GripVertical as zt, Edit as Tt, Copy as Ce, Trash2 as Fe, Plus as ae, Layout as Pt, Settings as se, Rows4 as It, MoreVertical as Rt, Download as Ue, FileJson as $t, CheckCircle as xe, AlertCircle as Je, FileText as Lt, Gift as kt, Rocket as me, Zap as ue, Clock as Vt, Target as Mt, Sparkles as ye, BookOpen as He, Code as Pe, Terminal as jt, Users as Bt, ExternalLink as Ie, Github as _t, Package as Ke, Shield as Re, Palette as Wt } from "lucide-react";
+import { RotateCcw as At, Check as le, Star as qe, Upload as Y, Smartphone as Et, Tablet as Ot, Monitor as zt, GripVertical as Dt, Edit as Tt, Copy as Ce, Trash2 as Fe, Plus as ae, Layout as Pt, Settings as se, Rows4 as It, MoreVertical as Rt, Download as Ue, FileJson as $t, CheckCircle as xe, AlertCircle as Je, FileText as Lt, Gift as kt, Rocket as me, Zap as ue, Clock as Vt, Target as Mt, Sparkles as ye, BookOpen as He, Code as Pe, Terminal as jt, Users as Bt, ExternalLink as Ie, Github as _t, Package as Ke, Shield as Re, Palette as Wt } from "lucide-react";
 import { CSS as qt } from "@dnd-kit/utilities";
 function Ut(t, s) {
   if (t.name && t.name.trim())
     return t.name;
-  const o = t.type.replace(/[-_]/g, "_").toLowerCase(), l = s.map((g) => g.name).filter(Boolean);
+  const o = t.type.replace(/[-_]/g, "_").toLowerCase(), l = s.map((h) => h.name).filter(Boolean);
   if (!l.includes(o))
     return o;
   let i = 2, n = `${o}${i}`;
@@ -223,7 +223,7 @@ function J() {
     throw new Error("useFormBuilder must be used within a FormBuilderProvider");
   return t;
 }
-function C(t) {
+function F(t) {
   const s = {
     id: Ve(),
     type: t,
@@ -668,60 +668,60 @@ function Qt(t) {
 }
 const Rr = {
   // Input fields
-  text: C("text"),
-  email: C("email"),
-  password: C("password"),
-  number: C("number"),
-  phone: C("phone"),
-  url: C("url"),
-  textarea: C("textarea"),
+  text: F("text"),
+  email: F("email"),
+  password: F("password"),
+  number: F("number"),
+  phone: F("phone"),
+  url: F("url"),
+  textarea: F("textarea"),
   // Selection fields
-  select: C("select"),
-  multiselect: C("multiselect"),
-  radio: C("radio"),
-  checkbox: C("checkbox"),
-  switch: C("switch"),
-  autocomplete: C("autocomplete"),
-  search: C("search"),
+  select: F("select"),
+  multiselect: F("multiselect"),
+  radio: F("radio"),
+  checkbox: F("checkbox"),
+  switch: F("switch"),
+  autocomplete: F("autocomplete"),
+  search: F("search"),
   // Date/Time fields
-  date: C("date"),
-  datetime: C("datetime"),
-  time: C("time"),
-  calendar: C("calendar"),
+  date: F("date"),
+  datetime: F("datetime"),
+  time: F("time"),
+  calendar: F("calendar"),
   // Special fields
-  file: C("file"),
-  rating: C("rating"),
-  signature: C("signature"),
-  range: C("range"),
-  "rich-text": C("rich-text"),
-  "number-format": C("number-format"),
-  "pattern-format": C("pattern-format"),
+  file: F("file"),
+  rating: F("rating"),
+  signature: F("signature"),
+  range: F("range"),
+  "rich-text": F("rich-text"),
+  "number-format": F("number-format"),
+  "pattern-format": F("pattern-format"),
   // Static content
-  button: C("button"),
-  label: C("label"),
-  header: C("header"),
-  paragraph: C("paragraph"),
-  image: C("image"),
-  message: C("message"),
-  "progress-line": C("progress-line"),
-  "progress-circle": C("progress-circle"),
-  tooltip: C("tooltip"),
-  "qr-code": C("qr-code"),
-  html: C("html"),
+  button: F("button"),
+  label: F("label"),
+  header: F("header"),
+  paragraph: F("paragraph"),
+  image: F("image"),
+  message: F("message"),
+  "progress-line": F("progress-line"),
+  "progress-circle": F("progress-circle"),
+  tooltip: F("tooltip"),
+  "qr-code": F("qr-code"),
+  html: F("html"),
   // Structure
-  container: C("container"),
-  card: C("card"),
-  tab: C("tab"),
-  breadcrumb: C("breadcrumb"),
-  section: C("section"),
-  pagebreak: C("pagebreak"),
-  repeater: C("repeater"),
+  container: F("container"),
+  card: F("card"),
+  tab: F("tab"),
+  breadcrumb: F("breadcrumb"),
+  section: F("section"),
+  pagebreak: F("pagebreak"),
+  repeater: F("repeater"),
   // Template fields
-  slot: C("slot"),
-  template: C("template"),
+  slot: F("slot"),
+  template: F("template"),
   // Error fields
-  "error-message": C("error-message")
-}, Xt = [
+  "error-message": F("error-message")
+}, Zt = [
   // Most common input fields
   { id: "text", type: "text", label: "Text Input", icon: "Type", category: "fields" },
   { id: "email", type: "email", label: "Email", icon: "Mail", category: "fields" },
@@ -731,6 +731,15 @@ const Rr = {
   { id: "textarea", type: "textarea", label: "Text Area", icon: "FileText", category: "fields" },
   // Selection fields
   { id: "select", type: "select", label: "Select", icon: "ChevronDown", category: "fields" },
+  {
+    id: "multiselect",
+    type: "multiselect",
+    label: "Multi Select",
+    icon: "ListChecks",
+    // or any icon you want
+    category: "fields"
+    // or the correct category id
+  },
   { id: "autocomplete", type: "autocomplete", label: "Auto Complete", icon: "Search", category: "fields" },
   { id: "radio", type: "radio", label: "Radio Group", icon: "Circle", category: "fields" },
   { id: "checkbox", type: "checkbox", label: "Checkbox Group", icon: "Square", category: "fields" },
@@ -750,7 +759,7 @@ const Rr = {
   { id: "section", type: "section", label: "Section", icon: "Layout", category: "structure" },
   { id: "container", type: "container", label: "Container", icon: "Box", category: "structure" },
   { id: "card", type: "card", label: "Card", icon: "Square", category: "structure" }
-], Zt = [
+], Xt = [
   {
     id: "fields",
     label: "Form Fields",
@@ -778,7 +787,7 @@ const Rr = {
   }
 ];
 function Se(t, s = !1) {
-  const o = tr(t.properties?.borderRadius), l = rr(t), i = Ye(t, s), n = t.properties?.customClasses || "", g = t.custom?.cssClasses?.join(" ") || "", m = [n, g].filter(Boolean).join(" "), S = er(m), c = t.properties?.classNames || {}, p = (d) => d ? (d.includes("text-") || d.includes("bg-") || d.includes("border-"), d) : "";
+  const o = tr(t.properties?.borderRadius), l = rr(t), i = Ye(t, s), n = t.properties?.customClasses || "", h = t.custom?.cssClasses?.join(" ") || "", p = [n, h].filter(Boolean).join(" "), C = er(p), c = t.properties?.classNames || {}, m = (d) => d ? (d.includes("text-") || d.includes("bg-") || d.includes("border-"), d) : "";
   return {
     // Base wrapper/container classes - for outer spacing and visibility
     base: [
@@ -786,54 +795,54 @@ function Se(t, s = !1) {
       l.padding,
       s ? "" : i.visibility,
       // Only apply responsive hiding in preview/renderer
-      S.wrapper,
+      C.wrapper,
       c.base || ""
     ].filter(Boolean).join(" "),
     // Label classes - ensure custom classes take precedence
     label: [
       "text-left",
       // Ensure labels are left-aligned by default
-      S.label,
-      p(c.label || "")
+      C.label,
+      m(c.label || "")
     ].filter(Boolean).join(" "),
     // Input wrapper classes - for border, shadow, background, etc.
     inputWrapper: [
       o,
-      S.inputWrapper,
-      p(c.inputWrapper || "")
+      C.inputWrapper,
+      m(c.inputWrapper || "")
     ].filter(Boolean).join(" "),
     // Inner wrapper classes
     innerWrapper: [
-      p(c.innerWrapper || "")
+      m(c.innerWrapper || "")
     ].filter(Boolean).join(" "),
     // Main wrapper classes
     mainWrapper: [
-      p(c.mainWrapper || "")
+      m(c.mainWrapper || "")
     ].filter(Boolean).join(" "),
     // Input field classes - ensure custom text styles take precedence
     input: [
       t.properties?.alignment || "",
-      S.input,
-      p(c.input || "")
+      C.input,
+      m(c.input || "")
     ].filter(Boolean).join(" "),
     // Clear button classes
     clearButton: [
-      p(c.clearButton || "")
+      m(c.clearButton || "")
     ].filter(Boolean).join(" "),
     // Helper wrapper classes
     helperWrapper: [
-      p(c.helperWrapper || "")
+      m(c.helperWrapper || "")
     ].filter(Boolean).join(" "),
     // Description classes
     description: [
       "text-left",
       // Ensure description text is left-aligned
-      S.description,
-      p(c.description || "")
+      C.description,
+      m(c.description || "")
     ].filter(Boolean).join(" "),
     // Error message classes
     errorMessage: [
-      p(c.errorMessage || "")
+      m(c.errorMessage || "")
     ].filter(Boolean).join(" ")
   };
 }
@@ -912,20 +921,20 @@ function Qe({
   disabled: i = !1,
   className: n = ""
 }) {
-  const g = nt(null), [m, S] = $(!1), [c, p] = $(!0), [a, d] = $({ x: 0, y: 0 });
+  const h = nt(null), [p, C] = $(!1), [c, m] = $(!0), [a, d] = $({ x: 0, y: 0 });
   lt(() => {
-    const y = g.current;
+    const y = h.current;
     if (!y) return;
     const x = y.getContext("2d");
     if (x && (y.width = o, y.height = l, x.lineCap = "round", x.lineJoin = "round", x.strokeStyle = "#000000", x.lineWidth = 2, x.fillStyle = "#ffffff", x.fillRect(0, 0, o, l), t && t.startsWith("data:image"))) {
       const E = new Image();
       E.onload = () => {
-        x.clearRect(0, 0, o, l), x.fillStyle = "#ffffff", x.fillRect(0, 0, o, l), x.drawImage(E, 0, 0, o, l), p(!1);
+        x.clearRect(0, 0, o, l), x.fillStyle = "#ffffff", x.fillRect(0, 0, o, l), x.drawImage(E, 0, 0, o, l), m(!1);
       }, E.src = t;
     }
   }, [o, l, t]);
   const u = (y) => {
-    const x = g.current;
+    const x = h.current;
     if (!x) return { x: 0, y: 0 };
     const E = x.getBoundingClientRect(), I = x.width / E.width, M = x.height / E.height;
     if ("touches" in y) {
@@ -943,38 +952,38 @@ function Qe({
     if (i) return;
     y.preventDefault();
     const x = u(y);
-    S(!0), d(x), p(!1);
-  }, h = (y) => {
-    if (!m || i) return;
+    C(!0), d(x), m(!1);
+  }, b = (y) => {
+    if (!p || i) return;
     y.preventDefault();
-    const x = g.current, E = x?.getContext("2d");
+    const x = h.current, E = x?.getContext("2d");
     if (!x || !E) return;
     const I = u(y);
     E.beginPath(), E.moveTo(a.x, a.y), E.lineTo(I.x, I.y), E.stroke(), d(I);
   }, w = () => {
-    m && (S(!1), D());
-  }, D = () => {
-    const y = g.current;
+    p && (C(!1), z());
+  }, z = () => {
+    const y = h.current;
     if (!y) return;
     const x = y.toDataURL("image/png");
     s?.(x);
   }, L = () => {
-    const y = g.current, x = y?.getContext("2d");
-    !y || !x || (x.fillStyle = "#ffffff", x.fillRect(0, 0, o, l), p(!0), s?.(""));
+    const y = h.current, x = y?.getContext("2d");
+    !y || !x || (x.fillStyle = "#ffffff", x.fillRect(0, 0, o, l), m(!0), s?.(""));
   };
   return /* @__PURE__ */ r("div", { className: `signature-pad ${n}`, children: [
     /* @__PURE__ */ e("div", { className: "border-2 border-default-300 rounded-lg overflow-hidden bg-white", children: /* @__PURE__ */ e(
       "canvas",
       {
-        ref: g,
+        ref: h,
         className: "block cursor-crosshair touch-none",
         style: { width: "100%", height: "auto", maxWidth: `${o}px` },
         onMouseDown: v,
-        onMouseMove: h,
+        onMouseMove: b,
         onMouseUp: w,
         onMouseLeave: w,
         onTouchStart: v,
-        onTouchMove: h,
+        onTouchMove: b,
         onTouchEnd: w
       }
     ) }),
@@ -982,7 +991,7 @@ function Qe({
       /* @__PURE__ */ e("div", { className: "text-xs text-default-500", children: c ? "Sign above" : "Signature captured" }),
       /* @__PURE__ */ r("div", { className: "flex gap-2", children: [
         /* @__PURE__ */ e(
-          F,
+          A,
           {
             size: "sm",
             variant: "flat",
@@ -994,13 +1003,13 @@ function Qe({
           }
         ),
         !c && /* @__PURE__ */ e(
-          F,
+          A,
           {
             size: "sm",
             color: "success",
             variant: "flat",
             startContent: /* @__PURE__ */ e(le, { size: 16 }),
-            onPress: D,
+            onPress: z,
             isDisabled: i,
             children: "Save"
           }
@@ -1014,26 +1023,26 @@ function fe({
   value: s,
   onChange: o
 }) {
-  const l = (h) => {
-    o && o(h);
+  const l = (b) => {
+    o && o(b);
   };
   if (t.advanced?.hidden || t.properties?.hidden)
     return null;
-  const i = Se(t, !0), n = i.base, m = (() => {
-    const h = [];
-    return t.properties?.hideOnMobile && h.push("Hidden on Mobile"), t.properties?.hideOnTablet && h.push("Hidden on Tablet"), t.properties?.hideOnDesktop && h.push("Hidden on Desktop"), h;
-  })(), S = ({ children: h }) => m.length === 0 ? /* @__PURE__ */ e(j, { children: h }) : /* @__PURE__ */ r("div", { className: "relative", children: [
-    h,
-    /* @__PURE__ */ e("div", { className: "absolute top-0 right-0 flex items-center gap-1 -mt-2 -mr-2 z-10", children: m.map((w) => /* @__PURE__ */ e(
+  const i = Se(t, !0), n = i.base, p = (() => {
+    const b = [];
+    return t.properties?.hideOnMobile && b.push("Hidden on Mobile"), t.properties?.hideOnTablet && b.push("Hidden on Tablet"), t.properties?.hideOnDesktop && b.push("Hidden on Desktop"), b;
+  })(), C = ({ children: b }) => p.length === 0 ? /* @__PURE__ */ e(j, { children: b }) : /* @__PURE__ */ r("div", { className: "relative", children: [
+    b,
+    /* @__PURE__ */ e("div", { className: "absolute top-0 right-0 flex items-center gap-1 -mt-2 -mr-2 z-10", children: p.map((w) => /* @__PURE__ */ e(
       "span",
       {
         className: "text-danger-700 text-xs px-1.5 py-0.5 rounded-full ",
         title: w,
-        children: w.includes("Mobile") ? /* @__PURE__ */ e(Et, { size: 15 }) : w.includes("Tablet") ? /* @__PURE__ */ e(Ot, { size: 15 }) : /* @__PURE__ */ e(Dt, { size: 15 })
+        children: w.includes("Mobile") ? /* @__PURE__ */ e(Et, { size: 15 }) : w.includes("Tablet") ? /* @__PURE__ */ e(Ot, { size: 15 }) : /* @__PURE__ */ e(zt, { size: 15 })
       },
       w
     )) })
-  ] }), c = (h) => /* @__PURE__ */ e(S, { children: h }), p = {
+  ] }), c = (b) => /* @__PURE__ */ e(C, { children: b }), m = {
     label: t.label,
     placeholder: t.placeholder,
     isRequired: t.required,
@@ -1057,24 +1066,24 @@ function fe({
       errorMessage: i.errorMessage
     }
   }, d = (() => {
-    const h = {}, w = t.custom?.dataAttributes || {};
-    return Object.entries(w).forEach(([D, L]) => {
-      h[`data-${D}`] = L;
-    }), t.custom?.role && (h.role = t.custom.role), t.custom?.tabIndex !== void 0 && (h.tabIndex = t.custom.tabIndex), t.properties?.ariaLabel && (h["aria-label"] = t.properties.ariaLabel), t.type === "number" && (t.properties?.min !== void 0 && (h.min = t.properties.min), t.properties?.max !== void 0 && (h.max = t.properties.max), t.properties?.step !== void 0 && (h.step = t.properties.step)), h;
+    const b = {}, w = t.custom?.dataAttributes || {};
+    return Object.entries(w).forEach(([z, L]) => {
+      b[`data-${z}`] = L;
+    }), t.custom?.role && (b.role = t.custom.role), t.custom?.tabIndex !== void 0 && (b.tabIndex = t.custom.tabIndex), t.properties?.ariaLabel && (b["aria-label"] = t.properties.ariaLabel), t.type === "number" && (t.properties?.min !== void 0 && (b.min = t.properties.min), t.properties?.max !== void 0 && (b.max = t.properties.max), t.properties?.step !== void 0 && (b.step = t.properties.step)), b;
   })(), v = (() => {
     if (t.properties?.showCharacterCount && (t.type === "text" || t.type === "textarea")) {
-      const h = s ? s.length : 0, w = t.properties?.maxLength;
-      return w ? `${h}/${w}` : `${h}`;
+      const b = s ? s.length : 0, w = t.properties?.maxLength;
+      return w ? `${b}/${w}` : `${b}`;
     }
     return null;
   })();
   switch (t.type) {
     case "text":
-      return /* @__PURE__ */ r(S, { children: [
+      return /* @__PURE__ */ r(C, { children: [
         /* @__PURE__ */ e(
-          A,
+          S,
           {
-            ...p,
+            ...m,
             ...d,
             type: "text",
             value: s || "",
@@ -1086,10 +1095,10 @@ function fe({
         v && /* @__PURE__ */ e("div", { className: "text-xs text-default-500 mt-1 text-right", children: v })
       ] });
     case "email":
-      return /* @__PURE__ */ e(S, { children: /* @__PURE__ */ e(
-        A,
+      return /* @__PURE__ */ e(C, { children: /* @__PURE__ */ e(
+        S,
         {
-          ...p,
+          ...m,
           ...d,
           type: "email",
           value: s || "",
@@ -1098,10 +1107,10 @@ function fe({
         `email-${t.id}`
       ) });
     case "password":
-      return /* @__PURE__ */ e(S, { children: /* @__PURE__ */ e(
-        A,
+      return /* @__PURE__ */ e(C, { children: /* @__PURE__ */ e(
+        S,
         {
-          ...p,
+          ...m,
           ...d,
           type: "password",
           value: s || "",
@@ -1112,9 +1121,9 @@ function fe({
     case "number":
       return c(
         /* @__PURE__ */ e(
-          A,
+          S,
           {
-            ...p,
+            ...m,
             ...d,
             type: "number",
             value: s || "",
@@ -1131,7 +1140,7 @@ function fe({
         /* @__PURE__ */ e(
           Oe,
           {
-            ...p,
+            ...m,
             value: s || null,
             onChange: (N) => {
               l(N ? N.toString() : "");
@@ -1144,7 +1153,7 @@ function fe({
       return /* @__PURE__ */ e(
         Oe,
         {
-          ...p,
+          ...m,
           granularity: "second",
           value: s || null,
           onChange: (N) => {
@@ -1157,7 +1166,7 @@ function fe({
       return /* @__PURE__ */ e(
         ht,
         {
-          ...p,
+          ...m,
           value: s || null,
           onChange: (N) => {
             l(N ? N.toString() : "");
@@ -1171,7 +1180,7 @@ function fe({
           /* @__PURE__ */ e(
             he,
             {
-              ...p,
+              ...m,
               ...d,
               value: s || "",
               onValueChange: (N) => l(N),
@@ -1188,14 +1197,14 @@ function fe({
         /* @__PURE__ */ e(
           V,
           {
-            ...p,
+            ...m,
             ...d,
             selectedKeys: s ? [s] : [],
             onSelectionChange: (N) => {
               const P = Array.from(N)[0];
               l(P);
             },
-            children: t.options?.map((N) => /* @__PURE__ */ e(b, { children: N.label }, N.value)) || []
+            children: t.options?.map((N) => /* @__PURE__ */ e(g, { children: N.label }, N.value)) || []
           }
         )
       );
@@ -1204,7 +1213,7 @@ function fe({
         /* @__PURE__ */ e(
           Be,
           {
-            ...p,
+            ...m,
             ...d,
             selectedKey: s || "",
             onSelectionChange: (N) => {
@@ -1219,17 +1228,17 @@ function fe({
       return /* @__PURE__ */ e(
         V,
         {
-          ...p,
+          ...m,
           selectionMode: "multiple",
           selectedKeys: s || [],
           onSelectionChange: (N) => {
             l(Array.from(N));
           },
-          children: t.options?.map((N) => /* @__PURE__ */ e(b, { children: N.label }, N.value)) || []
+          children: t.options?.map((N) => /* @__PURE__ */ e(g, { children: N.label }, N.value)) || []
         }
       );
     case "radio":
-      const h = t.properties?.orientation || "vertical", w = t.properties?.componentAlignment || "left", D = h === "horizontal" ? w === "center" ? "justify-center" : w === "right" ? "justify-end" : "justify-start" : w === "center" ? "items-center" : w === "right" ? "items-end" : "items-start", L = w === "center" ? "text-center" : w === "right" ? "text-right" : "text-left";
+      const b = t.properties?.orientation || "vertical", w = t.properties?.componentAlignment || "left", z = b === "horizontal" ? w === "center" ? "justify-center" : w === "right" ? "justify-end" : "justify-start" : w === "center" ? "items-center" : w === "right" ? "items-end" : "items-start", L = w === "center" ? "text-center" : w === "right" ? "text-right" : "text-left";
       return /* @__PURE__ */ e("div", { className: w === "center" ? "flex flex-col items-center" : w === "right" ? "flex flex-col items-end" : "flex flex-col items-start", children: /* @__PURE__ */ e(
         Me,
         {
@@ -1242,11 +1251,11 @@ function fe({
           color: t.properties?.colorVariant,
           isDisabled: t.advanced?.disabled || t.properties?.disabled,
           isReadOnly: t.advanced?.readOnly || t.properties?.readonly,
-          orientation: h,
+          orientation: b,
           classNames: {
             base: i.base,
             label: `${i.label} ${L}`,
-            wrapper: `${i.inputWrapper} ${D}`,
+            wrapper: `${i.inputWrapper} ${z}`,
             description: `${i.description} ${L}`
           },
           children: t.options?.map((N) => /* @__PURE__ */ e(je, { value: N.value, children: N.label }, N.value)) || []
@@ -1394,7 +1403,7 @@ function fe({
         )
       ] });
     case "section":
-      return /* @__PURE__ */ e("div", { className: n, children: /* @__PURE__ */ e(z, { children: /* @__PURE__ */ r(T, { className: "py-4", children: [
+      return /* @__PURE__ */ e("div", { className: n, children: /* @__PURE__ */ e(D, { children: /* @__PURE__ */ r(T, { className: "py-4", children: [
         /* @__PURE__ */ e("h3", { className: "text-lg font-semibold mb-2", children: t.label }),
         t.properties?.description && /* @__PURE__ */ e("p", { className: "text-default-600", children: t.properties?.description })
       ] }) }) });
@@ -1444,9 +1453,9 @@ function fe({
       ] });
     case "phone":
       return /* @__PURE__ */ e(
-        A,
+        S,
         {
-          ...p,
+          ...m,
           type: "tel",
           value: s || "",
           onValueChange: (N) => l(N)
@@ -1454,9 +1463,9 @@ function fe({
       );
     case "url":
       return /* @__PURE__ */ e(
-        A,
+        S,
         {
-          ...p,
+          ...m,
           type: "url",
           value: s || "",
           onValueChange: (N) => l(N)
@@ -1465,7 +1474,7 @@ function fe({
     case "button":
       return c(
         /* @__PURE__ */ e(
-          F,
+          A,
           {
             color: t.properties?.colorVariant,
             size: t.properties?.size,
@@ -1502,13 +1511,13 @@ function $e({
 }) {
   const { state: o, actions: l } = J(), { selectedFieldId: i } = o, {
     attributes: n,
-    listeners: g,
-    setNodeRef: m,
-    transform: S,
+    listeners: h,
+    setNodeRef: p,
+    transform: C,
     transition: c,
-    isDragging: p
+    isDragging: m
   } = pt({ id: t.id }), a = {
-    transform: qt.Transform.toString(S),
+    transform: qt.Transform.toString(C),
     transition: c
   }, d = i === t.id, u = () => {
     s || l.selectField(t.id);
@@ -1519,30 +1528,30 @@ function $e({
       label: `${t.label} (Copy)`
     };
     l.addField(L);
-  }, h = () => {
+  }, b = () => {
     l.deleteField(t.id);
   }, w = () => {
     l.selectField(t.id);
-  }, D = Ne(t, !s);
-  return s ? /* @__PURE__ */ e("div", { className: `w-full ${D}`, children: /* @__PURE__ */ e(fe, { field: t }) }) : /* @__PURE__ */ e(
+  }, z = Ne(t, !s);
+  return s ? /* @__PURE__ */ e("div", { className: `w-full ${z}`, children: /* @__PURE__ */ e(fe, { field: t }) }) : /* @__PURE__ */ e(
     "div",
     {
-      ref: m,
+      ref: p,
       style: a,
       className: `
         relative group
-        ${p ? "opacity-50 z-50" : ""}
+        ${m ? "opacity-50 z-50" : ""}
         
-        ${D}
+        ${z}
       `,
-      onClick: p ? void 0 : u,
+      onClick: m ? void 0 : u,
       children: /* @__PURE__ */ e(
         "div",
         {
           className: `
           border transition-all duration-200 cursor-pointer
           ${d ? "border-primary shadow-lg" : "border-default-200 hover:border-default-300"}
-          ${p ? "shadow-2xl" : ""}
+          ${m ? "shadow-2xl" : ""}
         `,
           children: /* @__PURE__ */ r("div", { className: "p-2", children: [
             /* @__PURE__ */ r("div", { className: "flex items-center justify-between mb-2 ", children: [
@@ -1551,16 +1560,16 @@ function $e({
                   "div",
                   {
                     ...n,
-                    ...g,
+                    ...h,
                     className: "cursor-grab active:cursor-grabbing p-1 hover:bg-default-100 rounded",
-                    children: /* @__PURE__ */ e(zt, { className: "text-default-400", size: 14 })
+                    children: /* @__PURE__ */ e(Dt, { className: "text-default-400", size: 14 })
                   }
                 ),
                 /* @__PURE__ */ e("span", { className: "text-xs text-default-600 font-medium", children: t.type.charAt(0).toUpperCase() + t.type.slice(1) })
               ] }),
               /* @__PURE__ */ r(ve, { size: "sm", variant: "flat", children: [
                 /* @__PURE__ */ e(
-                  F,
+                  A,
                   {
                     isIconOnly: !0,
                     onPress: w,
@@ -1568,8 +1577,8 @@ function $e({
                     children: /* @__PURE__ */ e(Tt, { size: 16 })
                   }
                 ),
-                /* @__PURE__ */ e(F, { isIconOnly: !0, onPress: v, children: /* @__PURE__ */ e(Ce, { size: 16 }) }),
-                /* @__PURE__ */ e(F, { isIconOnly: !0, color: "danger", onPress: h, children: /* @__PURE__ */ e(Fe, { size: 16 }) })
+                /* @__PURE__ */ e(A, { isIconOnly: !0, onPress: v, children: /* @__PURE__ */ e(Ce, { size: 16 }) }),
+                /* @__PURE__ */ e(A, { isIconOnly: !0, color: "danger", onPress: b, children: /* @__PURE__ */ e(Fe, { size: 16 }) })
               ] })
             ] }),
             /* @__PURE__ */ e("div", { className: "pointer-events-none", children: /* @__PURE__ */ e(fe, { field: t }) }),
@@ -1596,15 +1605,15 @@ function $e({
     }
   );
 }
-function Xe(t) {
+function Ze(t) {
   const s = [];
   let o = [], l = 0;
   return t.forEach((i, n) => {
-    const g = ie(i);
-    i.properties?.startNewRow || !1 || l + g > 12 || o.length === 0 ? (o.length > 0 && s.push({
+    const h = ie(i);
+    i.properties?.startNewRow || !1 || l + h > 12 || o.length === 0 ? (o.length > 0 && s.push({
       id: `row-${s.length}`,
       fields: [...o]
-    }), o = [i], l = g) : (o.push(i), l += g), n === t.length - 1 && o.length > 0 && s.push({
+    }), o = [i], l = h) : (o.push(i), l += h), n === t.length - 1 && o.length > 0 && s.push({
       id: `row-${s.length}`,
       fields: [...o]
     });
@@ -1656,8 +1665,8 @@ function sr({ row: t, isPreview: s }) {
     ) });
   }
   return /* @__PURE__ */ e("div", { className: "grid grid-cols-12 gap-3", children: o.map((l) => {
-    const i = ie(l), n = ar(i), g = Ne(l, !s), m = [n, g].filter(Boolean).join(" ");
-    return /* @__PURE__ */ e("div", { className: m, children: /* @__PURE__ */ e(
+    const i = ie(l), n = ar(i), h = Ne(l, !s), p = [n, h].filter(Boolean).join(" ");
+    return /* @__PURE__ */ e("div", { className: p, children: /* @__PURE__ */ e(
       $e,
       {
         field: l,
@@ -1666,93 +1675,95 @@ function sr({ row: t, isPreview: s }) {
     ) }, l.id);
   }) });
 }
-function Ze({
+function Xe({
   formConfig: t,
   onSubmit: s,
   className: o = ""
 }) {
-  const [l, i] = $({}), [n, g] = $({}), m = it((a, d) => {
+  const [l, i] = $({}), [n, h] = $({}), p = it((a, d) => {
     i((u) => ({
       ...u,
       [a]: d
-    })), g((u) => {
+    })), h((u) => {
       if (u[a]) {
         const v = { ...u };
         return delete v[a], v;
       }
       return u;
     });
-  }, []), S = () => {
+  }, []), C = () => {
     const a = {};
     return t.validation.requiredFields.forEach((d) => {
       const u = t.fieldMap[d], v = l[d];
       (!v || typeof v == "string" && v.trim() === "") && (a[d] = `${u.label} is required`);
     }), t.validation.fieldsWithValidation.forEach((d) => {
       const u = t.fieldMap[d], v = l[d];
-      u.validation && v && u.validation.forEach((h) => {
-        switch (h.type) {
+      u.validation && v && u.validation.forEach((b) => {
+        switch (b.type) {
           case "email":
-            /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || (a[d] = h.message);
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || (a[d] = b.message);
             break;
           case "minLength":
-            v.length < h.value && (a[d] = h.message);
+            v.length < b.value && (a[d] = b.message);
             break;
           case "maxLength":
-            v.length > h.value && (a[d] = h.message);
+            v.length > b.value && (a[d] = b.message);
             break;
           case "min":
-            parseFloat(v) < h.value && (a[d] = h.message);
+            parseFloat(v) < b.value && (a[d] = b.message);
             break;
           case "max":
-            parseFloat(v) > h.value && (a[d] = h.message);
+            parseFloat(v) > b.value && (a[d] = b.message);
             break;
           case "pattern":
-            new RegExp(h.value).test(v) || (a[d] = h.message);
+            new RegExp(b.value).test(v) || (a[d] = b.message);
             break;
         }
       });
-    }), g(a), Object.keys(a).length === 0;
+    }), h(a), Object.keys(a).length === 0;
   }, c = (a) => {
-    if (a.preventDefault(), S()) {
+    if (a.preventDefault(), C()) {
       const d = /* @__PURE__ */ new Map(), u = /* @__PURE__ */ new Set();
-      Object.keys(l).forEach((h) => {
-        const w = t.fieldMap[h];
-        let D = w.name;
-        if (!D || !D.trim()) {
+      Object.keys(l).forEach((b) => {
+        const w = t.fieldMap[b];
+        let z = w.name;
+        if (!z || !z.trim()) {
           const L = w.type.replace(/[-_]/g, "_").toLowerCase();
-          if (D = L, u.has(D)) {
+          if (z = L, u.has(z)) {
             let y = 2;
-            for (D = `${L}${y}`; u.has(D); )
-              y++, D = `${L}${y}`;
+            for (z = `${L}${y}`; u.has(z); )
+              y++, z = `${L}${y}`;
           }
         }
-        u.add(D), d.set(h, D);
+        u.add(z), d.set(b, z);
       });
       const v = {};
-      Object.entries(l).forEach(([h, w]) => {
-        const D = d.get(h);
-        v[D] = w;
+      Object.entries(l).forEach(([b, w]) => {
+        const z = d.get(b);
+        v[z] = w;
       }), s?.(v);
     }
-  }, p = (a) => {
-    const d = l[a.id] || a.defaultValue || "", u = n[a.id], v = !!u, h = Se(a, !1), w = {
+  }, m = (a) => {
+    const d = l[a.id] || a.defaultValue || "", u = n[a.id], v = !!u, b = Se(a, !1), w = {
       label: a.label,
       placeholder: a.placeholder,
       isRequired: a.required,
       description: a.properties?.description,
       classNames: {
-        base: h.base,
-        label: h.label,
-        inputWrapper: h.inputWrapper,
-        innerWrapper: h.innerWrapper,
-        mainWrapper: h.mainWrapper,
-        input: h.input,
-        clearButton: h.clearButton,
-        helperWrapper: h.helperWrapper,
-        description: h.description,
-        errorMessage: h.errorMessage
+        base: b.base,
+        label: b.label,
+        inputWrapper: b.inputWrapper,
+        innerWrapper: b.innerWrapper,
+        mainWrapper: b.mainWrapper,
+        input: b.input,
+        clearButton: b.clearButton,
+        helperWrapper: b.helperWrapper,
+        description: b.description,
+        errorMessage: b.errorMessage
       },
       // isInvalid: hasError,
+      isInvalid: v,
+      // <-- Add this line
       errorMessage: u,
       size: a.properties.size || "md",
       isDisabled: a.properties.disabled,
@@ -1773,12 +1784,12 @@ function Ze({
     switch (a.type) {
       case "text":
         return /* @__PURE__ */ e(
-          A,
+          S,
           {
             ...w,
             type: "text",
             value: d,
-            onValueChange: (f) => m(a.id, f),
+            onValueChange: (f) => p(a.id, f),
             minLength: a.properties.minLength,
             maxLength: a.properties.maxLength
           },
@@ -1786,12 +1797,12 @@ function Ze({
         );
       case "email":
         return /* @__PURE__ */ e(
-          A,
+          S,
           {
             ...w,
             type: "email",
             value: d,
-            onValueChange: (f) => m(a.id, f),
+            onValueChange: (f) => p(a.id, f),
             minLength: a.properties.minLength,
             maxLength: a.properties.maxLength
           },
@@ -1799,12 +1810,12 @@ function Ze({
         );
       case "password":
         return /* @__PURE__ */ e(
-          A,
+          S,
           {
             ...w,
             type: "password",
             value: d,
-            onValueChange: (f) => m(a.id, f),
+            onValueChange: (f) => p(a.id, f),
             minLength: a.properties.minLength,
             maxLength: a.properties.maxLength
           },
@@ -1812,14 +1823,14 @@ function Ze({
         );
       case "number":
         return /* @__PURE__ */ e(
-          A,
+          S,
           {
             ...w,
             type: "number",
             value: d,
             onValueChange: (f) => {
               const O = parseFloat(f);
-              !isNaN(O) && (a.properties.min !== void 0 && O < a.properties.min || a.properties.max !== void 0 && O > a.properties.max) || m(a.id, f);
+              !isNaN(O) && (a.properties.min !== void 0 && O < a.properties.min || a.properties.max !== void 0 && O > a.properties.max) || p(a.id, f);
             },
             min: a.properties.min,
             max: a.properties.max,
@@ -1833,7 +1844,7 @@ function Ze({
           {
             ...w,
             value: d,
-            onValueChange: (f) => m(a.id, f),
+            onValueChange: (f) => p(a.id, f),
             rows: a.properties.rows || 4,
             minLength: a.properties.minLength,
             maxLength: a.properties.maxLength
@@ -1848,10 +1859,10 @@ function Ze({
             selectedKeys: d ? [d] : [],
             onSelectionChange: (f) => {
               const O = Array.from(f)[0];
-              m(a.id, O);
+              p(a.id, O);
             },
             selectionMode: a.properties.multiple ? "multiple" : "single",
-            children: a.options?.map((f) => /* @__PURE__ */ e(b, { children: f.label }, f.value)) || []
+            children: a.options?.map((f) => /* @__PURE__ */ e(g, { children: f.label }, f.value)) || []
           }
         );
       case "autocomplete":
@@ -1861,7 +1872,7 @@ function Ze({
             ...w,
             selectedKey: d || "",
             onSelectionChange: (f) => {
-              m(a.id, f);
+              p(a.id, f);
             },
             allowsCustomValue: !0,
             children: a.options?.map((f) => /* @__PURE__ */ e(_e, { children: f.label }, f.value)) || []
@@ -1876,7 +1887,7 @@ function Ze({
             description: a.properties?.description,
             isRequired: a.required,
             value: d,
-            onValueChange: (f) => m(a.id, f),
+            onValueChange: (f) => p(a.id, f),
             isInvalid: v,
             errorMessage: u,
             size: a.properties.size || "md",
@@ -1912,10 +1923,10 @@ function Ze({
                 isSelected: d?.includes?.(K.value) || !1,
                 onValueChange: (et) => {
                   const Ee = d || [];
-                  et ? m(a.id, [
+                  et ? p(a.id, [
                     ...Ee,
                     K.value
-                  ]) : m(
+                  ]) : p(
                     a.id,
                     Ee.filter((tt) => tt !== K.value)
                   );
@@ -1942,7 +1953,7 @@ function Ze({
               pe,
               {
                 isSelected: d || !1,
-                onValueChange: (q) => m(a.id, q),
+                onValueChange: (q) => p(a.id, q),
                 size: a.properties.size || "md",
                 isDisabled: a.properties.disabled,
                 color: a.properties.colorVariant,
@@ -1960,7 +1971,7 @@ function Ze({
             U,
             {
               isSelected: d || !1,
-              onValueChange: (f) => m(a.id, f),
+              onValueChange: (f) => p(a.id, f),
               size: a.properties.size || "sm",
               isDisabled: a.properties.disabled,
               color: a.properties.colorVariant,
@@ -1975,7 +1986,7 @@ function Ze({
         ] });
       case "section":
         return /* @__PURE__ */ e(
-          z,
+          D,
           {
             radius: a.properties.borderRadius || "sm",
             className: a.properties.customClasses,
@@ -1992,12 +2003,12 @@ function Ze({
         ] });
       case "phone":
         return /* @__PURE__ */ e(
-          A,
+          S,
           {
             ...w,
             type: "tel",
             value: d,
-            onValueChange: (f) => m(a.id, f),
+            onValueChange: (f) => p(a.id, f),
             minLength: a.properties.minLength,
             maxLength: a.properties.maxLength
           },
@@ -2005,12 +2016,12 @@ function Ze({
         );
       case "url":
         return /* @__PURE__ */ e(
-          A,
+          S,
           {
             ...w,
             type: "url",
             value: d,
-            onValueChange: (f) => m(a.id, f),
+            onValueChange: (f) => p(a.id, f),
             minLength: a.properties.minLength,
             maxLength: a.properties.maxLength
           },
@@ -2018,34 +2029,34 @@ function Ze({
         );
       case "date":
         return /* @__PURE__ */ e(
-          A,
+          S,
           {
             ...w,
             type: "date",
             value: d,
-            onValueChange: (f) => m(a.id, f)
+            onValueChange: (f) => p(a.id, f)
           },
           `date-${a.id}`
         );
       case "time":
         return /* @__PURE__ */ e(
-          A,
+          S,
           {
             ...w,
             type: "time",
             value: d,
-            onValueChange: (f) => m(a.id, f)
+            onValueChange: (f) => p(a.id, f)
           },
           `time-${a.id}`
         );
       case "datetime":
         return /* @__PURE__ */ e(
-          A,
+          S,
           {
             ...w,
             type: "datetime-local",
             value: d,
-            onValueChange: (f) => m(a.id, f)
+            onValueChange: (f) => p(a.id, f)
           },
           `datetime-${a.id}`
         );
@@ -2058,9 +2069,9 @@ function Ze({
             selectedKeys: d || [],
             onSelectionChange: (f) => {
               const O = Array.from(f);
-              m(a.id, O);
+              p(a.id, O);
             },
-            children: a.options?.map((f) => /* @__PURE__ */ e(b, { children: f.label }, f.value)) || []
+            children: a.options?.map((f) => /* @__PURE__ */ e(g, { children: f.label }, f.value)) || []
           }
         );
       case "range":
@@ -2076,7 +2087,7 @@ function Ze({
               value: d || a.properties.min || 0,
               onChange: (f) => {
                 const O = Array.isArray(f) ? f[0] : f;
-                m(a.id, O);
+                p(a.id, O);
               },
               minValue: a.properties.min || 0,
               maxValue: a.properties.max || 100,
@@ -2111,7 +2122,7 @@ function Ze({
                 disabled: a.properties.disabled,
                 onChange: (f) => {
                   const O = a.properties.multiple ? Array.from(f.target.files || []) : f.target.files?.[0];
-                  m(a.id, O);
+                  p(a.id, O);
                 },
                 className: "hidden",
                 id: `file-${a.id}`
@@ -2140,7 +2151,7 @@ function Ze({
             {
               type: "button",
               disabled: a.properties.disabled,
-              onClick: () => m(a.id, O + 1),
+              onClick: () => p(a.id, O + 1),
               className: `p-1 hover:scale-110 transition-transform ${a.properties.disabled ? "opacity-50 cursor-not-allowed" : ""}`,
               children: /* @__PURE__ */ e(
                 qe,
@@ -2170,7 +2181,7 @@ function Ze({
             Qe,
             {
               value: d,
-              onChange: (f) => m(a.id, f),
+              onChange: (f) => p(a.id, f),
               width: 400,
               height: 200,
               className: "w-full",
@@ -2193,7 +2204,7 @@ function Ze({
         ) });
       case "button":
         return /* @__PURE__ */ e(
-          F,
+          A,
           {
             color: a.properties.colorVariant,
             size: a.properties.size,
@@ -2202,7 +2213,7 @@ function Ze({
             isDisabled: a.properties.disabled,
             className: a.properties.customClasses,
             onPress: () => {
-              console.log("Button clicked:", a.label), m(a.id, "clicked");
+              console.log("Button clicked:", a.label), p(a.id, "clicked");
             },
             ...L,
             children: a.label
@@ -2216,28 +2227,28 @@ function Ze({
         ] }) });
     }
   };
-  return /* @__PURE__ */ e("div", { className: `max-w-4xl mx-auto p-6 ${o}`, children: /* @__PURE__ */ r(z, { radius: "sm", className: "p-1", children: [
+  return /* @__PURE__ */ e("div", { className: `max-w-4xl mx-auto p-6 ${o}`, children: /* @__PURE__ */ r(D, { radius: "sm", className: "p-1", children: [
     /* @__PURE__ */ e(R, { children: /* @__PURE__ */ r("div", { children: [
       /* @__PURE__ */ e("h1", { className: "text-2xl font-bold", children: t.metadata.title }),
       t.metadata.description && /* @__PURE__ */ e("p", { className: "text-default-600 mt-2", children: t.metadata.description })
     ] }) }),
     /* @__PURE__ */ e(T, { children: /* @__PURE__ */ r("form", { onSubmit: c, className: "space-y-6", children: [
       t.layout.rows.map((a) => /* @__PURE__ */ e("div", { className: "grid grid-cols-12 gap-4", children: a.fields.map((d) => {
-        const u = t.fieldMap[d], h = (() => {
+        const u = t.fieldMap[d], b = (() => {
           const w = [];
           return u.properties.hideOnMobile && w.push("hidden sm:block"), u.properties.hideOnTablet && w.push("md:hidden lg:block"), u.properties.hideOnDesktop && w.push("lg:hidden"), w.join(" ");
         })();
         return /* @__PURE__ */ e(
           "div",
           {
-            className: `${u.layout.gridClass} ${h}`,
-            children: p(u)
+            className: `${u.layout.gridClass} ${b}`,
+            children: m(u)
           },
           d
         );
       }) }, a.id)),
       /* @__PURE__ */ e("div", { className: "flex justify-end pt-6 border-t border-divider", children: /* @__PURE__ */ e(
-        F,
+        A,
         {
           radius: "sm",
           type: "submit",
@@ -2251,10 +2262,10 @@ function Ze({
   ] }) });
 }
 function Ae(t) {
-  const s = Xe(t.fields), o = (/* @__PURE__ */ new Date()).toISOString(), l = t.fields.map((c, p) => {
+  const s = Ze(t.fields), o = (/* @__PURE__ */ new Date()).toISOString(), l = t.fields.map((c, m) => {
     if (c.name && c.name.trim())
       return c;
-    const a = c.type.replace(/[-_]/g, "_").toLowerCase(), d = t.fields.slice(0, p).map((v) => v.name).filter(Boolean);
+    const a = c.type.replace(/[-_]/g, "_").toLowerCase(), d = t.fields.slice(0, m).map((v) => v.name).filter(Boolean);
     let u = a;
     if (d.includes(a)) {
       let v = 2;
@@ -2267,10 +2278,10 @@ function Ae(t) {
     };
   }), i = s.map((c) => ({
     id: c.id,
-    fields: c.fields.map((p) => p.id),
-    columns: c.fields.reduce((p, a) => p + ie(a), 0)
+    fields: c.fields.map((m) => m.id),
+    columns: c.fields.reduce((m, a) => m + ie(a), 0)
   })), n = l.map((c) => {
-    const p = ie(c), a = s.find((d) => d.fields.some((u) => u.id === c.id))?.id || "row-0";
+    const m = ie(c), a = s.find((d) => d.fields.some((u) => u.id === c.id))?.id || "row-0";
     return {
       id: c.id,
       type: c.type,
@@ -2321,17 +2332,17 @@ function Ae(t) {
         tabIndex: c.properties?.tabIndex
       },
       layout: {
-        columnSpan: c.columnSpan || p,
+        columnSpan: c.columnSpan || m,
         rowId: a,
-        gridClass: nr(c.columnSpan || p)
+        gridClass: nr(c.columnSpan || m)
       },
       conditionalLogic: c.conditionalLogic
     };
-  }), g = {};
+  }), h = {};
   n.forEach((c) => {
-    g[c.id] = c;
+    h[c.id] = c;
   });
-  const m = n.filter((c) => c.required).map((c) => c.id), S = n.filter((c) => c.validation && c.validation.length > 0).map((c) => c.id);
+  const p = n.filter((c) => c.required).map((c) => c.id), C = n.filter((c) => c.validation && c.validation.length > 0).map((c) => c.id);
   return {
     metadata: {
       id: t.id,
@@ -2349,10 +2360,10 @@ function Ae(t) {
       totalFields: n.length
     },
     fields: n,
-    fieldMap: g,
+    fieldMap: h,
     validation: {
-      requiredFields: m,
-      fieldsWithValidation: S
+      requiredFields: p,
+      fieldsWithValidation: C
     }
   };
 }
@@ -2373,29 +2384,29 @@ function nr(t) {
   }[t] || "col-span-12";
 }
 function lr(t, s) {
-  const o = Ae(t), l = JSON.stringify(o, null, 2), i = new Blob([l], { type: "application/json" }), n = URL.createObjectURL(i), g = document.createElement("a");
-  g.href = n, g.download = `${t.title.replace(/\s+/g, "_")}_form_export.json`, g.click(), URL.revokeObjectURL(n);
+  const o = Ae(t), l = JSON.stringify(o, null, 2), i = new Blob([l], { type: "application/json" }), n = URL.createObjectURL(i), h = document.createElement("a");
+  h.href = n, h.download = `${t.title.replace(/\s+/g, "_")}_form_export.json`, h.click(), URL.revokeObjectURL(n);
 }
 function ir() {
   const { state: t, actions: s } = J(), { currentForm: o, previewMode: l } = t, [i, n] = $(null), {
-    isOpen: g,
-    onOpen: m,
-    onOpenChange: S
-  } = X(), { setNodeRef: c, isOver: p } = ot({
+    isOpen: h,
+    onOpen: p,
+    onOpenChange: C
+  } = Z(), { setNodeRef: c, isOver: m } = ot({
     id: "form-canvas"
   }), a = () => {
-    const u = C("text");
+    const u = F("text");
     s.addField(u);
   }, d = (u) => {
-    n(u), m();
+    n(u), p();
   };
   return o.fields.length === 0 ? /* @__PURE__ */ e(
     "div",
     {
       ref: c,
-      className: `flex-1 p-2 sm:p-4 ${p ? "bg-primary-50" : "bg-background"} transition-colors`,
+      className: `flex-1 p-2 sm:p-4 ${m ? "bg-primary-50" : "bg-background"} transition-colors`,
       children: /* @__PURE__ */ e(
-        z,
+        D,
         {
           radius: "sm",
           className: "h-full border-2 p-4 sm:p-10 border-dashed border-default-300",
@@ -2404,7 +2415,7 @@ function ir() {
             /* @__PURE__ */ e("h3", { className: "text-sm sm:text-md font-semibold mb-2", children: "Start Building Your Form" }),
             /* @__PURE__ */ e("p", { className: "text-default-600 mb-4 sm:mb-6 text-xs sm:text-sm max-w-xs sm:max-w-md", children: "Drag elements from the sidebar or click the button below to add your first field" }),
             /* @__PURE__ */ e(
-              F,
+              A,
               {
                 color: "secondary",
                 size: "sm",
@@ -2422,13 +2433,13 @@ function ir() {
     "div",
     {
       ref: c,
-      className: `flex-1 p-2 sm:p-4 overflow-y-auto ${p ? "bg-primary-50" : "bg-background"} transition-colors`,
+      className: `flex-1 p-2 sm:p-4 overflow-y-auto ${m ? "bg-primary-50" : "bg-background"} transition-colors`,
       children: [
         /* @__PURE__ */ r("div", { className: `w-full ${l ? "max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl mx-auto" : ""}`, children: [
           /* @__PURE__ */ e("div", { className: "mb-2 sm:mb-4 px-1 sm:px-2", children: l ? /* @__PURE__ */ e(j, {}) : /* @__PURE__ */ r("div", { className: "space-y-2 sm:space-y-3 mb-2 sm:mb-4 p-2 sm:p-4 bg-default-50 rounded-lg border border-default-200", children: [
             /* @__PURE__ */ e("h3", { className: "text-xs sm:text-sm font-semibold text-default-700 mb-1 sm:mb-2", children: "Form Information" }),
             /* @__PURE__ */ e(
-              A,
+              S,
               {
                 label: "Form Title",
                 placeholder: "Enter form title...",
@@ -2454,7 +2465,7 @@ function ir() {
           l ? (
             // In preview mode, use the same FormRenderer that will be used with exported JSON
             /* @__PURE__ */ e(
-              Ze,
+              Xe,
               {
                 formConfig: Ae(o),
                 onSubmit: d
@@ -2466,11 +2477,11 @@ function ir() {
               {
                 items: o.fields.map((u) => u.id),
                 strategy: ut,
-                children: /* @__PURE__ */ e("div", { className: "space-y-2 sm:space-y-4", children: Xe(o.fields).map((u) => /* @__PURE__ */ e(sr, { row: u, isPreview: !1 }, u.id)) })
+                children: /* @__PURE__ */ e("div", { className: "space-y-2 sm:space-y-4", children: Ze(o.fields).map((u) => /* @__PURE__ */ e(sr, { row: u, isPreview: !1 }, u.id)) })
               }
             ),
             /* @__PURE__ */ e("div", { className: "mt-2 flex justify-end sm:mt-4 pt-2 sm:pt-4 border-t border-divider px-1 sm:px-2", children: /* @__PURE__ */ e(
-              F,
+              A,
               {
                 radius: "sm",
                 color: "primary",
@@ -2481,7 +2492,7 @@ function ir() {
               }
             ) }),
             /* @__PURE__ */ e("div", { className: "mt-2 sm:mt-4 px-1 sm:px-2", children: /* @__PURE__ */ r(
-              F,
+              A,
               {
                 radius: "sm",
                 variant: "bordered",
@@ -2498,10 +2509,10 @@ function ir() {
           ] })
         ] }),
         /* @__PURE__ */ e(
-          Z,
+          X,
           {
-            isOpen: g,
-            onOpenChange: S,
+            isOpen: h,
+            onOpenChange: C,
             size: "2xl",
             children: /* @__PURE__ */ e(ee, { children: (u) => /* @__PURE__ */ r(j, { children: [
               /* @__PURE__ */ e(te, { children: "Form Preview Submission" }),
@@ -2522,7 +2533,7 @@ function ir() {
               ] }) }),
               /* @__PURE__ */ r(be, { children: [
                 /* @__PURE__ */ e(
-                  F,
+                  A,
                   {
                     color: "default",
                     variant: "flat",
@@ -2534,7 +2545,7 @@ function ir() {
                     children: "Copy Data"
                   }
                 ),
-                /* @__PURE__ */ e(F, { color: "primary", onPress: u, children: "Close" })
+                /* @__PURE__ */ e(A, { color: "primary", onPress: u, children: "Close" })
               ] })
             ] }) })
           }
@@ -2550,41 +2561,41 @@ function or({
   icon: l,
   category: i
 }) {
-  const { addField: n } = J().actions, g = i === "static" || i === "structure", { attributes: m, listeners: S, setNodeRef: c, transform: p, isDragging: a } = ct({
+  const { addField: n } = J().actions, h = i === "static" || i === "structure", { attributes: p, listeners: C, setNodeRef: c, transform: m, isDragging: a } = ct({
     id: t,
-    disabled: g
+    disabled: h
     // Disable dragging for coming soon items
-  }), d = p ? {
-    transform: `translate3d(${p.x}px, ${p.y}px, 0)`
+  }), d = m ? {
+    transform: `translate3d(${m.x}px, ${m.y}px, 0)`
   } : void 0, u = Te[l] || Te.Plus;
   return /* @__PURE__ */ e(
     "div",
     {
       ref: c,
       style: d,
-      ...g ? {} : S,
-      ...g ? {} : m,
-      className: `${g ? "cursor-not-allowed" : "cursor-grab active:cursor-grabbing"} ${a ? "opacity-50" : ""}`,
+      ...h ? {} : C,
+      ...h ? {} : p,
+      className: `${h ? "cursor-not-allowed" : "cursor-grab active:cursor-grabbing"} ${a ? "opacity-50" : ""}`,
       children: /* @__PURE__ */ r(
-        F,
+        A,
         {
           size: "sm",
           radius: "sm",
           variant: "flat",
-          className: `mb-1 w-full transition-colors relative ${g ? "bg-white" : "bg-white hover:bg-default-100 cursor-pointer"}`,
+          className: `mb-1 w-full transition-colors relative ${h ? "bg-white" : "bg-white hover:bg-default-100 cursor-pointer"}`,
           onPress: () => {
-            if (g)
+            if (h)
               return;
-            const h = C(s);
-            n(h);
+            const b = F(s);
+            n(b);
           },
-          isDisabled: g,
+          isDisabled: h,
           children: [
             /* @__PURE__ */ r("div", { className: "flex absolute left-1 sm:left-3 items-center justify-start text-start gap-1 sm:gap-1.5", children: [
               /* @__PURE__ */ e(u, { size: 14, className: "sm:w-4 sm:h-4" }),
               /* @__PURE__ */ e("span", { className: "text-xs font-body inline", children: o })
             ] }),
-            g && /* @__PURE__ */ e("div", { className: "absolute bg-white right-1 top-1/2 transform -translate-y-1/2", children: /* @__PURE__ */ e(
+            h && /* @__PURE__ */ e("div", { className: "absolute bg-white right-1 top-1/2 transform -translate-y-1/2", children: /* @__PURE__ */ e(
               _,
               {
                 size: "sm",
@@ -2601,9 +2612,9 @@ function or({
   );
 }
 function Le() {
-  const [t, s] = $(""), o = Xt.filter(
+  const [t, s] = $(""), o = Zt.filter(
     (i) => i.label.toLowerCase().includes(t.toLowerCase())
-  ), l = Zt.map((i) => ({
+  ), l = Xt.map((i) => ({
     ...i,
     items: o.filter((n) => n.category === i.id)
   })).filter((i) => i.items.length > 0);
@@ -2612,7 +2623,7 @@ function Le() {
       /* @__PURE__ */ e("h2", { className: "text-xs sm:text-sm font-semibold mb-2 hidden sm:block", children: "Form Elements" }),
       /* @__PURE__ */ e("h2", { className: "text-xs font-semibold mb-2 sm:hidden", children: "Elements" }),
       /* @__PURE__ */ e(
-        A,
+        S,
         {
           radius: "sm",
           type: "text",
@@ -2673,7 +2684,7 @@ function ke() {
       /* @__PURE__ */ e(H, { title: "Layout", children: /* @__PURE__ */ e(hr, { field: l }) }, "layout"),
       /* @__PURE__ */ e(H, { title: "Custom", children: /* @__PURE__ */ e(br, { field: l }) }, "custom")
     ] })
-  ] }) }) : /* @__PURE__ */ e("div", { className: "w-full bg-background border-l border-divider h-full mt-1 sm:mt-2 p-1 sm:p-2", children: /* @__PURE__ */ e(z, { radius: "sm", className: "py-4 sm:py-10", children: /* @__PURE__ */ r(T, { className: "text-center py-2 sm:py-4", children: [
+  ] }) }) : /* @__PURE__ */ e("div", { className: "w-full bg-background border-l border-divider h-full mt-1 sm:mt-2 p-1 sm:p-2", children: /* @__PURE__ */ e(D, { radius: "sm", className: "py-4 sm:py-10", children: /* @__PURE__ */ r(T, { className: "text-center py-2 sm:py-4", children: [
     /* @__PURE__ */ e(se, { className: "text-lg sm:text-2xl text-default-400 mx-auto mb-1 sm:mb-2" }),
     /* @__PURE__ */ e("h3", { className: "text-xs font-semibold mb-1 hidden sm:block", children: "No Field Selected" }),
     /* @__PURE__ */ e("h3", { className: "text-xs font-semibold mb-1 sm:hidden", children: "Select Field" }),
@@ -2690,7 +2701,7 @@ function cr({ field: t }) {
   };
   return /* @__PURE__ */ r("div", { className: "space-y-2 pt-2", children: [
     /* @__PURE__ */ e(
-      A,
+      S,
       {
         label: "Label",
         value: t.label,
@@ -2700,7 +2711,7 @@ function cr({ field: t }) {
       `label-${t.id}`
     ),
     /* @__PURE__ */ e(
-      A,
+      S,
       {
         label: "Field Name",
         placeholder: "e.g., first_name, email, age",
@@ -2712,7 +2723,7 @@ function cr({ field: t }) {
       `name-${t.id}`
     ),
     t.type !== "section" && t.type !== "paragraph" && /* @__PURE__ */ e(
-      A,
+      S,
       {
         label: "Placeholder",
         value: t.placeholder || "",
@@ -2722,7 +2733,7 @@ function cr({ field: t }) {
       `placeholder-${t.id}`
     ),
     t.type !== "section" && t.type !== "paragraph" && /* @__PURE__ */ e(
-      A,
+      S,
       {
         label: "Description",
         placeholder: "e.g. We'll never share your email with anyone else.",
@@ -2768,6 +2779,52 @@ function cr({ field: t }) {
         )
       ] })
     ] }),
+    (t.type === "text" || t.type === "phone" || t.type === "url" || t.type === "textarea") && /* @__PURE__ */ r("div", { className: "space-y-2 border-t border-divider pt-2", children: [
+      /* @__PURE__ */ e("h5", { className: "text-xs font-medium text-default-600", children: "Validation" }),
+      /* @__PURE__ */ e(
+        S,
+        {
+          label: "Pattern (Regex)",
+          placeholder: "e.g. ^[A-Za-z0-9]+$",
+          value: t.validation?.find((n) => n.type === "pattern")?.value || "",
+          onValueChange: (n) => {
+            let h = (t.validation || []).filter(
+              (p) => p.type !== "pattern"
+            );
+            if (n) {
+              const p = t.validation?.find((C) => C.type === "pattern")?.message || "";
+              h.push({
+                type: "pattern",
+                value: n,
+                message: p
+              });
+            }
+            o({ validation: h });
+          },
+          size: "sm"
+        }
+      ),
+      /* @__PURE__ */ e(
+        S,
+        {
+          label: "Pattern Error Message",
+          placeholder: "e.g. Only alphanumeric characters allowed.",
+          value: t.validation?.find((n) => n.type === "pattern")?.message || "",
+          onValueChange: (n) => {
+            let h = (t.validation || []).filter(
+              (C) => C.type !== "pattern"
+            );
+            const p = t.validation?.find((C) => C.type === "pattern")?.value || "";
+            p && h.push({
+              type: "pattern",
+              value: p,
+              message: n
+            }), o({ validation: h });
+          },
+          size: "sm"
+        }
+      )
+    ] }),
     (t.type === "text" || t.type === "email" || t.type === "password" || t.type === "number" || t.type === "phone" || t.type === "url" || t.type === "date" || t.type === "time" || t.type === "datetime" || t.type === "calendar" || t.type === "textarea" || t.type === "select" || t.type === "multiselect" || t.type === "autocomplete" || t.type === "search" || t.type === "file" || t.type === "range") && /* @__PURE__ */ r("div", { className: "space-y-2 border-t border-divider pt-2", children: [
       /* @__PURE__ */ e("h5", { className: "text-xs font-medium text-default-600", children: "Appearance" }),
       /* @__PURE__ */ r("div", { className: "grid grid-cols-2 gap-2", children: [
@@ -2777,17 +2834,17 @@ function cr({ field: t }) {
             label: "Color",
             selectedKeys: [t.properties?.colorVariant || "default"],
             onSelectionChange: (n) => {
-              const g = Array.from(n)[0];
-              l({ colorVariant: g });
+              const h = Array.from(n)[0];
+              l({ colorVariant: h });
             },
             size: "sm",
             children: [
-              /* @__PURE__ */ e(b, { children: "Default" }, "default"),
-              /* @__PURE__ */ e(b, { children: "Primary" }, "primary"),
-              /* @__PURE__ */ e(b, { children: "Secondary" }, "secondary"),
-              /* @__PURE__ */ e(b, { children: "Success" }, "success"),
-              /* @__PURE__ */ e(b, { children: "Warning" }, "warning"),
-              /* @__PURE__ */ e(b, { children: "Danger" }, "danger")
+              /* @__PURE__ */ e(g, { children: "Default" }, "default"),
+              /* @__PURE__ */ e(g, { children: "Primary" }, "primary"),
+              /* @__PURE__ */ e(g, { children: "Secondary" }, "secondary"),
+              /* @__PURE__ */ e(g, { children: "Success" }, "success"),
+              /* @__PURE__ */ e(g, { children: "Warning" }, "warning"),
+              /* @__PURE__ */ e(g, { children: "Danger" }, "danger")
             ]
           }
         ),
@@ -2797,14 +2854,14 @@ function cr({ field: t }) {
             label: "Size",
             selectedKeys: [t.properties?.size || "md"],
             onSelectionChange: (n) => {
-              const g = Array.from(n)[0];
-              l({ size: g });
+              const h = Array.from(n)[0];
+              l({ size: h });
             },
             size: "sm",
             children: [
-              /* @__PURE__ */ e(b, { children: "Small" }, "sm"),
-              /* @__PURE__ */ e(b, { children: "Medium" }, "md"),
-              /* @__PURE__ */ e(b, { children: "Large" }, "lg")
+              /* @__PURE__ */ e(g, { children: "Small" }, "sm"),
+              /* @__PURE__ */ e(g, { children: "Medium" }, "md"),
+              /* @__PURE__ */ e(g, { children: "Large" }, "lg")
             ]
           }
         )
@@ -2815,16 +2872,16 @@ function cr({ field: t }) {
           label: "Border Radius",
           selectedKeys: [t.properties?.borderRadius || "md"],
           onSelectionChange: (n) => {
-            const g = Array.from(n)[0];
-            l({ borderRadius: g });
+            const h = Array.from(n)[0];
+            l({ borderRadius: h });
           },
           size: "sm",
           children: [
-            /* @__PURE__ */ e(b, { children: "None" }, "none"),
-            /* @__PURE__ */ e(b, { children: "Small" }, "sm"),
-            /* @__PURE__ */ e(b, { children: "Medium" }, "md"),
-            /* @__PURE__ */ e(b, { children: "Large" }, "lg"),
-            /* @__PURE__ */ e(b, { children: "Full" }, "full")
+            /* @__PURE__ */ e(g, { children: "None" }, "none"),
+            /* @__PURE__ */ e(g, { children: "Small" }, "sm"),
+            /* @__PURE__ */ e(g, { children: "Medium" }, "md"),
+            /* @__PURE__ */ e(g, { children: "Large" }, "lg"),
+            /* @__PURE__ */ e(g, { children: "Full" }, "full")
           ]
         }
       )
@@ -2838,17 +2895,17 @@ function cr({ field: t }) {
             label: "Color",
             selectedKeys: [t.properties?.colorVariant || "default"],
             onSelectionChange: (n) => {
-              const g = Array.from(n)[0];
-              l({ colorVariant: g });
+              const h = Array.from(n)[0];
+              l({ colorVariant: h });
             },
             size: "sm",
             children: [
-              /* @__PURE__ */ e(b, { children: "Default" }, "default"),
-              /* @__PURE__ */ e(b, { children: "Primary" }, "primary"),
-              /* @__PURE__ */ e(b, { children: "Secondary" }, "secondary"),
-              /* @__PURE__ */ e(b, { children: "Success" }, "success"),
-              /* @__PURE__ */ e(b, { children: "Warning" }, "warning"),
-              /* @__PURE__ */ e(b, { children: "Danger" }, "danger")
+              /* @__PURE__ */ e(g, { children: "Default" }, "default"),
+              /* @__PURE__ */ e(g, { children: "Primary" }, "primary"),
+              /* @__PURE__ */ e(g, { children: "Secondary" }, "secondary"),
+              /* @__PURE__ */ e(g, { children: "Success" }, "success"),
+              /* @__PURE__ */ e(g, { children: "Warning" }, "warning"),
+              /* @__PURE__ */ e(g, { children: "Danger" }, "danger")
             ]
           }
         ),
@@ -2858,14 +2915,14 @@ function cr({ field: t }) {
             label: "Size",
             selectedKeys: [t.properties?.size || "md"],
             onSelectionChange: (n) => {
-              const g = Array.from(n)[0];
-              l({ size: g });
+              const h = Array.from(n)[0];
+              l({ size: h });
             },
             size: "sm",
             children: [
-              /* @__PURE__ */ e(b, { children: "Small" }, "sm"),
-              /* @__PURE__ */ e(b, { children: "Medium" }, "md"),
-              /* @__PURE__ */ e(b, { children: "Large" }, "lg")
+              /* @__PURE__ */ e(g, { children: "Small" }, "sm"),
+              /* @__PURE__ */ e(g, { children: "Medium" }, "md"),
+              /* @__PURE__ */ e(g, { children: "Large" }, "lg")
             ]
           }
         )
@@ -2876,25 +2933,25 @@ function cr({ field: t }) {
           label: "Variant",
           selectedKeys: [t.properties?.variant || "solid"],
           onSelectionChange: (n) => {
-            const g = Array.from(n)[0];
-            l({ variant: g });
+            const h = Array.from(n)[0];
+            l({ variant: h });
           },
           size: "sm",
           children: [
-            /* @__PURE__ */ e(b, { children: "Solid" }, "solid"),
-            /* @__PURE__ */ e(b, { children: "Bordered" }, "bordered"),
-            /* @__PURE__ */ e(b, { children: "Light" }, "light"),
-            /* @__PURE__ */ e(b, { children: "Flat" }, "flat"),
-            /* @__PURE__ */ e(b, { children: "Faded" }, "faded"),
-            /* @__PURE__ */ e(b, { children: "Shadow" }, "shadow"),
-            /* @__PURE__ */ e(b, { children: "Ghost" }, "ghost")
+            /* @__PURE__ */ e(g, { children: "Solid" }, "solid"),
+            /* @__PURE__ */ e(g, { children: "Bordered" }, "bordered"),
+            /* @__PURE__ */ e(g, { children: "Light" }, "light"),
+            /* @__PURE__ */ e(g, { children: "Flat" }, "flat"),
+            /* @__PURE__ */ e(g, { children: "Faded" }, "faded"),
+            /* @__PURE__ */ e(g, { children: "Shadow" }, "shadow"),
+            /* @__PURE__ */ e(g, { children: "Ghost" }, "ghost")
           ]
         }
       )
     ] }),
-    (t.type === "radio" || t.type === "checkbox" || t.type === "select" || t.type === "multiselect") && /* @__PURE__ */ e(gr, { field: t }),
+    (t.type === "radio" || t.type === "checkbox" || t.type === "select" || t.type === "multiselect" || t.type === "autocomplete") && /* @__PURE__ */ e(gr, { field: t }),
     t.type === "textarea" && /* @__PURE__ */ e(
-      A,
+      S,
       {
         type: "number",
         label: "Rows",
@@ -2905,7 +2962,7 @@ function cr({ field: t }) {
       `rows-${t.id}`
     ),
     t.type === "rating" && /* @__PURE__ */ e(
-      A,
+      S,
       {
         type: "number",
         label: "Max Rating",
@@ -2917,7 +2974,7 @@ function cr({ field: t }) {
     ),
     t.type === "file" && /* @__PURE__ */ r(j, { children: [
       /* @__PURE__ */ e(
-        A,
+        S,
         {
           label: "File Types",
           placeholder: "e.g., .jpg,.png,.pdf",
@@ -2940,7 +2997,7 @@ function cr({ field: t }) {
     ] }),
     t.type === "number" && /* @__PURE__ */ r(j, { children: [
       /* @__PURE__ */ e(
-        A,
+        S,
         {
           type: "number",
           label: "Min Value",
@@ -2951,7 +3008,7 @@ function cr({ field: t }) {
         `min-${t.id}`
       ),
       /* @__PURE__ */ e(
-        A,
+        S,
         {
           type: "number",
           label: "Max Value",
@@ -2965,100 +3022,100 @@ function cr({ field: t }) {
   ] });
 }
 function dr({ field: t }) {
-  const { actions: s } = J(), [o, l] = $({ label: "", value: "" }), i = (m) => {
-    s.updateField(t.id, { options: m });
+  const { actions: s } = J(), [o, l] = $({ label: "", value: "" }), i = (p) => {
+    s.updateField(t.id, { options: p });
   }, n = () => {
     if (o.label && o.value) {
-      const m = t.options || [];
-      i([...m, o]), l({ label: "", value: "" });
+      const p = t.options || [];
+      i([...p, o]), l({ label: "", value: "" });
     }
-  }, g = (m) => {
-    const S = t.options || [];
-    i(S.filter((c, p) => p !== m));
+  }, h = (p) => {
+    const C = t.options || [];
+    i(C.filter((c, m) => m !== p));
   };
   return /* @__PURE__ */ r("div", { className: "space-y-2", children: [
     /* @__PURE__ */ r("div", { className: "flex items-center justify-between", children: [
       /* @__PURE__ */ e("h4", { className: "text-xs font-medium", children: "Options" }),
       /* @__PURE__ */ e(_, { size: "sm", variant: "flat", children: t.options?.length || 0 })
     ] }),
-    t.options?.map((m, S) => /* @__PURE__ */ r(
+    t.options?.map((p, C) => /* @__PURE__ */ r(
       "div",
       {
         className: "p-2 border border-default-200 rounded space-y-1",
         children: [
           /* @__PURE__ */ e(
-            A,
+            S,
             {
               size: "sm",
               placeholder: "Label",
-              value: m.label,
+              value: p.label,
               onValueChange: (c) => {
                 const a = (t.options || []).map(
-                  (d, u) => u === S ? { ...d, label: c } : d
+                  (d, u) => u === C ? { ...d, label: c } : d
                 );
                 i(a);
               }
             },
-            `option-label-${S}-${t.id}`
+            `option-label-${C}-${t.id}`
           ),
           /* @__PURE__ */ r("div", { className: "flex gap-1", children: [
             /* @__PURE__ */ e(
-              A,
+              S,
               {
                 size: "sm",
                 placeholder: "Value",
-                value: m.value,
+                value: p.value,
                 onValueChange: (c) => {
                   const a = (t.options || []).map(
-                    (d, u) => u === S ? { ...d, value: c } : d
+                    (d, u) => u === C ? { ...d, value: c } : d
                   );
                   i(a);
                 },
                 className: "flex-1"
               },
-              `option-value-${S}-${t.id}`
+              `option-value-${C}-${t.id}`
             ),
             /* @__PURE__ */ e(
-              F,
+              A,
               {
                 size: "sm",
                 color: "danger",
                 variant: "flat",
                 isIconOnly: !0,
-                onPress: () => g(S),
+                onPress: () => h(C),
                 children: /* @__PURE__ */ e(Fe, { size: 12 })
               }
             )
           ] })
         ]
       },
-      `option-${S}-${t.id}`
+      `option-${C}-${t.id}`
     )),
     /* @__PURE__ */ r("div", { className: "p-2 border border-dashed border-default-300 rounded space-y-1", children: [
       /* @__PURE__ */ e(
-        A,
+        S,
         {
           size: "sm",
           placeholder: "New option label",
           value: o.label,
-          onValueChange: (m) => l({ ...o, label: m })
+          onValueChange: (p) => l({ ...o, label: p })
         },
         `new-option-label-${t.id}`
       ),
       /* @__PURE__ */ r("div", { className: "flex gap-1", children: [
         /* @__PURE__ */ e(
-          A,
+          S,
           {
             size: "sm",
             placeholder: "Value",
             value: o.value,
-            onValueChange: (m) => l({ ...o, value: m }),
+            onValueChange: (p) => l({ ...o, value: p }),
             className: "flex-1"
           },
           `new-option-value-${t.id}`
         ),
         /* @__PURE__ */ e(
-          F,
+          A,
           {
             size: "sm",
             color: "primary",
@@ -3106,18 +3163,18 @@ function pr({ field: t }) {
           },
           size: "sm",
           children: [
-            /* @__PURE__ */ e(b, { children: "1 column (8.33%)" }, "1"),
-            /* @__PURE__ */ e(b, { children: "2 columns (16.67%)" }, "2"),
-            /* @__PURE__ */ e(b, { children: "3 columns (25%)" }, "3"),
-            /* @__PURE__ */ e(b, { children: "4 columns (33.33%)" }, "4"),
-            /* @__PURE__ */ e(b, { children: "5 columns (41.67%)" }, "5"),
-            /* @__PURE__ */ e(b, { children: "6 columns (50%)" }, "6"),
-            /* @__PURE__ */ e(b, { children: "7 columns (58.33%)" }, "7"),
-            /* @__PURE__ */ e(b, { children: "8 columns (66.67%)" }, "8"),
-            /* @__PURE__ */ e(b, { children: "9 columns (75%)" }, "9"),
-            /* @__PURE__ */ e(b, { children: "10 columns (83.33%)" }, "10"),
-            /* @__PURE__ */ e(b, { children: "11 columns (91.67%)" }, "11"),
-            /* @__PURE__ */ e(b, { children: "12 columns (100%)" }, "12")
+            /* @__PURE__ */ e(g, { children: "1 column (8.33%)" }, "1"),
+            /* @__PURE__ */ e(g, { children: "2 columns (16.67%)" }, "2"),
+            /* @__PURE__ */ e(g, { children: "3 columns (25%)" }, "3"),
+            /* @__PURE__ */ e(g, { children: "4 columns (33.33%)" }, "4"),
+            /* @__PURE__ */ e(g, { children: "5 columns (41.67%)" }, "5"),
+            /* @__PURE__ */ e(g, { children: "6 columns (50%)" }, "6"),
+            /* @__PURE__ */ e(g, { children: "7 columns (58.33%)" }, "7"),
+            /* @__PURE__ */ e(g, { children: "8 columns (66.67%)" }, "8"),
+            /* @__PURE__ */ e(g, { children: "9 columns (75%)" }, "9"),
+            /* @__PURE__ */ e(g, { children: "10 columns (83.33%)" }, "10"),
+            /* @__PURE__ */ e(g, { children: "11 columns (91.67%)" }, "11"),
+            /* @__PURE__ */ e(g, { children: "12 columns (100%)" }, "12")
           ]
         }
       ),
@@ -3132,8 +3189,8 @@ function pr({ field: t }) {
           },
           size: "sm",
           children: [
-            /* @__PURE__ */ e(b, { children: "Vertical" }, "vertical"),
-            /* @__PURE__ */ e(b, { children: "Horizontal" }, "horizontal")
+            /* @__PURE__ */ e(g, { children: "Vertical" }, "vertical"),
+            /* @__PURE__ */ e(g, { children: "Horizontal" }, "horizontal")
           ]
         }
       ),
@@ -3148,9 +3205,9 @@ function pr({ field: t }) {
           },
           size: "sm",
           children: [
-            /* @__PURE__ */ e(b, { children: "Left" }, "left"),
-            /* @__PURE__ */ e(b, { children: "Center" }, "center"),
-            /* @__PURE__ */ e(b, { children: "Right" }, "right")
+            /* @__PURE__ */ e(g, { children: "Left" }, "left"),
+            /* @__PURE__ */ e(g, { children: "Center" }, "center"),
+            /* @__PURE__ */ e(g, { children: "Right" }, "right")
           ]
         }
       ),
@@ -3178,12 +3235,12 @@ function pr({ field: t }) {
             },
             size: "sm",
             children: [
-              /* @__PURE__ */ e(b, { children: "None (mt-0)" }, "mt-0"),
-              /* @__PURE__ */ e(b, { children: "Small (mt-1)" }, "mt-1"),
-              /* @__PURE__ */ e(b, { children: "Medium (mt-2)" }, "mt-2"),
-              /* @__PURE__ */ e(b, { children: "Default (mt-4)" }, "mt-4"),
-              /* @__PURE__ */ e(b, { children: "Large (mt-6)" }, "mt-6"),
-              /* @__PURE__ */ e(b, { children: "Extra Large (mt-8)" }, "mt-8")
+              /* @__PURE__ */ e(g, { children: "None (mt-0)" }, "mt-0"),
+              /* @__PURE__ */ e(g, { children: "Small (mt-1)" }, "mt-1"),
+              /* @__PURE__ */ e(g, { children: "Medium (mt-2)" }, "mt-2"),
+              /* @__PURE__ */ e(g, { children: "Default (mt-4)" }, "mt-4"),
+              /* @__PURE__ */ e(g, { children: "Large (mt-6)" }, "mt-6"),
+              /* @__PURE__ */ e(g, { children: "Extra Large (mt-8)" }, "mt-8")
             ]
           }
         ),
@@ -3198,12 +3255,12 @@ function pr({ field: t }) {
             },
             size: "sm",
             children: [
-              /* @__PURE__ */ e(b, { children: "None (mb-0)" }, "mb-0"),
-              /* @__PURE__ */ e(b, { children: "Small (mb-1)" }, "mb-1"),
-              /* @__PURE__ */ e(b, { children: "Medium (mb-2)" }, "mb-2"),
-              /* @__PURE__ */ e(b, { children: "Default (mb-4)" }, "mb-4"),
-              /* @__PURE__ */ e(b, { children: "Large (mb-6)" }, "mb-6"),
-              /* @__PURE__ */ e(b, { children: "Extra Large (mb-8)" }, "mb-8")
+              /* @__PURE__ */ e(g, { children: "None (mb-0)" }, "mb-0"),
+              /* @__PURE__ */ e(g, { children: "Small (mb-1)" }, "mb-1"),
+              /* @__PURE__ */ e(g, { children: "Medium (mb-2)" }, "mb-2"),
+              /* @__PURE__ */ e(g, { children: "Default (mb-4)" }, "mb-4"),
+              /* @__PURE__ */ e(g, { children: "Large (mb-6)" }, "mb-6"),
+              /* @__PURE__ */ e(g, { children: "Extra Large (mb-8)" }, "mb-8")
             ]
           }
         )
@@ -3220,12 +3277,12 @@ function pr({ field: t }) {
             },
             size: "sm",
             children: [
-              /* @__PURE__ */ e(b, { children: "None (p-0)" }, "p-0"),
-              /* @__PURE__ */ e(b, { children: "Small (p-1)" }, "p-1"),
-              /* @__PURE__ */ e(b, { children: "Medium (p-2)" }, "p-2"),
-              /* @__PURE__ */ e(b, { children: "Default (p-4)" }, "p-4"),
-              /* @__PURE__ */ e(b, { children: "Large (p-6)" }, "p-6"),
-              /* @__PURE__ */ e(b, { children: "Extra Large (p-8)" }, "p-8")
+              /* @__PURE__ */ e(g, { children: "None (p-0)" }, "p-0"),
+              /* @__PURE__ */ e(g, { children: "Small (p-1)" }, "p-1"),
+              /* @__PURE__ */ e(g, { children: "Medium (p-2)" }, "p-2"),
+              /* @__PURE__ */ e(g, { children: "Default (p-4)" }, "p-4"),
+              /* @__PURE__ */ e(g, { children: "Large (p-6)" }, "p-6"),
+              /* @__PURE__ */ e(g, { children: "Extra Large (p-8)" }, "p-8")
             ]
           }
         ),
@@ -3240,9 +3297,9 @@ function pr({ field: t }) {
             },
             size: "sm",
             children: [
-              /* @__PURE__ */ e(b, { children: "Left" }, "text-left"),
-              /* @__PURE__ */ e(b, { children: "Center" }, "text-center"),
-              /* @__PURE__ */ e(b, { children: "Right" }, "text-right")
+              /* @__PURE__ */ e(g, { children: "Left" }, "text-left"),
+              /* @__PURE__ */ e(g, { children: "Center" }, "text-center"),
+              /* @__PURE__ */ e(g, { children: "Right" }, "text-right")
             ]
           }
         )
@@ -3283,23 +3340,23 @@ function pr({ field: t }) {
   ] });
 }
 function mr({ field: t }) {
-  const { actions: s } = J(), [o, l] = $(""), [i, n] = $(""), g = (p) => {
-    s.updateFieldCustom(t.id, p);
-  }, m = (p) => {
-    s.updateFieldProperties(t.id, p);
-  }, S = () => {
+  const { actions: s } = J(), [o, l] = $(""), [i, n] = $(""), h = (m) => {
+    s.updateFieldCustom(t.id, m);
+  }, p = (m) => {
+    s.updateFieldProperties(t.id, m);
+  }, C = () => {
     if (o && i) {
-      const p = t.custom?.dataAttributes || {};
-      g({
+      const m = t.custom?.dataAttributes || {};
+      h({
         dataAttributes: {
-          ...p,
+          ...m,
           [o]: i
         }
       }), l(""), n("");
     }
-  }, c = (p) => {
+  }, c = (m) => {
     const d = { ...t.custom?.dataAttributes || {} };
-    delete d[p], g({ dataAttributes: d });
+    delete d[m], h({ dataAttributes: d });
   };
   return /* @__PURE__ */ r("div", { className: "space-y-4 py-4", children: [
     /* @__PURE__ */ r("div", { className: "space-y-2", children: [
@@ -3307,17 +3364,17 @@ function mr({ field: t }) {
       /* @__PURE__ */ r("div", { className: "space-y-2 border-t border-divider pt-2", children: [
         /* @__PURE__ */ e("div", { className: "text-xs text-default-500 font-medium", children: "Layout & Structure" }),
         /* @__PURE__ */ e(
-          A,
+          S,
           {
             label: "Base (Outer Container)",
             placeholder: "e.g. p-4 bg-gray-50 rounded-lg",
             value: t.properties?.classNames?.base || "",
-            onValueChange: (p) => {
+            onValueChange: (m) => {
               const a = t.properties?.classNames || {};
-              m({
+              p({
                 classNames: {
                   ...a,
-                  base: p
+                  base: m
                 }
               });
             },
@@ -3327,17 +3384,17 @@ function mr({ field: t }) {
           `classnames-base-${t.id}`
         ),
         /* @__PURE__ */ e(
-          A,
+          S,
           {
             label: "Main Wrapper",
             placeholder: "e.g. flex flex-col gap-2",
             value: t.properties?.classNames?.mainWrapper || "",
-            onValueChange: (p) => {
+            onValueChange: (m) => {
               const a = t.properties?.classNames || {};
-              m({
+              p({
                 classNames: {
                   ...a,
-                  mainWrapper: p
+                  mainWrapper: m
                 }
               });
             },
@@ -3347,17 +3404,17 @@ function mr({ field: t }) {
           `classnames-mainwrapper-${t.id}`
         ),
         /* @__PURE__ */ e(
-          A,
+          S,
           {
             label: "Inner Wrapper",
             placeholder: "e.g. relative flex items-center",
             value: t.properties?.classNames?.innerWrapper || "",
-            onValueChange: (p) => {
+            onValueChange: (m) => {
               const a = t.properties?.classNames || {};
-              m({
+              p({
                 classNames: {
                   ...a,
-                  innerWrapper: p
+                  innerWrapper: m
                 }
               });
             },
@@ -3370,17 +3427,17 @@ function mr({ field: t }) {
       /* @__PURE__ */ r("div", { className: "space-y-2 border-t border-divider pt-2", children: [
         /* @__PURE__ */ e("div", { className: "text-xs text-default-500 font-medium", children: "Input Elements" }),
         /* @__PURE__ */ e(
-          A,
+          S,
           {
             label: "Input Wrapper",
             placeholder: "e.g. border border-red-500 shadow-lg",
             value: t.properties?.classNames?.inputWrapper || "",
-            onValueChange: (p) => {
+            onValueChange: (m) => {
               const a = t.properties?.classNames || {};
-              m({
+              p({
                 classNames: {
                   ...a,
-                  inputWrapper: p
+                  inputWrapper: m
                 }
               });
             },
@@ -3390,17 +3447,17 @@ function mr({ field: t }) {
           `classnames-inputwrapper-${t.id}`
         ),
         /* @__PURE__ */ e(
-          A,
+          S,
           {
             label: "Input Field",
             placeholder: "e.g. text-lg font-bold text-blue-600",
             value: t.properties?.classNames?.input || "",
-            onValueChange: (p) => {
+            onValueChange: (m) => {
               const a = t.properties?.classNames || {};
-              m({
+              p({
                 classNames: {
                   ...a,
-                  input: p
+                  input: m
                 }
               });
             },
@@ -3410,17 +3467,17 @@ function mr({ field: t }) {
           `classnames-input-${t.id}`
         ),
         /* @__PURE__ */ e(
-          A,
+          S,
           {
             label: "Clear Button",
             placeholder: "e.g. text-gray-400 hover:text-red-500",
             value: t.properties?.classNames?.clearButton || "",
-            onValueChange: (p) => {
+            onValueChange: (m) => {
               const a = t.properties?.classNames || {};
-              m({
+              p({
                 classNames: {
                   ...a,
-                  clearButton: p
+                  clearButton: m
                 }
               });
             },
@@ -3433,17 +3490,17 @@ function mr({ field: t }) {
       /* @__PURE__ */ r("div", { className: "space-y-2 border-t border-divider pt-2", children: [
         /* @__PURE__ */ e("div", { className: "text-xs text-default-500 font-medium", children: "Labels & Text" }),
         /* @__PURE__ */ e(
-          A,
+          S,
           {
             label: "Label",
             placeholder: "e.g. text-sm font-semibold text-purple-700",
             value: t.properties?.classNames?.label || "",
-            onValueChange: (p) => {
+            onValueChange: (m) => {
               const a = t.properties?.classNames || {};
-              m({
+              p({
                 classNames: {
                   ...a,
-                  label: p
+                  label: m
                 }
               });
             },
@@ -3453,17 +3510,17 @@ function mr({ field: t }) {
           `classnames-label-${t.id}`
         ),
         /* @__PURE__ */ e(
-          A,
+          S,
           {
             label: "Description/Helper",
             placeholder: "e.g. text-xs text-gray-500 italic",
             value: t.properties?.classNames?.description || "",
-            onValueChange: (p) => {
+            onValueChange: (m) => {
               const a = t.properties?.classNames || {};
-              m({
+              p({
                 classNames: {
                   ...a,
-                  description: p
+                  description: m
                 }
               });
             },
@@ -3473,17 +3530,17 @@ function mr({ field: t }) {
           `classnames-description-${t.id}`
         ),
         /* @__PURE__ */ e(
-          A,
+          S,
           {
             label: "Helper Wrapper",
             placeholder: "e.g. mt-1 flex justify-between",
             value: t.properties?.classNames?.helperWrapper || "",
-            onValueChange: (p) => {
+            onValueChange: (m) => {
               const a = t.properties?.classNames || {};
-              m({
+              p({
                 classNames: {
                   ...a,
-                  helperWrapper: p
+                  helperWrapper: m
                 }
               });
             },
@@ -3493,17 +3550,17 @@ function mr({ field: t }) {
           `classnames-helperwrapper-${t.id}`
         ),
         /* @__PURE__ */ e(
-          A,
+          S,
           {
             label: "Error Message",
             placeholder: "e.g. text-red-500 text-xs font-medium",
             value: t.properties?.classNames?.errorMessage || "",
-            onValueChange: (p) => {
+            onValueChange: (m) => {
               const a = t.properties?.classNames || {};
-              m({
+              p({
                 classNames: {
                   ...a,
-                  errorMessage: p
+                  errorMessage: m
                 }
               });
             },
@@ -3515,24 +3572,24 @@ function mr({ field: t }) {
       ] }),
       /* @__PURE__ */ r("div", { className: "flex gap-2 pt-2 border-t border-divider", children: [
         /* @__PURE__ */ e(
-          F,
+          A,
           {
             size: "sm",
             variant: "flat",
             onPress: () => {
-              m({ classNames: void 0 });
+              p({ classNames: void 0 });
             },
             children: "Clear All"
           }
         ),
         /* @__PURE__ */ e(
-          F,
+          A,
           {
             size: "sm",
             variant: "flat",
             color: "primary",
             onPress: () => {
-              m({
+              p({
                 classNames: {
                   base: "p-4",
                   inputWrapper: "border-2 border-primary-300 hover:border-primary-500",
@@ -3551,12 +3608,12 @@ function mr({ field: t }) {
       /* @__PURE__ */ r("div", { className: "flex items-center justify-between", children: [
         /* @__PURE__ */ e("h5", { className: "text-xs font-medium text-default-600", children: "Data Attributes" }),
         /* @__PURE__ */ e(
-          F,
+          A,
           {
             size: "sm",
             variant: "flat",
             onPress: () => {
-              g({
+              h({
                 dataAttributes: {
                   ...t.custom?.dataAttributes,
                   "field-type": t.type,
@@ -3570,7 +3627,7 @@ function mr({ field: t }) {
       ] }),
       /* @__PURE__ */ r("div", { className: "flex gap-2", children: [
         /* @__PURE__ */ e(
-          A,
+          S,
           {
             placeholder: "e.g. analytics-event",
             value: o,
@@ -3581,7 +3638,7 @@ function mr({ field: t }) {
           `new-data-key-${t.id}`
         ),
         /* @__PURE__ */ e(
-          A,
+          S,
           {
             placeholder: "e.g. form-submit",
             value: i,
@@ -3592,44 +3649,44 @@ function mr({ field: t }) {
           `new-data-value-${t.id}`
         ),
         /* @__PURE__ */ e(
-          F,
+          A,
           {
             size: "sm",
             variant: "flat",
-            onPress: S,
+            onPress: C,
             isIconOnly: !0,
             children: /* @__PURE__ */ e(ae, { className: "w-4 h-4" })
           }
         )
       ] }),
       /* @__PURE__ */ e("div", { className: "space-y-1", children: Object.entries(t.custom?.dataAttributes || {}).map(
-        ([p, a]) => /* @__PURE__ */ r(
+        ([m, a]) => /* @__PURE__ */ r(
           "div",
           {
             className: "flex items-center justify-between bg-default-100 p-2 rounded text-xs",
             children: [
               /* @__PURE__ */ r("span", { children: [
                 /* @__PURE__ */ r("strong", { children: [
-                  p,
+                  m,
                   ":"
                 ] }),
                 " ",
                 a
               ] }),
               /* @__PURE__ */ e(
-                F,
+                A,
                 {
                   size: "sm",
                   variant: "light",
                   color: "danger",
-                  onPress: () => c(p),
+                  onPress: () => c(m),
                   isIconOnly: !0,
                   children: /* @__PURE__ */ e(Fe, { className: "w-3 h-3" })
                 }
               )
             ]
           },
-          p
+          m
         )
       ) })
     ] }),
@@ -3637,12 +3694,12 @@ function mr({ field: t }) {
       /* @__PURE__ */ r("div", { className: "flex items-center justify-between", children: [
         /* @__PURE__ */ e("h5", { className: "text-xs font-medium text-default-600", children: "Accessibility" }),
         /* @__PURE__ */ e(
-          F,
+          A,
           {
             size: "sm",
             variant: "flat",
             onPress: () => {
-              g({
+              h({
                 role: t.type === "button" ? "button" : t.type === "select" || t.type === "multiselect" ? "combobox" : t.type === "radio" ? "radiogroup" : t.type === "checkbox" ? "checkbox" : "textbox",
                 tabIndex: 0
               });
@@ -3652,24 +3709,24 @@ function mr({ field: t }) {
         )
       ] }),
       /* @__PURE__ */ e(
-        A,
+        S,
         {
           label: "Tab Index",
           type: "number",
           value: t.custom?.tabIndex?.toString() || "",
-          onValueChange: (p) => g({ tabIndex: parseInt(p) || void 0 }),
+          onValueChange: (m) => h({ tabIndex: parseInt(m) || void 0 }),
           size: "sm",
           placeholder: "0 for normal tab order, -1 to skip"
         },
         `tab-index-${t.id}`
       ),
       /* @__PURE__ */ e(
-        A,
+        S,
         {
           label: "ARIA Role",
           placeholder: "textbox, button, combobox, etc.",
           value: t.custom?.role || "",
-          onValueChange: (p) => g({ role: p }),
+          onValueChange: (m) => h({ role: m }),
           size: "sm",
           description: "Override the default ARIA role for this element"
         },
@@ -3681,20 +3738,20 @@ function mr({ field: t }) {
 const ur = oe.memo(cr), hr = oe.memo(pr), br = oe.memo(mr), gr = oe.memo(dr);
 function xr() {
   const { state: t, actions: s } = J(), { previewMode: o, currentForm: l } = t, [i, n] = $({ type: null, message: "" }), {
-    isOpen: g,
-    onOpen: m,
-    onOpenChange: S
-  } = X(), {
-    isOpen: c,
+    isOpen: h,
     onOpen: p,
+    onOpenChange: C
+  } = Z(), {
+    isOpen: c,
+    onOpen: m,
     onOpenChange: a
-  } = X(), d = () => {
+  } = Z(), d = () => {
     s.setPreviewMode(!o);
   }, u = () => {
     lr(l);
   }, v = () => {
-    m();
-  }, h = (y) => {
+    p();
+  }, b = (y) => {
     if (!y || typeof y != "object") return !1;
     if (y.metadata && y.fields) {
       if (!y.metadata.title || typeof y.metadata.title != "string" || !Array.isArray(y.fields)) return !1;
@@ -3710,8 +3767,8 @@ function xr() {
     }
     return !1;
   }, w = () => {
-    n({ type: null, message: "" }), p();
-  }, D = (y) => y.title && y.fields && !y.metadata ? y : {
+    n({ type: null, message: "" }), m();
+  }, z = (y) => y.title && y.fields && !y.metadata ? y : {
     id: y.metadata?.id || y.id,
     title: y.metadata?.title || y.title,
     description: y.metadata?.description || y.description || "",
@@ -3728,14 +3785,14 @@ function xr() {
     x.onload = (E) => {
       try {
         const I = JSON.parse(E.target?.result);
-        if (!h(I)) {
+        if (!b(I)) {
           n({
             type: "error",
             message: "Invalid form structure. Please ensure the JSON file contains a valid form configuration."
           });
           return;
         }
-        const M = D(I);
+        const M = z(I);
         s.setForm(M), n({
           type: "success",
           message: `Successfully imported "${M.title}" with ${M.fields.length} field(s).`
@@ -3753,10 +3810,10 @@ function xr() {
   return /* @__PURE__ */ r(j, { children: [
     /* @__PURE__ */ r(yt, { className: "border-b border-divider", maxWidth: "full", children: [
       /* @__PURE__ */ e(Nt, { children: /* @__PURE__ */ e("h1", { className: "font-bold text-inherit text-sm sm:text-base", children: "Form Builder" }) }),
-      /* @__PURE__ */ e(De, { className: "flex gap-2 sm:gap-4", justify: "center" }),
-      /* @__PURE__ */ e(De, { justify: "end", children: /* @__PURE__ */ e(ft, { children: /* @__PURE__ */ r(ve, { radius: "sm", size: "sm", children: [
+      /* @__PURE__ */ e(ze, { className: "flex gap-2 sm:gap-4", justify: "center" }),
+      /* @__PURE__ */ e(ze, { justify: "end", children: /* @__PURE__ */ e(ft, { children: /* @__PURE__ */ r(ve, { radius: "sm", size: "sm", children: [
         /* @__PURE__ */ e(
-          F,
+          A,
           {
             variant: "flat",
             onPress: d,
@@ -3766,7 +3823,7 @@ function xr() {
           }
         ),
         /* @__PURE__ */ e(
-          F,
+          A,
           {
             variant: "flat",
             isIconOnly: !0,
@@ -3777,7 +3834,7 @@ function xr() {
           }
         ),
         /* @__PURE__ */ r(vt, { children: [
-          /* @__PURE__ */ e(wt, { children: /* @__PURE__ */ e(F, { variant: "flat", isIconOnly: !0, size: "sm", children: /* @__PURE__ */ e(Rt, {}) }) }),
+          /* @__PURE__ */ e(wt, { children: /* @__PURE__ */ e(A, { variant: "flat", isIconOnly: !0, size: "sm", children: /* @__PURE__ */ e(Rt, {}) }) }),
           /* @__PURE__ */ r(Ct, { children: [
             /* @__PURE__ */ e(
               ge,
@@ -3813,12 +3870,12 @@ function xr() {
     /* @__PURE__ */ e(
       yr,
       {
-        isOpen: g,
-        onOpenChange: S,
+        isOpen: h,
+        onOpenChange: C,
         form: l
       }
     ),
-    /* @__PURE__ */ e(Z, { isOpen: c, onOpenChange: a, size: "2xl", children: /* @__PURE__ */ e(ee, { children: (y) => /* @__PURE__ */ r(j, { children: [
+    /* @__PURE__ */ e(X, { isOpen: c, onOpenChange: a, size: "2xl", children: /* @__PURE__ */ e(ee, { children: (y) => /* @__PURE__ */ r(j, { children: [
       /* @__PURE__ */ r(te, { className: "flex flex-col gap-1", children: [
         /* @__PURE__ */ e("h3", { className: "text-lg font-semibold", children: "Import Form" }),
         /* @__PURE__ */ e("p", { className: "text-sm text-default-500", children: "Import a form configuration from JSON file or paste JSON directly" })
@@ -3846,7 +3903,7 @@ function xr() {
           /* @__PURE__ */ e("span", { className: "text-sm", children: i.message })
         ] }) })
       ] }),
-      /* @__PURE__ */ e(be, { children: /* @__PURE__ */ e(F, { variant: "flat", onPress: y, children: "Close" }) })
+      /* @__PURE__ */ e(be, { children: /* @__PURE__ */ e(A, { variant: "flat", onPress: y, children: "Close" }) })
     ] }) }) })
   ] });
 }
@@ -3855,14 +3912,14 @@ function yr({
   onOpenChange: s,
   form: o
 }) {
-  const [l, i] = $(!1), [n, g] = $("formatted"), m = Ae(o), S = JSON.stringify(m, null, 2), c = JSON.stringify(m), p = () => {
-    navigator.clipboard.writeText(S), i(!0), setTimeout(() => i(!1), 2e3);
+  const [l, i] = $(!1), [n, h] = $("formatted"), p = Ae(o), C = JSON.stringify(p, null, 2), c = JSON.stringify(p), m = () => {
+    navigator.clipboard.writeText(C), i(!0), setTimeout(() => i(!1), 2e3);
   }, a = () => {
-    const d = new Blob([S], { type: "application/json" }), u = URL.createObjectURL(d), v = document.createElement("a");
+    const d = new Blob([C], { type: "application/json" }), u = URL.createObjectURL(d), v = document.createElement("a");
     v.href = u, v.download = `${o.title.replace(/\s+/g, "_")}_form_config.json`, document.body.appendChild(v), v.click(), document.body.removeChild(v), URL.revokeObjectURL(u);
   };
   return /* @__PURE__ */ e(
-    Z,
+    X,
     {
       isOpen: t,
       onOpenChange: s,
@@ -3877,17 +3934,17 @@ function yr({
           ] }),
           /* @__PURE__ */ r("div", { className: "flex gap-2", children: [
             /* @__PURE__ */ e(
-              F,
+              A,
               {
                 size: "sm",
                 variant: "flat",
                 startContent: l ? /* @__PURE__ */ e(le, { className: "w-4 h-4" }) : /* @__PURE__ */ e(Ce, { className: "w-4 h-4" }),
-                onPress: p,
+                onPress: m,
                 children: l ? "Copied!" : "Copy"
               }
             ),
             /* @__PURE__ */ e(
-              F,
+              A,
               {
                 size: "sm",
                 color: "primary",
@@ -3902,56 +3959,56 @@ function yr({
           we,
           {
             selectedKey: n,
-            onSelectionChange: (u) => g(u),
+            onSelectionChange: (u) => h(u),
             "aria-label": "JSON Format Options",
             children: [
-              /* @__PURE__ */ e(H, { title: "Formatted", children: /* @__PURE__ */ r(z, { children: [
+              /* @__PURE__ */ e(H, { title: "Formatted", children: /* @__PURE__ */ r(D, { children: [
                 /* @__PURE__ */ e(R, { children: /* @__PURE__ */ r("div", { className: "flex items-center justify-between", children: [
                   /* @__PURE__ */ e("h4", { className: "text-md font-medium", children: "Formatted JSON" }),
                   /* @__PURE__ */ r("div", { className: "text-sm text-default-500", children: [
-                    m.layout.totalFields,
+                    p.layout.totalFields,
                     " fields •",
                     " ",
-                    m.layout.rows.length,
+                    p.layout.rows.length,
                     " rows"
                   ] })
                 ] }) }),
-                /* @__PURE__ */ e(T, { children: /* @__PURE__ */ e("pre", { className: "text-xs overflow-auto bg-default-50 p-4 rounded-lg max-h-96 font-mono", children: S }) })
+                /* @__PURE__ */ e(T, { children: /* @__PURE__ */ e("pre", { className: "text-xs overflow-auto bg-default-50 p-4 rounded-lg max-h-96 font-mono", children: C }) })
               ] }) }, "formatted"),
-              /* @__PURE__ */ e(H, { title: "Compact", children: /* @__PURE__ */ r(z, { children: [
+              /* @__PURE__ */ e(H, { title: "Compact", children: /* @__PURE__ */ r(D, { children: [
                 /* @__PURE__ */ e(R, { children: /* @__PURE__ */ e("h4", { className: "text-md font-medium", children: "Compact JSON" }) }),
                 /* @__PURE__ */ e(T, { children: /* @__PURE__ */ e("pre", { className: "text-xs overflow-auto bg-default-50 p-4 rounded-lg max-h-96 font-mono break-all", children: c }) })
               ] }) }, "compact"),
-              /* @__PURE__ */ e(H, { title: "Metadata", children: /* @__PURE__ */ r(z, { children: [
+              /* @__PURE__ */ e(H, { title: "Metadata", children: /* @__PURE__ */ r(D, { children: [
                 /* @__PURE__ */ e(R, { children: /* @__PURE__ */ e("h4", { className: "text-md font-medium", children: "Form Information" }) }),
                 /* @__PURE__ */ e(T, { children: /* @__PURE__ */ r("div", { className: "space-y-4", children: [
                   /* @__PURE__ */ r("div", { className: "grid grid-cols-2 gap-4", children: [
                     /* @__PURE__ */ r("div", { children: [
                       /* @__PURE__ */ e("label", { className: "text-sm font-medium text-default-700", children: "Title" }),
-                      /* @__PURE__ */ e("p", { className: "text-sm text-default-600", children: m.metadata.title })
+                      /* @__PURE__ */ e("p", { className: "text-sm text-default-600", children: p.metadata.title })
                     ] }),
                     /* @__PURE__ */ r("div", { children: [
                       /* @__PURE__ */ e("label", { className: "text-sm font-medium text-default-700", children: "Version" }),
-                      /* @__PURE__ */ e("p", { className: "text-sm text-default-600", children: m.metadata.version })
+                      /* @__PURE__ */ e("p", { className: "text-sm text-default-600", children: p.metadata.version })
                     ] }),
                     /* @__PURE__ */ r("div", { children: [
                       /* @__PURE__ */ e("label", { className: "text-sm font-medium text-default-700", children: "Total Fields" }),
-                      /* @__PURE__ */ e("p", { className: "text-sm text-default-600", children: m.layout.totalFields })
+                      /* @__PURE__ */ e("p", { className: "text-sm text-default-600", children: p.layout.totalFields })
                     ] }),
                     /* @__PURE__ */ r("div", { children: [
                       /* @__PURE__ */ e("label", { className: "text-sm font-medium text-default-700", children: "Required Fields" }),
-                      /* @__PURE__ */ e("p", { className: "text-sm text-default-600", children: m.validation.requiredFields.length })
+                      /* @__PURE__ */ e("p", { className: "text-sm text-default-600", children: p.validation.requiredFields.length })
                     ] })
                   ] }),
                   /* @__PURE__ */ r("div", { children: [
                     /* @__PURE__ */ e("label", { className: "text-sm font-medium text-default-700", children: "Description" }),
-                    /* @__PURE__ */ e("p", { className: "text-sm text-default-600", children: m.metadata.description || "No description provided" })
+                    /* @__PURE__ */ e("p", { className: "text-sm text-default-600", children: p.metadata.description || "No description provided" })
                   ] }),
                   /* @__PURE__ */ r("div", { children: [
                     /* @__PURE__ */ e("label", { className: "text-sm font-medium text-default-700", children: "Field Types" }),
                     /* @__PURE__ */ e("div", { className: "flex flex-wrap gap-2 mt-1", children: [
                       ...new Set(
-                        m.fields.map((u) => u.type)
+                        p.fields.map((u) => u.type)
                       )
                     ].map((u) => /* @__PURE__ */ e(
                       "span",
@@ -3967,19 +4024,19 @@ function yr({
                     /* @__PURE__ */ e("div", { className: "bg-default-50 p-3 rounded-lg mt-1", children: /* @__PURE__ */ r("div", { className: "grid grid-cols-2 gap-3 text-sm", children: [
                       /* @__PURE__ */ r("div", { children: [
                         /* @__PURE__ */ e("span", { className: "text-default-700", children: "Submit Button:" }),
-                        /* @__PURE__ */ e("span", { className: "text-default-600 ml-2", children: m.settings.submitButtonText })
+                        /* @__PURE__ */ e("span", { className: "text-default-600 ml-2", children: p.settings.submitButtonText })
                       ] }),
                       /* @__PURE__ */ r("div", { children: [
                         /* @__PURE__ */ e("span", { className: "text-default-700", children: "Theme:" }),
-                        /* @__PURE__ */ e("span", { className: "text-default-600 ml-2", children: m.settings.theme })
+                        /* @__PURE__ */ e("span", { className: "text-default-600 ml-2", children: p.settings.theme })
                       ] }),
                       /* @__PURE__ */ r("div", { children: [
                         /* @__PURE__ */ e("span", { className: "text-default-700", children: "Multiple Submissions:" }),
-                        /* @__PURE__ */ e("span", { className: "text-default-600 ml-2", children: m.settings.allowMultipleSubmissions ? "Yes" : "No" })
+                        /* @__PURE__ */ e("span", { className: "text-default-600 ml-2", children: p.settings.allowMultipleSubmissions ? "Yes" : "No" })
                       ] }),
                       /* @__PURE__ */ r("div", { children: [
                         /* @__PURE__ */ e("span", { className: "text-default-700", children: "Captcha:" }),
-                        /* @__PURE__ */ e("span", { className: "text-default-600 ml-2", children: m.settings.captchaEnabled ? "Enabled" : "Disabled" })
+                        /* @__PURE__ */ e("span", { className: "text-default-600 ml-2", children: p.settings.captchaEnabled ? "Enabled" : "Disabled" })
                       ] })
                     ] }) })
                   ] })
@@ -3988,17 +4045,17 @@ function yr({
             ]
           }
         ) }),
-        /* @__PURE__ */ e(be, { children: /* @__PURE__ */ e(F, { color: "default", variant: "light", onPress: d, children: "Close" }) })
+        /* @__PURE__ */ e(be, { children: /* @__PURE__ */ e(A, { color: "default", variant: "light", onPress: d, children: "Close" }) })
       ] }) })
     }
   );
 }
 function Nr() {
-  const [t, s] = $(""), [o, l] = $(null), [i, n] = $(""), [g, m] = $(null), [S, c] = $(!1), {
-    isOpen: p,
+  const [t, s] = $(""), [o, l] = $(null), [i, n] = $(""), [h, p] = $(null), [C, c] = $(!1), {
+    isOpen: m,
     onOpen: a,
     onOpenChange: d
-  } = X(), u = {
+  } = Z(), u = {
     metadata: {
       id: "sample-form-001",
       title: "Contact Information Form",
@@ -4156,12 +4213,12 @@ function Nr() {
         x instanceof Error ? x.message : "Invalid JSON format. Please check your syntax."
       ), l(null);
     }
-  }, h = () => {
+  }, b = () => {
     s(JSON.stringify(u, null, 2)), l(u), n("");
   }, w = async () => {
     await navigator.clipboard.writeText(JSON.stringify(u, null, 2)), c(!0), setTimeout(() => c(!1), 2e3);
-  }, D = (x) => {
-    m(x), a();
+  }, z = (x) => {
+    p(x), a();
   };
   return /* @__PURE__ */ e("div", { className: "min-h-screen bg-background", children: /* @__PURE__ */ r("div", { className: "mx-auto p-6", children: [
     /* @__PURE__ */ r("div", { className: "mb-8", children: [
@@ -4170,7 +4227,7 @@ function Nr() {
     ] }),
     /* @__PURE__ */ r("div", { className: "flex flex-col sm:flex-row gap-6", children: [
       /* @__PURE__ */ r("div", { className: "basis-4/12", children: [
-        /* @__PURE__ */ r(z, { radius: "sm", children: [
+        /* @__PURE__ */ r(D, { radius: "sm", children: [
           /* @__PURE__ */ e(R, { children: /* @__PURE__ */ e("div", { className: "flex items-center justify-between w-full p-1", children: /* @__PURE__ */ r("div", { className: "flex gap-2 flex-wrap", children: [
             /* @__PURE__ */ e(
               "input",
@@ -4198,7 +4255,7 @@ function Nr() {
               }
             ),
             /* @__PURE__ */ e(
-              F,
+              A,
               {
                 size: "sm",
                 variant: "flat",
@@ -4208,32 +4265,32 @@ function Nr() {
               }
             ),
             /* @__PURE__ */ e(
-              F,
+              A,
               {
                 size: "sm",
                 variant: "flat",
-                startContent: S ? /* @__PURE__ */ e(le, { className: "w-4 h-4" }) : /* @__PURE__ */ e(Ce, { className: "w-4 h-4" }),
+                startContent: C ? /* @__PURE__ */ e(le, { className: "w-4 h-4" }) : /* @__PURE__ */ e(Ce, { className: "w-4 h-4" }),
                 onPress: w,
-                children: S ? "Copied!" : "Sample"
+                children: C ? "Copied!" : "Sample"
               }
             ),
             /* @__PURE__ */ e(
-              F,
+              A,
               {
                 size: "sm",
                 color: "secondary",
-                onPress: h,
+                onPress: b,
                 children: "Load Sample"
               }
             ),
             /* @__PURE__ */ e(
-              F,
+              A,
               {
                 size: "sm",
                 color: "danger",
                 variant: "flat",
                 onPress: () => {
-                  s(""), l(null), n(""), m(null);
+                  s(""), l(null), n(""), p(null);
                 },
                 children: "Clear"
               }
@@ -4263,7 +4320,7 @@ function Nr() {
               ] })
             ] }),
             /* @__PURE__ */ e("div", { className: "flex gap-2 mt-4", children: /* @__PURE__ */ e(
-              F,
+              A,
               {
                 radius: "sm",
                 color: "secondary",
@@ -4275,7 +4332,7 @@ function Nr() {
             ) })
           ] }) })
         ] }),
-        o && /* @__PURE__ */ r(z, { radius: "sm", className: "mt-5", children: [
+        o && /* @__PURE__ */ r(D, { radius: "sm", className: "mt-5", children: [
           /* @__PURE__ */ e(R, { children: /* @__PURE__ */ e("h3", { className: "text-lg font-semibold", children: "Form Information" }) }),
           /* @__PURE__ */ e(T, { children: /* @__PURE__ */ r("div", { className: "space-y-2 text-sm", children: [
             /* @__PURE__ */ r("div", { className: "flex justify-between", children: [
@@ -4298,10 +4355,10 @@ function Nr() {
         ] })
       ] }),
       /* @__PURE__ */ e("div", { className: "basis-8/12", children: o ? /* @__PURE__ */ e("div", { className: "", children: /* @__PURE__ */ e(
-        Ze,
+        Xe,
         {
           formConfig: o,
-          onSubmit: D
+          onSubmit: z
         }
       ) }) : /* @__PURE__ */ r("div", { className: "text-center py-12 text-default-500", children: [
         /* @__PURE__ */ e(Lt, { className: "w-12 h-12 mx-auto mb-4 opacity-50" }),
@@ -4310,9 +4367,9 @@ function Nr() {
       ] }) })
     ] }),
     /* @__PURE__ */ e(
-      Z,
+      X,
       {
-        isOpen: p,
+        isOpen: m,
         onOpenChange: d,
         size: "2xl",
         children: /* @__PURE__ */ e(ee, { children: (x) => /* @__PURE__ */ r(j, { children: [
@@ -4325,7 +4382,7 @@ function Nr() {
             /* @__PURE__ */ e(ne, {}),
             /* @__PURE__ */ r("div", { children: [
               /* @__PURE__ */ e("h4", { className: "font-semibold mb-2", children: "Submitted Data:" }),
-              /* @__PURE__ */ e("div", { className: "bg-success-50 p-4 rounded-lg", children: /* @__PURE__ */ e("pre", { className: "text-sm overflow-auto whitespace-pre-wrap", children: JSON.stringify(g, null, 2) }) })
+              /* @__PURE__ */ e("div", { className: "bg-success-50 p-4 rounded-lg", children: /* @__PURE__ */ e("pre", { className: "text-sm overflow-auto whitespace-pre-wrap", children: JSON.stringify(h, null, 2) }) })
             ] }),
             /* @__PURE__ */ r("div", { className: "text-sm text-default-600", children: [
               /* @__PURE__ */ e("strong", { children: "Note:" }),
@@ -4334,19 +4391,19 @@ function Nr() {
           ] }) }),
           /* @__PURE__ */ r(be, { children: [
             /* @__PURE__ */ e(
-              F,
+              A,
               {
                 color: "default",
                 variant: "flat",
                 onPress: async () => {
-                  g && await navigator.clipboard.writeText(
-                    JSON.stringify(g, null, 2)
+                  h && await navigator.clipboard.writeText(
+                    JSON.stringify(h, null, 2)
                   );
                 },
                 children: "Copy Data"
               }
             ),
-            /* @__PURE__ */ e(F, { color: "primary", onPress: x, children: "Close" })
+            /* @__PURE__ */ e(A, { color: "primary", onPress: x, children: "Close" })
           ] })
         ] }) })
       }
@@ -4422,7 +4479,7 @@ const fr = () => {
       ) }),
       /* @__PURE__ */ e("h1", { className: "text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent mb-5", children: "🎉 Major Updates Available!" }),
       /* @__PURE__ */ e("p", { className: "text-xl text-default-600 max-w-3xl mx-auto mb-8", children: "We've been working hard to bring you exciting new features, improvements, and a better overall experience. Here's everything new in React Form Builder!" }),
-      /* @__PURE__ */ e("div", { className: "flex flex-col sm:flex-row gap-4 justify-center items-center", children: /* @__PURE__ */ e(z, { className: "bg-gradient-to-r from-primary-50 to-secondary-50 border-primary-200", children: /* @__PURE__ */ e(T, { className: "text-center py-4", children: /* @__PURE__ */ r("div", { className: "flex items-center justify-center gap-3", children: [
+      /* @__PURE__ */ e("div", { className: "flex flex-col sm:flex-row gap-4 justify-center items-center", children: /* @__PURE__ */ e(D, { className: "bg-gradient-to-r from-primary-50 to-secondary-50 border-primary-200", children: /* @__PURE__ */ e(T, { className: "text-center py-4", children: /* @__PURE__ */ r("div", { className: "flex items-center justify-center gap-3", children: [
         /* @__PURE__ */ e(me, { className: "w-6 h-6 text-primary-600" }),
         /* @__PURE__ */ r("div", { children: [
           /* @__PURE__ */ e("p", { className: "font-semibold text-primary-700", children: "Try Live Demo" }),
@@ -4439,7 +4496,7 @@ const fr = () => {
         ] })
       ] }) }) }) })
     ] }),
-    /* @__PURE__ */ e(z, { className: "mb-8", children: /* @__PURE__ */ r(T, { children: [
+    /* @__PURE__ */ e(D, { className: "mb-8", children: /* @__PURE__ */ r(T, { children: [
       /* @__PURE__ */ r("div", { className: "flex items-center justify-between mb-2", children: [
         /* @__PURE__ */ e("span", { className: "text-sm font-medium", children: "Release Progress" }),
         /* @__PURE__ */ e("span", { className: "text-sm text-default-600", children: "4/4 Features Completed" })
@@ -4452,7 +4509,7 @@ const fr = () => {
         /* @__PURE__ */ e(me, { className: "w-8 h-8 text-primary-500" }),
         "New Features & Enhancements"
       ] }),
-      /* @__PURE__ */ e("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-6", children: t.map((l, i) => /* @__PURE__ */ r(z, { className: "hover:shadow-lg transition-shadow", children: [
+      /* @__PURE__ */ e("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-6", children: t.map((l, i) => /* @__PURE__ */ r(D, { className: "hover:shadow-lg transition-shadow", children: [
         /* @__PURE__ */ e(R, { className: "pb-2", children: /* @__PURE__ */ r("div", { className: "flex items-center gap-x-3 justify-between", children: [
           /* @__PURE__ */ r("div", { className: "flex items-center gap-3", children: [
             /* @__PURE__ */ e("div", { className: "p-2 rounded-lg bg-primary-50 text-primary-500", children: l.icon }),
@@ -4472,7 +4529,7 @@ const fr = () => {
         /* @__PURE__ */ e(T, { className: "pt-0", children: /* @__PURE__ */ e("p", { className: "text-default-600", children: l.description }) })
       ] }, i)) })
     ] }),
-    /* @__PURE__ */ r(z, { className: "mb-12", children: [
+    /* @__PURE__ */ r(D, { className: "mb-12", children: [
       /* @__PURE__ */ e(R, { children: /* @__PURE__ */ r("h2", { className: "text-2xl font-bold flex items-center gap-2", children: [
         /* @__PURE__ */ e(ue, { className: "w-6 h-6 text-warning-500" }),
         "Quality Improvements"
@@ -4487,7 +4544,7 @@ const fr = () => {
         /* @__PURE__ */ e(Vt, { className: "w-8 h-8 text-secondary-500" }),
         "What's Coming Next"
       ] }),
-      /* @__PURE__ */ e("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-6", children: o.map((l, i) => /* @__PURE__ */ r(z, { className: "border-dashed border-2 border-default-200", children: [
+      /* @__PURE__ */ e("div", { className: "grid grid-cols-1 md:grid-cols-2 gap-6", children: o.map((l, i) => /* @__PURE__ */ r(D, { className: "border-dashed border-2 border-default-200", children: [
         /* @__PURE__ */ e(R, { className: "pb-2", children: /* @__PURE__ */ r("div", { className: "flex items-center gap-x-3 justify-between", children: [
           /* @__PURE__ */ e("h3", { className: "text-lg font-semibold", children: l.title }),
           /* @__PURE__ */ e(_, { color: "secondary", variant: "flat", size: "sm", children: l.eta })
@@ -4495,7 +4552,7 @@ const fr = () => {
         /* @__PURE__ */ e(T, { className: "pt-0", children: /* @__PURE__ */ e("p", { className: "text-default-600", children: l.description }) })
       ] }, i)) })
     ] }),
-    /* @__PURE__ */ r(z, { className: "mb-12", children: [
+    /* @__PURE__ */ r(D, { className: "mb-12", children: [
       /* @__PURE__ */ e(R, { children: /* @__PURE__ */ e("h2", { className: "text-2xl font-bold flex items-center gap-2", children: "📋 Version 1.1 Changelog" }) }),
       /* @__PURE__ */ e(T, { children: /* @__PURE__ */ r("div", { className: "space-y-4", children: [
         /* @__PURE__ */ r("div", { children: [
@@ -4596,7 +4653,7 @@ const fr = () => {
       /* @__PURE__ */ e("h1", { className: "text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent mb-4", children: "📚 Complete Guide" }),
       /* @__PURE__ */ e("p", { className: "text-xl text-default-600 max-w-3xl mx-auto mb-8", children: "Everything you need to know about React Form Builder - installation, usage, customization, and more." })
     ] }),
-    /* @__PURE__ */ r(z, { className: "mb-8", children: [
+    /* @__PURE__ */ r(D, { className: "mb-8", children: [
       /* @__PURE__ */ e(R, { children: /* @__PURE__ */ r("h2", { className: "text-2xl font-bold flex items-center gap-2", children: [
         /* @__PURE__ */ e(me, { className: "w-6 h-6 text-primary-500" }),
         "Quick Start"
@@ -4644,7 +4701,7 @@ const fr = () => {
         /* @__PURE__ */ r("div", { children: [
           /* @__PURE__ */ e("h3", { className: "text-lg font-semibold mb-2", children: "Required Dependencies" }),
           /* @__PURE__ */ r("div", { className: "grid grid-cols-1 lg:grid-cols-2 gap-4", children: [
-            /* @__PURE__ */ r(z, { className: "bg-primary-50 border-primary-200", children: [
+            /* @__PURE__ */ r(D, { className: "bg-primary-50 border-primary-200", children: [
               /* @__PURE__ */ e(R, { className: "pb-2", children: /* @__PURE__ */ e("h4", { className: "font-medium text-sm text-primary-700", children: "Core Dependencies" }) }),
               /* @__PURE__ */ e(T, { className: "pt-0", children: /* @__PURE__ */ r("ul", { className: "text-sm text-default-600 space-y-1", children: [
                 /* @__PURE__ */ r("li", { children: [
@@ -4669,7 +4726,7 @@ const fr = () => {
                 ] })
               ] }) })
             ] }),
-            /* @__PURE__ */ r(z, { className: "bg-secondary-50 border-secondary-200", children: [
+            /* @__PURE__ */ r(D, { className: "bg-secondary-50 border-secondary-200", children: [
               /* @__PURE__ */ e(R, { className: "pb-2", children: /* @__PURE__ */ e("h4", { className: "font-medium text-sm text-secondary-700", children: "Additional Dependencies" }) }),
               /* @__PURE__ */ e(T, { className: "pt-0", children: /* @__PURE__ */ r("ul", { className: "text-sm text-default-600 space-y-1", children: [
                 /* @__PURE__ */ r("li", { children: [
@@ -4725,7 +4782,7 @@ function App() {
         /* @__PURE__ */ e(ue, { className: "w-8 h-8 text-primary-500" }),
         "Key Features"
       ] }),
-      /* @__PURE__ */ e("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6", children: t.map((o, l) => /* @__PURE__ */ r(z, { className: "hover:shadow-lg transition-shadow", children: [
+      /* @__PURE__ */ e("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6", children: t.map((o, l) => /* @__PURE__ */ r(D, { className: "hover:shadow-lg transition-shadow", children: [
         /* @__PURE__ */ e(R, { className: "pb-2", children: /* @__PURE__ */ r("div", { className: "flex items-center gap-3", children: [
           /* @__PURE__ */ e("div", { className: "p-2 rounded-lg bg-primary-50 text-primary-500", children: o.icon }),
           /* @__PURE__ */ e("h3", { className: "text-lg font-semibold", children: o.title })
@@ -4733,7 +4790,7 @@ function App() {
         /* @__PURE__ */ e(T, { className: "pt-0", children: /* @__PURE__ */ e("p", { className: "text-default-600", children: o.description }) })
       ] }, l)) })
     ] }),
-    /* @__PURE__ */ r(z, { className: "mb-8", children: [
+    /* @__PURE__ */ r(D, { className: "mb-8", children: [
       /* @__PURE__ */ e(R, { children: /* @__PURE__ */ r("h2", { className: "text-2xl font-bold flex items-center gap-2", children: [
         /* @__PURE__ */ e(se, { className: "w-6 h-6 text-secondary-500" }),
         "Supported Field Types"
@@ -4749,7 +4806,7 @@ function App() {
         o
       )) }) })
     ] }),
-    /* @__PURE__ */ r(z, { className: "mb-8", children: [
+    /* @__PURE__ */ r(D, { className: "mb-8", children: [
       /* @__PURE__ */ e(R, { children: /* @__PURE__ */ r("h2", { className: "text-2xl font-bold flex items-center gap-2", children: [
         /* @__PURE__ */ e(Pe, { className: "w-6 h-6 text-warning-500" }),
         "Advanced Usage"
@@ -4831,7 +4888,7 @@ const MyFormBuilder = () => {
         ] })
       ] }) })
     ] }),
-    /* @__PURE__ */ r(z, { className: "mb-8", children: [
+    /* @__PURE__ */ r(D, { className: "mb-8", children: [
       /* @__PURE__ */ e(R, { children: /* @__PURE__ */ r("h2", { className: "text-2xl font-bold flex items-center gap-2", children: [
         /* @__PURE__ */ e(se, { className: "w-6 h-6 text-success-500" }),
         "Configuration"
@@ -4889,7 +4946,7 @@ const MyFormBuilder = () => {
         ] })
       ] }) })
     ] }),
-    /* @__PURE__ */ r(z, { className: "mb-8", children: [
+    /* @__PURE__ */ r(D, { className: "mb-8", children: [
       /* @__PURE__ */ e(R, { children: /* @__PURE__ */ r("h2", { className: "text-2xl font-bold flex items-center gap-2", children: [
         /* @__PURE__ */ e(jt, { className: "w-6 h-6 text-danger-500" }),
         "API Reference"
@@ -4957,7 +5014,7 @@ const MyFormBuilder = () => {
         ] })
       ] }) })
     ] }),
-    /* @__PURE__ */ r(z, { className: "mb-8", children: [
+    /* @__PURE__ */ r(D, { className: "mb-8", children: [
       /* @__PURE__ */ e(R, { children: /* @__PURE__ */ r("h2", { className: "text-2xl font-bold flex items-center gap-2", children: [
         /* @__PURE__ */ e(Bt, { className: "w-6 h-6 text-primary-500" }),
         "Contributing"
@@ -4966,12 +5023,12 @@ const MyFormBuilder = () => {
         /* @__PURE__ */ e("p", { className: "text-default-600", children: "We welcome contributions! Please feel free to submit a Pull Request." }),
         /* @__PURE__ */ r("div", { className: "flex flex-wrap gap-4", children: [
           /* @__PURE__ */ r(
-            F,
+            A,
             {
               color: "primary",
               variant: "flat",
               startContent: /* @__PURE__ */ e(_t, { className: "w-4 h-4" }),
-              as: ze,
+              as: De,
               href: "https://github.com/zenpou21/react-form-builder",
               isExternal: !0,
               children: [
@@ -4981,12 +5038,12 @@ const MyFormBuilder = () => {
             }
           ),
           /* @__PURE__ */ r(
-            F,
+            A,
             {
               color: "secondary",
               variant: "flat",
               startContent: /* @__PURE__ */ e(Ke, { className: "w-4 h-4" }),
-              as: ze,
+              as: De,
               href: "https://www.npmjs.com/package/@flowcsolutions/react-form-builder",
               isExternal: !0,
               children: [
@@ -4998,7 +5055,7 @@ const MyFormBuilder = () => {
         ] })
       ] }) })
     ] }),
-    /* @__PURE__ */ r(z, { className: "mb-8", children: [
+    /* @__PURE__ */ r(D, { className: "mb-8", children: [
       /* @__PURE__ */ e(R, { children: /* @__PURE__ */ r("h2", { className: "text-2xl font-bold flex items-center gap-2", children: [
         /* @__PURE__ */ e(Re, { className: "w-6 h-6 text-success-500" }),
         "License"
@@ -5054,7 +5111,7 @@ function Cr({
     /* @__PURE__ */ e("h1", { className: "text-xl sm:text-2xl font-bold mb-2", children: "Form Builder Suite" }),
     /* @__PURE__ */ e("div", { className: "hidden sm:block", children: /* @__PURE__ */ r(ve, { className: "", radius: "sm", children: [
       /* @__PURE__ */ e(
-        F,
+        A,
         {
           variant: t === "builder" ? "solid" : "flat",
           color: t === "builder" ? "secondary" : "default",
@@ -5063,7 +5120,7 @@ function Cr({
         }
       ),
       /* @__PURE__ */ e(
-        F,
+        A,
         {
           variant: t === "renderer" ? "solid" : "flat",
           color: t === "renderer" ? "secondary" : "default",
@@ -5072,7 +5129,7 @@ function Cr({
         }
       ),
       /* @__PURE__ */ r(
-        F,
+        A,
         {
           variant: t === "announcement" ? "solid" : "flat",
           color: t === "announcement" ? "secondary" : "default",
@@ -5098,7 +5155,7 @@ function Cr({
     /* @__PURE__ */ e("div", { className: "block sm:hidden", children: /* @__PURE__ */ r("div", { className: "flex flex-col gap-2", children: [
       /* @__PURE__ */ r("div", { className: "flex gap-2", children: [
         /* @__PURE__ */ e(
-          F,
+          A,
           {
             variant: t === "builder" ? "solid" : "flat",
             color: t === "builder" ? "secondary" : "default",
@@ -5109,7 +5166,7 @@ function Cr({
           }
         ),
         /* @__PURE__ */ e(
-          F,
+          A,
           {
             variant: t === "renderer" ? "solid" : "flat",
             color: t === "renderer" ? "secondary" : "default",
@@ -5121,7 +5178,7 @@ function Cr({
         )
       ] }),
       /* @__PURE__ */ r(
-        F,
+        A,
         {
           variant: t === "announcement" ? "solid" : "flat",
           color: t === "announcement" ? "secondary" : "default",
@@ -5157,12 +5214,12 @@ function Fr() {
   const { state: t, actions: s } = J(), { currentForm: o, previewMode: l } = t, {
     isOpen: i,
     onOpen: n,
-    onOpenChange: g
-  } = X(), {
-    isOpen: m,
-    onOpen: S,
+    onOpenChange: h
+  } = Z(), {
+    isOpen: p,
+    onOpen: C,
     onOpenChange: c
-  } = X();
+  } = Z();
   return /* @__PURE__ */ r(j, { children: [
     /* @__PURE__ */ r("div", { className: "h-[calc(100vh-120px)] font-sans flex flex-col bg-background", children: [
       /* @__PURE__ */ e(xr, {}),
@@ -5170,17 +5227,17 @@ function Fr() {
         const { active: u, over: v } = d;
         if (v) {
           if (v.id === "form-canvas" && typeof u.id == "string" && !u.id.includes("-")) {
-            const h = u.id, w = C(h);
+            const b = u.id, w = F(b);
             s.addField(w);
             return;
           }
           if (u.id !== v.id) {
-            const h = o.fields.findIndex(
-              (D) => D.id === u.id
+            const b = o.fields.findIndex(
+              (z) => z.id === u.id
             ), w = o.fields.findIndex(
-              (D) => D.id === v.id
+              (z) => z.id === v.id
             );
-            h !== -1 && w !== -1 && s.reorderFields(h, w);
+            b !== -1 && w !== -1 && s.reorderFields(b, w);
           }
         }
       }, onDragOver: (d) => {
@@ -5200,7 +5257,7 @@ function Fr() {
       ] }) }),
       !l && /* @__PURE__ */ e("div", { className: "md:hidden border-t border-divider bg-background p-2", children: /* @__PURE__ */ r("div", { className: "flex gap-2", children: [
         /* @__PURE__ */ e(
-          F,
+          A,
           {
             size: "sm",
             variant: "flat",
@@ -5211,23 +5268,23 @@ function Fr() {
           }
         ),
         /* @__PURE__ */ e(
-          F,
+          A,
           {
             size: "sm",
             variant: "flat",
             className: "flex-1",
             startContent: /* @__PURE__ */ e(se, { size: 16 }),
-            onPress: S,
+            onPress: C,
             children: "Properties"
           }
         )
       ] }) })
     ] }),
     /* @__PURE__ */ e(
-      Z,
+      X,
       {
         isOpen: i,
-        onOpenChange: g,
+        onOpenChange: h,
         size: "full",
         placement: "bottom",
         classNames: {
@@ -5244,9 +5301,9 @@ function Fr() {
       }
     ),
     /* @__PURE__ */ e(
-      Z,
+      X,
       {
-        isOpen: m,
+        isOpen: p,
         onOpenChange: c,
         size: "full",
         placement: "bottom",
@@ -5278,8 +5335,8 @@ function Sr() {
 }
 const Lr = Sr;
 export {
-  Xt as DRAG_ITEMS,
-  Zt as FIELD_CATEGORIES,
+  Zt as DRAG_ITEMS,
+  Xt as FIELD_CATEGORIES,
   Rr as FIELD_TEMPLATES,
   Le as FieldSidebar,
   Kt as FormBuilderProvider,
@@ -5287,7 +5344,7 @@ export {
   xr as FormBuilderToolbar,
   ir as FormCanvas,
   fe as FormFieldRenderer,
-  Ze as FormRenderer,
+  Xe as FormRenderer,
   sr as FormRowRenderer,
   Nr as JsonFormRenderer,
   ke as PropertiesPanel,
@@ -5295,11 +5352,11 @@ export {
   $r as buildFieldClasses,
   Ne as buildFieldWrapperClasses,
   Se as buildHeroUIClasses,
-  C as createFormField,
+  F as createFormField,
   Ae as generateFormExportData,
   ie as getFieldSpan,
   ar as getGridClassName,
-  Xe as groupFieldsIntoRows,
+  Ze as groupFieldsIntoRows,
   J as useFormBuilder
 };
 //# sourceMappingURL=index.js.map
