@@ -67,9 +67,9 @@ function DraggableField({
         radius="sm"
         variant="flat"
         className={`mb-1 w-full transition-colors relative ${
-          isComingSoon
-            ? "bg-white"
-            : "bg-white hover:bg-default-100 cursor-pointer"
+         isComingSoon
+          ? "bg-background"
+          : "bg-background hover:bg-default-100 cursor-pointer"
         }`}
         onPress={handleClick}
         isDisabled={isComingSoon}
