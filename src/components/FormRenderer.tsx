@@ -186,6 +186,7 @@ export function FormRenderer({
         errorMessage: heroUIClasses.errorMessage,
       },
       // isInvalid: hasError,
+      isInvalid: hasError,      // <-- Add this line
       errorMessage: error,
       size: (field.properties.size as "sm" | "md" | "lg") || "md",
       isDisabled: field.properties.disabled,

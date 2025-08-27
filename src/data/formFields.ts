@@ -576,6 +576,13 @@ export const DRAG_ITEMS: DragItem[] = [
   
   // Selection fields
   { id: 'select', type: 'select', label: 'Select', icon: 'ChevronDown', category: 'fields' },
+  {
+  id: "multiselect",
+  type: "multiselect",
+  label: "Multi Select",
+  icon: "ListChecks", // or any icon you want
+  category: "fields" // or the correct category id
+},
   { id: 'autocomplete', type: 'autocomplete', label: 'Auto Complete', icon: 'Search', category: 'fields' },
   { id: 'radio', type: 'radio', label: 'Radio Group', icon: 'Circle', category: 'fields' },
   { id: 'checkbox', type: 'checkbox', label: 'Checkbox Group', icon: 'Square', category: 'fields' },

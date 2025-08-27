@@ -178,6 +178,64 @@ function BasicProperties({ field }: { field: FormField }) {
         </div>
       )}
 
+      {/* Validation Section */}
+      {(field.type === "text" ||
+        field.type === "phone" ||
+        field.type === "url" ||
+        field.type === "textarea") && (
+        <div className="space-y-2 border-t border-divider pt-2">
+          <h5 className="text-xs font-medium text-default-600">Validation</h5>
+          <Input
+            label="Pattern (Regex)"
+            placeholder="e.g. ^[A-Za-z0-9]+$"
+            value={
+              field.validation?.find((v) => v.type === "pattern")?.value || ""
+            }
+            onValueChange={(value) => {
+              let newValidation = (field.validation || []).filter(
+                (v) => v.type !== "pattern"
+              );
+              if (value) {
+                const errorMessage =
+                  field.validation?.find((v) => v.type === "pattern")
+                    ?.message || "";
+                newValidation.push({
+                  type: "pattern",
+                  value,
+                  message: errorMessage,
+                });
+              }
+              updateField({ validation: newValidation });
+            }}
+            size="sm"
+          />
+          <Input
+            label="Pattern Error Message"
+            placeholder="e.g. Only alphanumeric characters allowed."
+            value={
+              field.validation?.find((v) => v.type === "pattern")?.message || ""
+            }
+            onValueChange={(value) => {
+              let newValidation = (field.validation || []).filter(
+                (v) => v.type !== "pattern"
+              );
+              const patternValue =
+                field.validation?.find((v) => v.type === "pattern")?.value ||
+                "";
+              if (patternValue) {
+                newValidation.push({
+                  type: "pattern",
+                  value: patternValue,
+                  message: value,
+                });
+              }
+              updateField({ validation: newValidation });
+            }}
+            size="sm"
+          />
+        </div>
+      )}
+
       {/* Color and Size Settings for input fields */}
       {(field.type === "text" ||
         field.type === "email" ||
@@ -316,7 +374,8 @@ function BasicProperties({ field }: { field: FormField }) {
       {(field.type === "radio" ||
         field.type === "checkbox" ||
         field.type === "select" ||
-        field.type === "multiselect") && (
+        field.type === "multiselect" || 
+        field.type === "autocomplete") && (
         <MemoizedOptionsEditor field={field} />
       )}
 
@@ -763,10 +822,10 @@ function CustomProperties({ field }: { field: FormField }) {
     <div className="space-y-4 py-4">
       <div className="space-y-2">
         <h5 className="text-xs font-medium text-default-600">HeroUI ClassNames</h5>
-        
+
         <div className="space-y-2 border-t border-divider pt-2">
           <div className="text-xs text-default-500 font-medium">Layout & Structure</div>
-          
+
           <Input
             key={`classnames-base-${field.id}`}
             label="Base (Outer Container)"
@@ -774,9 +833,9 @@ function CustomProperties({ field }: { field: FormField }) {
             value={field.properties?.classNames?.base || ""}
             onValueChange={(value) => {
               const currentClassNames = field.properties?.classNames || {};
-              updateProperties({ 
-                classNames: { 
-                  ...currentClassNames, 
+              updateProperties({
+                classNames: {
+                  ...currentClassNames,
                   base: value 
                 } 
               });
@@ -792,9 +851,9 @@ function CustomProperties({ field }: { field: FormField }) {
             value={field.properties?.classNames?.mainWrapper || ""}
             onValueChange={(value) => {
               const currentClassNames = field.properties?.classNames || {};
-              updateProperties({ 
-                classNames: { 
-                  ...currentClassNames, 
+              updateProperties({
+                classNames: {
+                  ...currentClassNames,
                   mainWrapper: value 
                 } 
               });
@@ -810,9 +869,9 @@ function CustomProperties({ field }: { field: FormField }) {
             value={field.properties?.classNames?.innerWrapper || ""}
             onValueChange={(value) => {
               const currentClassNames = field.properties?.classNames || {};
-              updateProperties({ 
-                classNames: { 
-                  ...currentClassNames, 
+              updateProperties({
+                classNames: {
+                  ...currentClassNames,
                   innerWrapper: value 
                 } 
               });
@@ -824,7 +883,7 @@ function CustomProperties({ field }: { field: FormField }) {
 
         <div className="space-y-2 border-t border-divider pt-2">
           <div className="text-xs text-default-500 font-medium">Input Elements</div>
-          
+
           <Input
             key={`classnames-inputwrapper-${field.id}`}
             label="Input Wrapper"
@@ -832,9 +891,9 @@ function CustomProperties({ field }: { field: FormField }) {
             value={field.properties?.classNames?.inputWrapper || ""}
             onValueChange={(value) => {
               const currentClassNames = field.properties?.classNames || {};
-              updateProperties({ 
-                classNames: { 
-                  ...currentClassNames, 
+              updateProperties({
+                classNames: {
+                  ...currentClassNames,
                   inputWrapper: value 
                 } 
               });
@@ -850,9 +909,9 @@ function CustomProperties({ field }: { field: FormField }) {
             value={field.properties?.classNames?.input || ""}
             onValueChange={(value) => {
               const currentClassNames = field.properties?.classNames || {};
-              updateProperties({ 
-                classNames: { 
-                  ...currentClassNames, 
+              updateProperties({
+                classNames: {
+                  ...currentClassNames,
                   input: value 
                 } 
               });
@@ -868,9 +927,9 @@ function CustomProperties({ field }: { field: FormField }) {
             value={field.properties?.classNames?.clearButton || ""}
             onValueChange={(value) => {
               const currentClassNames = field.properties?.classNames || {};
-              updateProperties({ 
-                classNames: { 
-                  ...currentClassNames, 
+              updateProperties({
+                classNames: {
+                  ...currentClassNames,
                   clearButton: value 
                 } 
               });
@@ -882,7 +941,7 @@ function CustomProperties({ field }: { field: FormField }) {
 
         <div className="space-y-2 border-t border-divider pt-2">
           <div className="text-xs text-default-500 font-medium">Labels & Text</div>
-          
+
           <Input
             key={`classnames-label-${field.id}`}
             label="Label"
@@ -890,9 +949,9 @@ function CustomProperties({ field }: { field: FormField }) {
             value={field.properties?.classNames?.label || ""}
             onValueChange={(value) => {
               const currentClassNames = field.properties?.classNames || {};
-              updateProperties({ 
-                classNames: { 
-                  ...currentClassNames, 
+              updateProperties({
+                classNames: {
+                  ...currentClassNames,
                   label: value 
                 } 
               });
@@ -908,9 +967,9 @@ function CustomProperties({ field }: { field: FormField }) {
             value={field.properties?.classNames?.description || ""}
             onValueChange={(value) => {
               const currentClassNames = field.properties?.classNames || {};
-              updateProperties({ 
-                classNames: { 
-                  ...currentClassNames, 
+              updateProperties({
+                classNames: {
+                  ...currentClassNames,
                   description: value 
                 } 
               });
@@ -926,9 +985,9 @@ function CustomProperties({ field }: { field: FormField }) {
             value={field.properties?.classNames?.helperWrapper || ""}
             onValueChange={(value) => {
               const currentClassNames = field.properties?.classNames || {};
-              updateProperties({ 
-                classNames: { 
-                  ...currentClassNames, 
+              updateProperties({
+                classNames: {
+                  ...currentClassNames,
                   helperWrapper: value 
                 } 
               });
@@ -944,9 +1003,9 @@ function CustomProperties({ field }: { field: FormField }) {
             value={field.properties?.classNames?.errorMessage || ""}
             onValueChange={(value) => {
               const currentClassNames = field.properties?.classNames || {};
-              updateProperties({ 
-                classNames: { 
-                  ...currentClassNames, 
+              updateProperties({
+                classNames: {
+                  ...currentClassNames,
                   errorMessage: value 
                 } 
               });
@@ -966,13 +1025,13 @@ function CustomProperties({ field }: { field: FormField }) {
           >
             Clear All
           </Button>
-          
+
           <Button
             size="sm"
             variant="flat"
             color="primary"
             onPress={() => {
-              updateProperties({ 
+              updateProperties({
                 classNames: {
                   base: "p-4",
                   inputWrapper: "border-2 border-primary-300 hover:border-primary-500",
