@@ -3,9 +3,9 @@ import oe, { createContext as rt, useContext as at, useReducer as st, useRef as 
 import { v4 as Ve } from "uuid";
 import { useDroppable as ot, useDraggable as ct, DndContext as dt } from "@dnd-kit/core";
 import { useSortable as pt, SortableContext as mt, verticalListSortingStrategy as ut } from "@dnd-kit/sortable";
-import { Button as A, Input as S, Divider as ne, Card as D, CardBody as T, Switch as U, Checkbox as pe, RadioGroup as Me, Radio as je, Select as V, SelectItem as g, Autocomplete as Be, AutocompleteItem as _e, Textarea as he, TimeInput as ht, DateInput as Oe, ButtonGroup as ve, CardHeader as R, Chip as _, Slider as bt, useDisclosure as Z, Modal as X, ModalContent as ee, ModalHeader as te, ModalBody as re, ModalFooter as be, Accordion as gt, AccordionItem as xt, Tabs as we, Tab as H, Navbar as yt, NavbarBrand as Nt, NavbarContent as ze, NavbarItem as ft, Dropdown as vt, DropdownTrigger as wt, DropdownMenu as Ct, DropdownItem as ge, Progress as Ft, Spacer as We, Snippet as G, Code as k, Link as De, HeroUIProvider as St } from "@heroui/react";
+import { Button as A, Input as S, Divider as ne, Card as D, CardBody as T, Switch as U, Checkbox as pe, RadioGroup as Me, Radio as je, Select as V, SelectItem as g, Autocomplete as Be, AutocompleteItem as _e, Textarea as he, TimeInput as ht, DateInput as Ee, ButtonGroup as ve, CardHeader as R, Chip as _, Slider as bt, useDisclosure as Z, Modal as X, ModalContent as ee, ModalHeader as te, ModalBody as re, ModalFooter as be, Accordion as gt, AccordionItem as xt, Tabs as we, Tab as H, Navbar as yt, NavbarBrand as Nt, NavbarContent as ze, NavbarItem as ft, Dropdown as vt, DropdownTrigger as wt, DropdownMenu as Ct, DropdownItem as ge, Progress as Ft, Spacer as We, Snippet as G, Code as k, Link as De, HeroUIProvider as St } from "@heroui/react";
 import * as Te from "lucide-react";
-import { RotateCcw as At, Check as le, Star as qe, Upload as Y, Smartphone as Et, Tablet as Ot, Monitor as zt, GripVertical as Dt, Edit as Tt, Copy as Ce, Trash2 as Fe, Plus as ae, Layout as Pt, Settings as se, Rows4 as It, MoreVertical as Rt, Download as Ue, FileJson as $t, CheckCircle as xe, AlertCircle as Je, FileText as Lt, Gift as kt, Rocket as me, Zap as ue, Clock as Vt, Target as Mt, Sparkles as ye, BookOpen as He, Code as Pe, Terminal as jt, Users as Bt, ExternalLink as Ie, Github as _t, Package as Ke, Shield as Re, Palette as Wt } from "lucide-react";
+import { RotateCcw as At, Check as le, Star as qe, Upload as Y, Smartphone as Ot, Tablet as Et, Monitor as zt, GripVertical as Dt, Edit as Tt, Copy as Ce, Trash2 as Fe, Plus as ae, Layout as Pt, Settings as se, Rows4 as It, MoreVertical as Rt, Download as Ue, FileJson as $t, CheckCircle as xe, AlertCircle as Je, FileText as Lt, Gift as kt, Rocket as me, Zap as ue, Clock as Vt, Target as Mt, Sparkles as ye, BookOpen as He, Code as Pe, Terminal as jt, Users as Bt, ExternalLink as Ie, Github as _t, Package as Ke, Shield as Re, Palette as Wt } from "lucide-react";
 import { CSS as qt } from "@dnd-kit/utilities";
 function Ut(t, s) {
   if (t.name && t.name.trim())
@@ -923,53 +923,53 @@ function Qe({
 }) {
   const h = nt(null), [p, C] = $(!1), [c, m] = $(!0), [a, d] = $({ x: 0, y: 0 });
   lt(() => {
-    const y = h.current;
-    if (!y) return;
-    const x = y.getContext("2d");
-    if (x && (y.width = o, y.height = l, x.lineCap = "round", x.lineJoin = "round", x.strokeStyle = "#000000", x.lineWidth = 2, x.fillStyle = "#ffffff", x.fillRect(0, 0, o, l), t && t.startsWith("data:image"))) {
-      const E = new Image();
-      E.onload = () => {
-        x.clearRect(0, 0, o, l), x.fillStyle = "#ffffff", x.fillRect(0, 0, o, l), x.drawImage(E, 0, 0, o, l), m(!1);
-      }, E.src = t;
+    const N = h.current;
+    if (!N) return;
+    const x = N.getContext("2d");
+    if (x && (N.width = o, N.height = l, x.lineCap = "round", x.lineJoin = "round", x.strokeStyle = "#000000", x.lineWidth = 2, x.fillStyle = "#ffffff", x.fillRect(0, 0, o, l), t && t.startsWith("data:image"))) {
+      const O = new Image();
+      O.onload = () => {
+        x.clearRect(0, 0, o, l), x.fillStyle = "#ffffff", x.fillRect(0, 0, o, l), x.drawImage(O, 0, 0, o, l), m(!1);
+      }, O.src = t;
     }
   }, [o, l, t]);
-  const u = (y) => {
+  const u = (N) => {
     const x = h.current;
     if (!x) return { x: 0, y: 0 };
-    const E = x.getBoundingClientRect(), I = x.width / E.width, M = x.height / E.height;
-    if ("touches" in y) {
-      const B = y.touches[0];
+    const O = x.getBoundingClientRect(), I = x.width / O.width, M = x.height / O.height;
+    if ("touches" in N) {
+      const B = N.touches[0];
       return {
-        x: (B.clientX - E.left) * I,
-        y: (B.clientY - E.top) * M
+        x: (B.clientX - O.left) * I,
+        y: (B.clientY - O.top) * M
       };
     } else
       return {
-        x: (y.clientX - E.left) * I,
-        y: (y.clientY - E.top) * M
+        x: (N.clientX - O.left) * I,
+        y: (N.clientY - O.top) * M
       };
-  }, v = (y) => {
+  }, v = (N) => {
     if (i) return;
-    y.preventDefault();
-    const x = u(y);
+    N.preventDefault();
+    const x = u(N);
     C(!0), d(x), m(!1);
-  }, b = (y) => {
+  }, b = (N) => {
     if (!p || i) return;
-    y.preventDefault();
-    const x = h.current, E = x?.getContext("2d");
-    if (!x || !E) return;
-    const I = u(y);
-    E.beginPath(), E.moveTo(a.x, a.y), E.lineTo(I.x, I.y), E.stroke(), d(I);
+    N.preventDefault();
+    const x = h.current, O = x?.getContext("2d");
+    if (!x || !O) return;
+    const I = u(N);
+    O.beginPath(), O.moveTo(a.x, a.y), O.lineTo(I.x, I.y), O.stroke(), d(I);
   }, w = () => {
     p && (C(!1), z());
   }, z = () => {
-    const y = h.current;
-    if (!y) return;
-    const x = y.toDataURL("image/png");
+    const N = h.current;
+    if (!N) return;
+    const x = N.toDataURL("image/png");
     s?.(x);
   }, L = () => {
-    const y = h.current, x = y?.getContext("2d");
-    !y || !x || (x.fillStyle = "#ffffff", x.fillRect(0, 0, o, l), m(!0), s?.(""));
+    const N = h.current, x = N?.getContext("2d");
+    !N || !x || (x.fillStyle = "#ffffff", x.fillRect(0, 0, o, l), m(!0), s?.(""));
   };
   return /* @__PURE__ */ r("div", { className: `signature-pad ${n}`, children: [
     /* @__PURE__ */ e("div", { className: "border-2 border-default-300 rounded-lg overflow-hidden bg-white", children: /* @__PURE__ */ e(
@@ -1038,7 +1038,7 @@ function fe({
       {
         className: "text-danger-700 text-xs px-1.5 py-0.5 rounded-full ",
         title: w,
-        children: w.includes("Mobile") ? /* @__PURE__ */ e(Et, { size: 15 }) : w.includes("Tablet") ? /* @__PURE__ */ e(Ot, { size: 15 }) : /* @__PURE__ */ e(zt, { size: 15 })
+        children: w.includes("Mobile") ? /* @__PURE__ */ e(Ot, { size: 15 }) : w.includes("Tablet") ? /* @__PURE__ */ e(Et, { size: 15 }) : /* @__PURE__ */ e(zt, { size: 15 })
       },
       w
     )) })
@@ -1087,7 +1087,7 @@ function fe({
             ...d,
             type: "text",
             value: s || "",
-            onValueChange: (N) => l(N),
+            onValueChange: (f) => l(f),
             maxLength: t.properties?.maxLength
           },
           `text-${t.id}`
@@ -1102,7 +1102,7 @@ function fe({
           ...d,
           type: "email",
           value: s || "",
-          onValueChange: (N) => l(N)
+          onValueChange: (f) => l(f)
         },
         `email-${t.id}`
       ) });
@@ -1114,7 +1114,7 @@ function fe({
           ...d,
           type: "password",
           value: s || "",
-          onValueChange: (N) => l(N)
+          onValueChange: (f) => l(f)
         },
         `password-${t.id}`
       ) });
@@ -1127,9 +1127,9 @@ function fe({
             ...d,
             type: "number",
             value: s || "",
-            onValueChange: (N) => {
-              const P = parseFloat(N);
-              !isNaN(P) && (t.properties?.min !== void 0 && P < t.properties.min || t.properties?.max !== void 0 && P > t.properties.max) || l(N);
+            onValueChange: (f) => {
+              const P = parseFloat(f);
+              !isNaN(P) && (t.properties?.min !== void 0 && P < t.properties.min || t.properties?.max !== void 0 && P > t.properties.max) || l(f);
             }
           },
           `number-${t.id}`
@@ -1138,12 +1138,12 @@ function fe({
     case "date":
       return c(
         /* @__PURE__ */ e(
-          Oe,
+          Ee,
           {
             ...m,
             value: s || null,
-            onChange: (N) => {
-              l(N ? N.toString() : "");
+            onChange: (f) => {
+              l(f ? f.toString() : "");
             }
           },
           `date-${t.id}`
@@ -1151,13 +1151,13 @@ function fe({
       );
     case "datetime":
       return /* @__PURE__ */ e(
-        Oe,
+        Ee,
         {
           ...m,
           granularity: "second",
           value: s || null,
-          onChange: (N) => {
-            l(N ? N.toString() : "");
+          onChange: (f) => {
+            l(f ? f.toString() : "");
           }
         },
         `datetime-${t.id}`
@@ -1168,8 +1168,8 @@ function fe({
         {
           ...m,
           value: s || null,
-          onChange: (N) => {
-            l(N ? N.toString() : "");
+          onChange: (f) => {
+            l(f ? f.toString() : "");
           }
         },
         `time-${t.id}`
@@ -1183,7 +1183,7 @@ function fe({
               ...m,
               ...d,
               value: s || "",
-              onValueChange: (N) => l(N),
+              onValueChange: (f) => l(f),
               rows: t.properties?.rows || 4,
               maxLength: t.properties?.maxLength
             },
@@ -1200,11 +1200,11 @@ function fe({
             ...m,
             ...d,
             selectedKeys: s ? [s] : [],
-            onSelectionChange: (N) => {
-              const P = Array.from(N)[0];
+            onSelectionChange: (f) => {
+              const P = Array.from(f)[0];
               l(P);
             },
-            children: t.options?.map((N) => /* @__PURE__ */ e(g, { children: N.label }, N.value)) || []
+            children: t.options?.map((f) => /* @__PURE__ */ e(g, { children: f.label }, f.value)) || []
           }
         )
       );
@@ -1216,11 +1216,11 @@ function fe({
             ...m,
             ...d,
             selectedKey: s || "",
-            onSelectionChange: (N) => {
-              l(N);
+            onSelectionChange: (f) => {
+              l(f);
             },
             allowsCustomValue: !0,
-            children: t.options?.map((N) => /* @__PURE__ */ e(_e, { children: N.label }, N.value)) || []
+            children: t.options?.map((f) => /* @__PURE__ */ e(_e, { children: f.label }, f.value)) || []
           }
         )
       );
@@ -1231,10 +1231,10 @@ function fe({
           ...m,
           selectionMode: "multiple",
           selectedKeys: s || [],
-          onSelectionChange: (N) => {
-            l(Array.from(N));
+          onSelectionChange: (f) => {
+            l(Array.from(f));
           },
-          children: t.options?.map((N) => /* @__PURE__ */ e(g, { children: N.label }, N.value)) || []
+          children: t.options?.map((f) => /* @__PURE__ */ e(g, { children: f.label }, f.value)) || []
         }
       );
     case "radio":
@@ -1258,19 +1258,19 @@ function fe({
             wrapper: `${i.inputWrapper} ${z}`,
             description: `${i.description} ${L}`
           },
-          children: t.options?.map((N) => /* @__PURE__ */ e(je, { value: N.value, children: N.label }, N.value)) || []
+          children: t.options?.map((f) => /* @__PURE__ */ e(je, { value: f.value, children: f.label }, f.value)) || []
         }
       ) });
     case "checkbox":
       if (t.options && t.options.length > 1) {
-        const N = t.properties?.orientation || "vertical", P = t.properties?.componentAlignment || "left", W = N === "horizontal" ? "flex flex-wrap gap-4" : "flex flex-col space-y-2", f = N === "horizontal" ? P === "center" ? "justify-center" : P === "right" ? "justify-end" : "justify-start" : P === "center" ? "items-center" : P === "right" ? "items-end" : "items-start", O = P === "center" ? "text-center" : P === "right" ? "text-right" : "text-left";
+        const f = t.properties?.orientation || "vertical", P = t.properties?.componentAlignment || "left", W = f === "horizontal" ? "flex flex-wrap gap-4" : "flex flex-col space-y-2", y = f === "horizontal" ? P === "center" ? "justify-center" : P === "right" ? "justify-end" : "justify-start" : P === "center" ? "items-center" : P === "right" ? "items-end" : "items-start", E = P === "center" ? "text-center" : P === "right" ? "text-right" : "text-left";
         return /* @__PURE__ */ r("div", { className: `space-y-2 ${n} ${P === "center" ? "flex flex-col items-center" : P === "right" ? "flex flex-col items-end" : "flex flex-col items-start"}`, children: [
-          /* @__PURE__ */ r("label", { className: `text-sm font-medium ${O}`, children: [
+          /* @__PURE__ */ r("label", { className: `text-sm font-medium ${E}`, children: [
             t.label,
             t.required && /* @__PURE__ */ e("span", { className: "text-danger", children: "*" })
           ] }),
-          t.properties?.description && /* @__PURE__ */ e("p", { className: `text-xs text-default-500 ${O}`, children: t.properties?.description }),
-          /* @__PURE__ */ e("div", { className: `${W} ${f}`, children: t.options.map((q) => /* @__PURE__ */ e(
+          t.properties?.description && /* @__PURE__ */ e("p", { className: `text-xs text-default-500 ${E}`, children: t.properties?.description }),
+          /* @__PURE__ */ e("div", { className: `${W} ${y}`, children: t.options.map((q) => /* @__PURE__ */ e(
             pe,
             {
               value: q.value,
@@ -1290,7 +1290,7 @@ function fe({
           )) })
         ] });
       } else {
-        const N = t.properties?.componentAlignment || "left", P = N === "center" ? "flex justify-center" : N === "right" ? "flex justify-end" : "flex justify-start", W = N === "center" ? "text-center" : N === "right" ? "text-right" : "text-left";
+        const f = t.properties?.componentAlignment || "left", P = f === "center" ? "flex justify-center" : f === "right" ? "flex justify-end" : "flex justify-start", W = f === "center" ? "text-center" : f === "right" ? "text-right" : "text-left";
         return /* @__PURE__ */ r("div", { className: `${n} ${P} flex-col items-start`, children: [
           /* @__PURE__ */ r("label", { className: `text-sm font-medium ${W} block mb-2`, children: [
             t.label,
@@ -1313,9 +1313,9 @@ function fe({
         ] });
       }
     case "switch":
-      const x = t.properties?.componentAlignment || "left", E = x === "center" ? "flex justify-center" : x === "right" ? "flex justify-end" : "flex justify-start";
+      const x = t.properties?.componentAlignment || "left", O = x === "center" ? "flex justify-center" : x === "right" ? "flex justify-end" : "flex justify-start";
       return /* @__PURE__ */ r("div", { className: `space-y-2 ${n}`, children: [
-        /* @__PURE__ */ e("div", { className: E, children: /* @__PURE__ */ r(
+        /* @__PURE__ */ e("div", { className: O, children: /* @__PURE__ */ r(
           U,
           {
             isSelected: s || !1,
@@ -1330,7 +1330,7 @@ function fe({
             ]
           }
         ) }),
-        t.properties?.description && /* @__PURE__ */ e("div", { className: E, children: /* @__PURE__ */ e("p", { className: "text-xs text-default-500", children: t.properties?.description }) })
+        t.properties?.description && /* @__PURE__ */ e("div", { className: O, children: /* @__PURE__ */ e("p", { className: "text-xs text-default-500", children: t.properties?.description }) })
       ] });
     case "file":
       return /* @__PURE__ */ r("div", { className: `space-y-2 ${n}`, children: [
@@ -1350,8 +1350,8 @@ function fe({
               accept: t.properties?.accept,
               multiple: t.properties?.multiple,
               className: "absolute inset-0 w-full h-full opacity-0 cursor-pointer",
-              onChange: (N) => {
-                const P = Array.from(N.target.files || []);
+              onChange: (f) => {
+                const P = Array.from(f.target.files || []);
                 l(t.properties?.multiple ? P : P[0]);
               }
             }
@@ -1366,21 +1366,21 @@ function fe({
           t.required && /* @__PURE__ */ e("span", { className: "text-danger", children: "*" })
         ] }) }),
         t.properties?.description && /* @__PURE__ */ e("div", { className: B, children: /* @__PURE__ */ e("p", { className: "text-xs text-default-500", children: t.properties?.description }) }),
-        /* @__PURE__ */ e("div", { className: B, children: /* @__PURE__ */ e("div", { className: "flex gap-1", children: Array.from({ length: I }, (N, P) => P + 1).map(
-          (N) => /* @__PURE__ */ e(
+        /* @__PURE__ */ e("div", { className: B, children: /* @__PURE__ */ e("div", { className: "flex gap-1", children: Array.from({ length: I }, (f, P) => P + 1).map(
+          (f) => /* @__PURE__ */ e(
             "button",
             {
               type: "button",
-              onClick: () => l(N),
+              onClick: () => l(f),
               className: "focus:outline-none",
               children: /* @__PURE__ */ e(
                 qe,
                 {
-                  className: `w-6 h-6 ${N <= (s || 0) ? "text-warning fill-current" : "text-default-300"}`
+                  className: `w-6 h-6 ${f <= (s || 0) ? "text-warning fill-current" : "text-default-300"}`
                 }
               )
             },
-            N
+            f
           )
         ) }) })
       ] });
@@ -1444,7 +1444,7 @@ function fe({
               max: t.properties?.max || 100,
               step: t.properties?.step || 1,
               value: s || t.properties?.min || 0,
-              onChange: (N) => l(Number(N.target.value)),
+              onChange: (f) => l(Number(f.target.value)),
               className: "flex-1 h-2 bg-default-200 rounded-lg appearance-none cursor-pointer"
             }
           ),
@@ -1458,7 +1458,7 @@ function fe({
           ...m,
           type: "tel",
           value: s || "",
-          onValueChange: (N) => l(N)
+          onValueChange: (f) => l(f)
         }
       );
     case "url":
@@ -1468,7 +1468,7 @@ function fe({
           ...m,
           type: "url",
           value: s || "",
-          onValueChange: (N) => l(N)
+          onValueChange: (f) => l(f)
         }
       );
     case "button":
@@ -1730,9 +1730,9 @@ function Xe({
         if (!z || !z.trim()) {
           const L = w.type.replace(/[-_]/g, "_").toLowerCase();
           if (z = L, u.has(z)) {
-            let y = 2;
-            for (z = `${L}${y}`; u.has(z); )
-              y++, z = `${L}${y}`;
+            let N = 2;
+            for (z = `${L}${N}`; u.has(z); )
+              N++, z = `${L}${N}`;
           }
         }
         u.add(z), d.set(b, z);
@@ -1775,11 +1775,11 @@ function Xe({
     if (a.properties.hidden)
       return null;
     const L = (() => {
-      const y = {};
-      return a.properties.ariaLabel && (y["aria-label"] = a.properties.ariaLabel), a.properties.tabIndex !== void 0 && (y.tabIndex = a.properties.tabIndex), a.properties.dataAttributes && a.properties.dataAttributes.split(",").forEach((E) => {
-        const [I, M] = E.split("=");
-        I && M && (y[I.trim()] = M.trim());
-      }), y;
+      const N = {};
+      return a.properties.ariaLabel && (N["aria-label"] = a.properties.ariaLabel), a.properties.tabIndex !== void 0 && (N.tabIndex = a.properties.tabIndex), a.properties.dataAttributes && a.properties.dataAttributes.split(",").forEach((O) => {
+        const [I, M] = O.split("=");
+        I && M && (N[I.trim()] = M.trim());
+      }), N;
     })();
     switch (a.type) {
       case "text":
@@ -1789,7 +1789,7 @@ function Xe({
             ...w,
             type: "text",
             value: d,
-            onValueChange: (f) => p(a.id, f),
+            onValueChange: (y) => p(a.id, y),
             minLength: a.properties.minLength,
             maxLength: a.properties.maxLength
           },
@@ -1802,7 +1802,7 @@ function Xe({
             ...w,
             type: "email",
             value: d,
-            onValueChange: (f) => p(a.id, f),
+            onValueChange: (y) => p(a.id, y),
             minLength: a.properties.minLength,
             maxLength: a.properties.maxLength
           },
@@ -1815,7 +1815,7 @@ function Xe({
             ...w,
             type: "password",
             value: d,
-            onValueChange: (f) => p(a.id, f),
+            onValueChange: (y) => p(a.id, y),
             minLength: a.properties.minLength,
             maxLength: a.properties.maxLength
           },
@@ -1828,9 +1828,9 @@ function Xe({
             ...w,
             type: "number",
             value: d,
-            onValueChange: (f) => {
-              const O = parseFloat(f);
-              !isNaN(O) && (a.properties.min !== void 0 && O < a.properties.min || a.properties.max !== void 0 && O > a.properties.max) || p(a.id, f);
+            onValueChange: (y) => {
+              const E = parseFloat(y);
+              !isNaN(E) && (a.properties.min !== void 0 && E < a.properties.min || a.properties.max !== void 0 && E > a.properties.max) || p(a.id, y);
             },
             min: a.properties.min,
             max: a.properties.max,
@@ -1844,7 +1844,7 @@ function Xe({
           {
             ...w,
             value: d,
-            onValueChange: (f) => p(a.id, f),
+            onValueChange: (y) => p(a.id, y),
             rows: a.properties.rows || 4,
             minLength: a.properties.minLength,
             maxLength: a.properties.maxLength
@@ -1857,12 +1857,12 @@ function Xe({
           {
             ...w,
             selectedKeys: d ? [d] : [],
-            onSelectionChange: (f) => {
-              const O = Array.from(f)[0];
-              p(a.id, O);
+            onSelectionChange: (y) => {
+              const E = Array.from(y)[0];
+              p(a.id, E);
             },
             selectionMode: a.properties.multiple ? "multiple" : "single",
-            children: a.options?.map((f) => /* @__PURE__ */ e(g, { children: f.label }, f.value)) || []
+            children: a.options?.map((y) => /* @__PURE__ */ e(g, { children: y.label }, y.value)) || []
           }
         );
       case "autocomplete":
@@ -1871,15 +1871,15 @@ function Xe({
           {
             ...w,
             selectedKey: d || "",
-            onSelectionChange: (f) => {
-              p(a.id, f);
+            onSelectionChange: (y) => {
+              p(a.id, y);
             },
             allowsCustomValue: !0,
-            children: a.options?.map((f) => /* @__PURE__ */ e(_e, { children: f.label }, f.value)) || []
+            children: a.options?.map((y) => /* @__PURE__ */ e(_e, { children: y.label }, y.value)) || []
           }
         );
       case "radio":
-        const y = a.properties?.orientation || "vertical", x = a.properties?.componentAlignment || "left", E = y === "horizontal" ? x === "center" ? "justify-center" : x === "right" ? "justify-end" : "justify-start" : x === "center" ? "items-center" : x === "right" ? "items-end" : "items-start", I = x === "center" ? "text-center" : x === "right" ? "text-right" : "text-left";
+        const N = a.properties?.orientation || "vertical", x = a.properties?.componentAlignment || "left", O = N === "horizontal" ? x === "center" ? "justify-center" : x === "right" ? "justify-end" : "justify-start" : x === "center" ? "items-center" : x === "right" ? "items-end" : "items-start", I = x === "center" ? "text-center" : x === "right" ? "text-right" : "text-left";
         return /* @__PURE__ */ e("div", { className: x === "center" ? "flex flex-col items-center" : x === "right" ? "flex flex-col items-end" : "flex flex-col items-start", children: /* @__PURE__ */ e(
           Me,
           {
@@ -1887,30 +1887,30 @@ function Xe({
             description: a.properties?.description,
             isRequired: a.required,
             value: d,
-            onValueChange: (f) => p(a.id, f),
+            onValueChange: (y) => p(a.id, y),
             isInvalid: v,
             errorMessage: u,
             size: a.properties.size || "md",
             isDisabled: a.properties.disabled,
             color: a.properties.colorVariant,
-            orientation: y,
+            orientation: N,
             classNames: {
               base: [
                 a.properties.marginTop,
                 a.properties.marginBottom,
                 a.properties.padding
               ].filter(Boolean).join(" "),
-              wrapper: `${a.properties.alignment || ""} ${E}`,
+              wrapper: `${a.properties.alignment || ""} ${O}`,
               label: I,
               description: I
             },
             className: a.properties.customClasses,
-            children: a.options?.map((f) => /* @__PURE__ */ e(je, { value: f.value, children: f.label }, f.value)) || []
+            children: a.options?.map((y) => /* @__PURE__ */ e(je, { value: y.value, children: y.label }, y.value)) || []
           }
         ) });
       case "checkbox":
         if (a.options && a.options.length > 1) {
-          const f = a.properties?.orientation || "vertical", O = a.properties?.componentAlignment || "left", Q = f === "horizontal" ? "flex flex-wrap gap-4" : "flex flex-col space-y-2", q = f === "horizontal" ? O === "center" ? "justify-center" : O === "right" ? "justify-end" : "justify-start" : O === "center" ? "items-center" : O === "right" ? "items-end" : "items-start", ce = O === "center" ? "text-center" : O === "right" ? "text-right" : "text-left", de = O === "center" ? "flex flex-col items-center" : O === "right" ? "flex flex-col items-end" : "flex flex-col items-start";
+          const y = a.properties?.orientation || "vertical", E = a.properties?.componentAlignment || "left", Q = y === "horizontal" ? "flex flex-wrap gap-4" : "flex flex-col space-y-2", q = y === "horizontal" ? E === "center" ? "justify-center" : E === "right" ? "justify-end" : "justify-start" : E === "center" ? "items-center" : E === "right" ? "items-end" : "items-start", ce = E === "center" ? "text-center" : E === "right" ? "text-right" : "text-left", de = E === "center" ? "flex flex-col items-center" : E === "right" ? "flex flex-col items-end" : "flex flex-col items-start";
           return /* @__PURE__ */ r("div", { className: `space-y-2 ${a.properties.customClasses || ""} ${de}`, children: [
             /* @__PURE__ */ r("label", { className: `text-sm font-medium ${ce}`, children: [
               a.label,
@@ -1922,13 +1922,13 @@ function Xe({
               {
                 isSelected: d?.includes?.(K.value) || !1,
                 onValueChange: (et) => {
-                  const Ee = d || [];
+                  const Oe = d || [];
                   et ? p(a.id, [
-                    ...Ee,
+                    ...Oe,
                     K.value
                   ]) : p(
                     a.id,
-                    Ee.filter((tt) => tt !== K.value)
+                    Oe.filter((tt) => tt !== K.value)
                   );
                 },
                 size: a.properties.size || "md",
@@ -1942,8 +1942,8 @@ function Xe({
             v && /* @__PURE__ */ e("p", { className: "text-danger text-xs", children: u })
           ] });
         } else {
-          const f = a.properties?.componentAlignment || "left", O = f === "center" ? "justify-center" : f === "right" ? "justify-end" : "justify-start", Q = f === "center" ? "text-center" : f === "right" ? "text-right" : "text-left";
-          return /* @__PURE__ */ r("div", { className: `${a.properties.customClasses} ${O}`, children: [
+          const y = a.properties?.componentAlignment || "left", E = y === "center" ? "justify-center" : y === "right" ? "justify-end" : "justify-start", Q = y === "center" ? "text-center" : y === "right" ? "text-right" : "text-left";
+          return /* @__PURE__ */ r("div", { className: `${a.properties.customClasses} ${E}`, children: [
             /* @__PURE__ */ r("label", { className: `text-sm font-medium block mb-2 ${Q}`, children: [
               a.label,
               a.required && /* @__PURE__ */ e("span", { className: "text-danger", children: "*" })
@@ -1965,13 +1965,13 @@ function Xe({
           ] });
         }
       case "switch":
-        const B = a.properties?.componentAlignment || "left", N = B === "center" ? "flex justify-center" : B === "right" ? "flex justify-end" : "flex justify-start";
+        const B = a.properties?.componentAlignment || "left", f = B === "center" ? "flex justify-center" : B === "right" ? "flex justify-end" : "flex justify-start";
         return /* @__PURE__ */ r("div", { className: `space-y-2 ${a.properties.customClasses || ""}`, children: [
-          /* @__PURE__ */ e("div", { className: N, children: /* @__PURE__ */ r(
+          /* @__PURE__ */ e("div", { className: f, children: /* @__PURE__ */ r(
             U,
             {
               isSelected: d || !1,
-              onValueChange: (f) => p(a.id, f),
+              onValueChange: (y) => p(a.id, y),
               size: a.properties.size || "sm",
               isDisabled: a.properties.disabled,
               color: a.properties.colorVariant,
@@ -1981,8 +1981,8 @@ function Xe({
               ]
             }
           ) }),
-          a.properties?.description && /* @__PURE__ */ e("div", { className: N, children: /* @__PURE__ */ e("p", { className: "text-xs text-default-500", children: a.properties?.description }) }),
-          v && /* @__PURE__ */ e("div", { className: N, children: /* @__PURE__ */ e("p", { className: "text-danger text-xs", children: u }) })
+          a.properties?.description && /* @__PURE__ */ e("div", { className: f, children: /* @__PURE__ */ e("p", { className: "text-xs text-default-500", children: a.properties?.description }) }),
+          v && /* @__PURE__ */ e("div", { className: f, children: /* @__PURE__ */ e("p", { className: "text-danger text-xs", children: u }) })
         ] });
       case "section":
         return /* @__PURE__ */ e(
@@ -2008,7 +2008,7 @@ function Xe({
             ...w,
             type: "tel",
             value: d,
-            onValueChange: (f) => p(a.id, f),
+            onValueChange: (y) => p(a.id, y),
             minLength: a.properties.minLength,
             maxLength: a.properties.maxLength
           },
@@ -2021,7 +2021,7 @@ function Xe({
             ...w,
             type: "url",
             value: d,
-            onValueChange: (f) => p(a.id, f),
+            onValueChange: (y) => p(a.id, y),
             minLength: a.properties.minLength,
             maxLength: a.properties.maxLength
           },
@@ -2034,7 +2034,7 @@ function Xe({
             ...w,
             type: "date",
             value: d,
-            onValueChange: (f) => p(a.id, f)
+            onValueChange: (y) => p(a.id, y)
           },
           `date-${a.id}`
         );
@@ -2045,7 +2045,7 @@ function Xe({
             ...w,
             type: "time",
             value: d,
-            onValueChange: (f) => p(a.id, f)
+            onValueChange: (y) => p(a.id, y)
           },
           `time-${a.id}`
         );
@@ -2056,7 +2056,7 @@ function Xe({
             ...w,
             type: "datetime-local",
             value: d,
-            onValueChange: (f) => p(a.id, f)
+            onValueChange: (y) => p(a.id, y)
           },
           `datetime-${a.id}`
         );
@@ -2067,11 +2067,11 @@ function Xe({
             ...w,
             selectionMode: "multiple",
             selectedKeys: d || [],
-            onSelectionChange: (f) => {
-              const O = Array.from(f);
-              p(a.id, O);
+            onSelectionChange: (y) => {
+              const E = Array.from(y);
+              p(a.id, E);
             },
-            children: a.options?.map((f) => /* @__PURE__ */ e(g, { children: f.label }, f.value)) || []
+            children: a.options?.map((y) => /* @__PURE__ */ e(g, { children: y.label }, y.value)) || []
           }
         );
       case "range":
@@ -2085,9 +2085,9 @@ function Xe({
             bt,
             {
               value: d || a.properties.min || 0,
-              onChange: (f) => {
-                const O = Array.isArray(f) ? f[0] : f;
-                p(a.id, O);
+              onChange: (y) => {
+                const E = Array.isArray(y) ? y[0] : y;
+                p(a.id, E);
               },
               minValue: a.properties.min || 0,
               maxValue: a.properties.max || 100,
@@ -2120,9 +2120,9 @@ function Xe({
                 accept: a.properties.accept || "*",
                 multiple: a.properties.multiple,
                 disabled: a.properties.disabled,
-                onChange: (f) => {
-                  const O = a.properties.multiple ? Array.from(f.target.files || []) : f.target.files?.[0];
-                  p(a.id, O);
+                onChange: (y) => {
+                  const E = a.properties.multiple ? Array.from(y.target.files || []) : y.target.files?.[0];
+                  p(a.id, E);
                 },
                 className: "hidden",
                 id: `file-${a.id}`
@@ -2133,7 +2133,25 @@ function Xe({
                 "Click to upload ",
                 a.properties.multiple ? "files" : "a file"
               ] }),
-              d && /* @__PURE__ */ e("div", { className: "mt-2", children: Array.isArray(d) ? /* @__PURE__ */ e("div", { className: "flex flex-wrap gap-1", children: d.map((f, O) => /* @__PURE__ */ e(_, { color: "primary", size: "sm", children: f.name || `File ${O + 1}` }, O)) }) : /* @__PURE__ */ e(_, { color: "primary", size: "sm", children: d.name || "File selected" }) })
+              d && /* @__PURE__ */ e("div", { className: "mt-2", children: Array.isArray(d) ? /* @__PURE__ */ e("div", { className: "flex flex-wrap gap-1", children: d.map((y, E) => /* @__PURE__ */ e(_, { color: "primary", size: "sm", children: /* @__PURE__ */ e(
+                "a",
+                {
+                  href: URL.createObjectURL(y),
+                  download: y.name,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  children: y.name || `File ${E + 1}`
+                }
+              ) }, E)) }) : /* @__PURE__ */ e(_, { color: "primary", size: "sm", children: /* @__PURE__ */ e(
+                "a",
+                {
+                  href: URL.createObjectURL(d),
+                  download: d.name,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  children: d.name || "File selected"
+                }
+              ) }) })
             ] })
           ] }),
           v && /* @__PURE__ */ e("p", { className: "text-danger text-xs", children: u })
@@ -2146,21 +2164,21 @@ function Xe({
             a.required && /* @__PURE__ */ e("span", { className: "text-danger", children: "*" })
           ] }) }),
           a.properties?.description && /* @__PURE__ */ e("div", { className: W, children: /* @__PURE__ */ e("p", { className: "text-xs text-default-500", children: a.properties?.description }) }),
-          /* @__PURE__ */ e("div", { className: W, children: /* @__PURE__ */ e("div", { className: "flex space-x-1", children: Array.from({ length: a.properties.max || 5 }, (f, O) => /* @__PURE__ */ e(
+          /* @__PURE__ */ e("div", { className: W, children: /* @__PURE__ */ e("div", { className: "flex space-x-1", children: Array.from({ length: a.properties.max || 5 }, (y, E) => /* @__PURE__ */ e(
             "button",
             {
               type: "button",
               disabled: a.properties.disabled,
-              onClick: () => p(a.id, O + 1),
+              onClick: () => p(a.id, E + 1),
               className: `p-1 hover:scale-110 transition-transform ${a.properties.disabled ? "opacity-50 cursor-not-allowed" : ""}`,
               children: /* @__PURE__ */ e(
                 qe,
                 {
-                  className: `h-6 w-6 ${(d || 0) > O ? "text-yellow-400 fill-yellow-400" : "text-default-300"}`
+                  className: `h-6 w-6 ${(d || 0) > E ? "text-yellow-400 fill-yellow-400" : "text-default-300"}`
                 }
               )
             },
-            O
+            E
           )) }) }),
           d && /* @__PURE__ */ e("div", { className: W, children: /* @__PURE__ */ r("div", { className: "text-sm text-default-600", children: [
             d,
@@ -2181,7 +2199,7 @@ function Xe({
             Qe,
             {
               value: d,
-              onChange: (f) => p(a.id, f),
+              onChange: (y) => p(a.id, y),
               width: 400,
               height: 200,
               className: "w-full",
@@ -3751,40 +3769,40 @@ function xr() {
     lr(l);
   }, v = () => {
     p();
-  }, b = (y) => {
-    if (!y || typeof y != "object") return !1;
-    if (y.metadata && y.fields) {
-      if (!y.metadata.title || typeof y.metadata.title != "string" || !Array.isArray(y.fields)) return !1;
-      for (const x of y.fields)
+  }, b = (N) => {
+    if (!N || typeof N != "object") return !1;
+    if (N.metadata && N.fields) {
+      if (!N.metadata.title || typeof N.metadata.title != "string" || !Array.isArray(N.fields)) return !1;
+      for (const x of N.fields)
         if (!x.id || !x.type || !x.label) return !1;
       return !0;
     }
-    if (y.title && y.fields) {
-      if (typeof y.title != "string" || !Array.isArray(y.fields)) return !1;
-      for (const x of y.fields)
+    if (N.title && N.fields) {
+      if (typeof N.title != "string" || !Array.isArray(N.fields)) return !1;
+      for (const x of N.fields)
         if (!x.id || !x.type || !x.label) return !1;
       return !0;
     }
     return !1;
   }, w = () => {
     n({ type: null, message: "" }), m();
-  }, z = (y) => y.title && y.fields && !y.metadata ? y : {
-    id: y.metadata?.id || y.id,
-    title: y.metadata?.title || y.title,
-    description: y.metadata?.description || y.description || "",
-    fields: y.fields,
-    settings: y.settings || {
+  }, z = (N) => N.title && N.fields && !N.metadata ? N : {
+    id: N.metadata?.id || N.id,
+    title: N.metadata?.title || N.title,
+    description: N.metadata?.description || N.description || "",
+    fields: N.fields,
+    settings: N.settings || {
       submitButtonText: "Submit",
       allowMultipleSubmissions: !0,
       requireAuth: !1,
       captchaEnabled: !1,
       theme: "auto"
     }
-  }, L = (y) => {
+  }, L = (N) => {
     const x = new FileReader();
-    x.onload = (E) => {
+    x.onload = (O) => {
       try {
-        const I = JSON.parse(E.target?.result);
+        const I = JSON.parse(O.target?.result);
         if (!b(I)) {
           n({
             type: "error",
@@ -3805,7 +3823,7 @@ function xr() {
           message: "Invalid JSON file. Please check the file format and try again."
         });
       }
-    }, x.readAsText(y);
+    }, x.readAsText(N);
   };
   return /* @__PURE__ */ r(j, { children: [
     /* @__PURE__ */ r(yt, { className: "border-b border-divider", maxWidth: "full", children: [
@@ -3875,7 +3893,7 @@ function xr() {
         form: l
       }
     ),
-    /* @__PURE__ */ e(X, { isOpen: c, onOpenChange: a, size: "2xl", children: /* @__PURE__ */ e(ee, { children: (y) => /* @__PURE__ */ r(j, { children: [
+    /* @__PURE__ */ e(X, { isOpen: c, onOpenChange: a, size: "2xl", children: /* @__PURE__ */ e(ee, { children: (N) => /* @__PURE__ */ r(j, { children: [
       /* @__PURE__ */ r(te, { className: "flex flex-col gap-1", children: [
         /* @__PURE__ */ e("h3", { className: "text-lg font-semibold", children: "Import Form" }),
         /* @__PURE__ */ e("p", { className: "text-sm text-default-500", children: "Import a form configuration from JSON file or paste JSON directly" })
@@ -3892,8 +3910,8 @@ function xr() {
               accept: ".json",
               className: "absolute inset-0 w-full h-full opacity-0 cursor-pointer",
               onChange: (x) => {
-                const E = x.target.files?.[0];
-                E && L(E);
+                const O = x.target.files?.[0];
+                O && L(O);
               }
             }
           )
@@ -3903,7 +3921,7 @@ function xr() {
           /* @__PURE__ */ e("span", { className: "text-sm", children: i.message })
         ] }) })
       ] }),
-      /* @__PURE__ */ e(be, { children: /* @__PURE__ */ e(A, { variant: "flat", onPress: y, children: "Close" }) })
+      /* @__PURE__ */ e(be, { children: /* @__PURE__ */ e(A, { variant: "flat", onPress: N, children: "Close" }) })
     ] }) }) })
   ] });
 }
@@ -4235,19 +4253,19 @@ function Nr() {
                 type: "file",
                 accept: ".json",
                 onChange: (x) => {
-                  const E = x.target.files?.[0];
-                  if (E && E.type === "application/json") {
+                  const O = x.target.files?.[0];
+                  if (O && O.type === "application/json") {
                     const I = new FileReader();
                     I.onload = (M) => {
                       const B = M.target?.result;
                       s(B);
                       try {
-                        const N = JSON.parse(B);
-                        l(N), n("");
+                        const f = JSON.parse(B);
+                        l(f), n("");
                       } catch {
                         n("Invalid JSON file format"), l(null);
                       }
-                    }, I.readAsText(E);
+                    }, I.readAsText(O);
                   }
                 },
                 className: "hidden",
