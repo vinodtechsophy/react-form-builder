@@ -702,13 +702,31 @@ export function FormRenderer({
                       <div className="flex flex-wrap gap-1">
                         {value.map((file: any, index: number) => (
                           <Chip key={index} color="primary" size="sm">
-                            {file.name || `File ${index + 1}`}
+                            {/* Add download link here */}
+                              <a
+                                href={URL.createObjectURL(file)}
+                                download={file.name}
+                                // className="underline"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                               {file.name || `File ${index + 1}`}
+                             </a>
                           </Chip>
                         ))}
                       </div>
                     ) : (
                       <Chip color="primary" size="sm">
-                        {value.name || "File selected"}
+                        {/* Add download link here */}
+                         <a
+                           href={URL.createObjectURL(value)}
+                           download={value.name}
+                          //  className="underline"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                          >
+                          {value.name || "File selected"}
+                         </a>
                       </Chip>
                     )}
                   </div>
