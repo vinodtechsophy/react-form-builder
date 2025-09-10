@@ -2245,42 +2245,39 @@ function Xe({
         ] }) });
     }
   };
-  return (
-    // <div className={`max-w-4xl mx-auto p-6 ${className}`}>
-    /* @__PURE__ */ e("div", { className: `mx-auto p-6 ${o}`, children: /* @__PURE__ */ r(D, { radius: "sm", className: "p-1", children: [
-      /* @__PURE__ */ e(R, { children: /* @__PURE__ */ r("div", { children: [
-        /* @__PURE__ */ e("h1", { className: "text-2xl font-bold", children: t.metadata.title }),
-        t.metadata.description && /* @__PURE__ */ e("p", { className: "text-default-600 mt-2", children: t.metadata.description })
-      ] }) }),
-      /* @__PURE__ */ e(T, { children: /* @__PURE__ */ r("form", { onSubmit: c, className: "space-y-6", children: [
-        t.layout.rows.map((a) => /* @__PURE__ */ e("div", { className: "grid grid-cols-12 gap-4", children: a.fields.map((d) => {
-          const u = t.fieldMap[d], b = (() => {
-            const w = [];
-            return u.properties.hideOnMobile && w.push("hidden sm:block"), u.properties.hideOnTablet && w.push("md:hidden lg:block"), u.properties.hideOnDesktop && w.push("lg:hidden"), w.join(" ");
-          })();
-          return /* @__PURE__ */ e(
-            "div",
-            {
-              className: `${u.layout.gridClass} ${b}`,
-              children: m(u)
-            },
-            d
-          );
-        }) }, a.id)),
-        /* @__PURE__ */ e("div", { className: "flex justify-end pt-6 border-t border-divider", children: /* @__PURE__ */ e(
-          A,
+  return /* @__PURE__ */ e("div", { className: `max-w-4xl mx-auto p-6 ${o}`, children: /* @__PURE__ */ r(D, { radius: "sm", className: "p-1", children: [
+    /* @__PURE__ */ e(R, { children: /* @__PURE__ */ r("div", { children: [
+      /* @__PURE__ */ e("h1", { className: "text-2xl font-bold", children: t.metadata.title }),
+      t.metadata.description && /* @__PURE__ */ e("p", { className: "text-default-600 mt-2", children: t.metadata.description })
+    ] }) }),
+    /* @__PURE__ */ e(T, { children: /* @__PURE__ */ r("form", { onSubmit: c, className: "space-y-6", children: [
+      t.layout.rows.map((a) => /* @__PURE__ */ e("div", { className: "grid grid-cols-12 gap-4", children: a.fields.map((d) => {
+        const u = t.fieldMap[d], b = (() => {
+          const w = [];
+          return u.properties.hideOnMobile && w.push("hidden sm:block"), u.properties.hideOnTablet && w.push("md:hidden lg:block"), u.properties.hideOnDesktop && w.push("lg:hidden"), w.join(" ");
+        })();
+        return /* @__PURE__ */ e(
+          "div",
           {
-            radius: "sm",
-            type: "submit",
-            color: "primary",
-            size: "md",
-            className: "w-full sm:w-auto",
-            children: t.settings.submitButtonText
-          }
-        ) })
-      ] }) })
+            className: `${u.layout.gridClass} ${b}`,
+            children: m(u)
+          },
+          d
+        );
+      }) }, a.id)),
+      /* @__PURE__ */ e("div", { className: "flex justify-end pt-6 border-t border-divider", children: /* @__PURE__ */ e(
+        A,
+        {
+          radius: "sm",
+          type: "submit",
+          color: "primary",
+          size: "md",
+          className: "w-full sm:w-auto",
+          children: t.settings.submitButtonText
+        }
+      ) })
     ] }) })
-  );
+  ] }) });
 }
 function Ae(t) {
   const s = Ze(t.fields), o = (/* @__PURE__ */ new Date()).toISOString(), l = t.fields.map((c, m) => {
