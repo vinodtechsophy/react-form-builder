@@ -871,7 +871,8 @@ export function FormRenderer({
   };
 
   return (
-    <div className={`max-w-4xl mx-auto p-6 ${className}`}>
+    // <div className={`max-w-4xl mx-auto p-6 ${className}`}>
+    <div className={`mx-auto p-6 ${className}`}>
       <Card radius="sm" className="p-1">
         <CardHeader>
           <div>
